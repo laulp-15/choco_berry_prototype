@@ -1,0 +1,38 @@
+/* src/features/catalog/components/QuantitySelector.css */
+
+.selector-block {
+  margin-bottom: 20px;
+}
+
+.selector-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto);
+  margin-bottom: 10px;
+}
+
+.quantity-group.MuiToggleButtonGroup-root {
+  gap: 10px;
+}
+
+.quantity-btn.MuiToggleButton-root {
+  width: 44px;
+  height: 44px;
+  border-radius: 50% !important;
+  border: 1px solid var(--borde) !important;
+  background: var(--blanco);
+  color: var(--texto);
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none;
+  padding: 0;
+}
+.quantity-btn.MuiToggleButton-root:hover {
+  background: var(--secundario-1);
+}
+.quantity-btn.MuiToggleButton-root.Mui-selected {
+  background: var(--primario) !important;
+  border-color: var(--primario) !important;
+  color: var(--blanco) !important;
+}

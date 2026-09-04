@@ -1,0 +1,22 @@
+/* src/shared/styles/tokens.css
+   Importar una sola vez de forma global (ej: en src/index.js o src/App.jsx):
+   import "./shared/styles/tokens.css";
+*/
+
+:root {
+  /* --- Paleta ChocoBerry --- */
+  --primario: #E63946;
+  --primario-oscuro: #C92F3C;
+  --primario-claro: #EF818A;
+
+  --secundario-1: #FAD2E1;
+  --secundario-2: #FCE8EF;
+  --secundario-3: #FEF7F9;
+  --blanco: #FFFFFF;
+
+  /* --- Neutros tomados de la guía de estilo --- */
+  --texto: #2A231D;
+  --texto-muted: #675A51;
+  --texto-suave: #A4968B;
+  --borde: #E9D9DE;
+}

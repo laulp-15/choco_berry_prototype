@@ -1,0 +1,55 @@
+/* src/features/catalog/components/FeatureHighlights.css */
+
+.feature-highlights {
+  margin: 56px 0;
+}
+
+.feature-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 24px; /* H2 */
+  line-height: 32px;
+  margin-bottom: 32px;
+}
+
+.feature-col {
+  margin-bottom: 20px;
+}
+
+.feature-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--secundario-2);
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  border-radius: 12px;
+  background: var(--secundario-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature-icon i {
+  font-size: 20px;
+  color: var(--primario);
+}
+
+.feature-card-title {
+  font-size: 16px; /* H5 */
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.feature-card-desc {
+  font-size: 13px;
+  color: var(--texto-muted);
+  line-height: 1.5;
+}

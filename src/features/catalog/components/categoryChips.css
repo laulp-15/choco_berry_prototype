@@ -1,0 +1,30 @@
+/* src/features/catalog/components/CategoryChips.css */
+
+.categories-scroll {
+  margin-bottom: 28px;
+}
+
+/* --- Pisa estilos por defecto de MUI Chip --- */
+.chip.MuiChip-root {
+  border: 1px solid var(--primario);
+  background: var(--blanco);
+  color: var(--primario);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  height: auto;
+  padding: 9px 6px;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.chip.MuiChip-root:hover {
+  background: var(--secundario-1);
+  color: var(--primario);
+}
+.chip.MuiChip-root.active {
+  background: var(--primario);
+  color: var(--blanco);
+}
+.chip.MuiChip-root .MuiChip-label {
+  padding: 0 8px;
+}

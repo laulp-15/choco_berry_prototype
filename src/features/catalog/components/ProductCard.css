@@ -1,0 +1,117 @@
+/* src/features/catalog/components/ProductCard.css */
+
+.product-card {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.product-card:hover {
+  box-shadow: 0 10px 24px rgba(230, 57, 70, 0.12);
+  transform: translateY(-2px);
+}
+
+.product-image {
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(160deg, var(--secundario-2), var(--secundario-1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-image i {
+  font-size: 36px;
+  color: var(--primario-claro);
+}
+
+.product-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-category {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--primario);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.product-name {
+  font-size: 17px; /* H5 */
+  font-weight: 700;
+  line-height: 22px;
+  margin-bottom: 4px;
+}
+
+.product-desc {
+  font-size: 13px;
+  color: var(--texto-muted);
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--primario);
+  margin-bottom: 14px;
+  margin-top: auto;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* --- Pisa estilos por defecto de MUI Button --- */
+.btn-detail.MuiButton-root {
+  flex: 1;
+  border: 1px solid var(--primario) !important;
+  background: var(--blanco) !important;
+  color: var(--primario) !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  border-radius: 999px !important;
+  padding: 10px 0 !important;
+  box-shadow: none !important;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-detail.MuiButton-root:hover {
+  background: var(--secundario-1) !important;
+  color: var(--primario-oscuro) !important;
+  box-shadow: none !important;
+}
+
+/* --- Pisa estilos por defecto de MUI IconButton --- */
+.btn-cart.MuiIconButton-root {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primario);
+  color: var(--blanco);
+  font-size: 14px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.btn-cart.MuiIconButton-root:hover {
+  background: var(--primario-oscuro);
+}
+.btn-cart.MuiIconButton-root:active {
+  transform: scale(0.94);
+}

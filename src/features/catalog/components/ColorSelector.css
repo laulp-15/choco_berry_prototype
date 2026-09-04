@@ -1,0 +1,26 @@
+/* src/features/catalog/components/ColorSelector.css */
+
+.color-group.MuiToggleButtonGroup-root {
+  gap: 12px;
+}
+
+.color-btn.MuiToggleButton-root {
+  width: 36px;
+  height: 36px;
+  border-radius: 50% !important;
+  border: 2px solid transparent !important;
+  background: transparent;
+  padding: 3px;
+}
+.color-btn.MuiToggleButton-root.Mui-selected {
+  border-color: var(--primario) !important;
+  background: transparent !important;
+}
+
+.color-swatch {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+  border: 1px solid var(--borde);
+}

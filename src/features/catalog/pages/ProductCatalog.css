@@ -1,0 +1,48 @@
+/* src/features/catalog/pages/ProductCatalog.css
+   Estilos propios de la página: fondo, contenedor y encabezado.
+   Los tokens de color (--primario, --texto, etc.) vienen de
+   shared/styles/tokens.css, importado globalmente en la app.
+*/
+
+.catalog-page {
+  background: var(--secundario-3);
+  color: var(--texto);
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.catalog-wrap {
+  max-width: 1360px;
+  padding: 32px 20px 0;
+}
+
+.catalog-title {
+  font-weight: 700;
+  font-size: 24px; /* H2 */
+  line-height: 32px;
+  margin-bottom: 4px;
+}
+
+.catalog-subtitle {
+  font-weight: 400;
+  font-size: 16px; /* Body 1 */
+  color: var(--texto-muted);
+  margin-bottom: 24px;
+}
+
+.product-col {
+  margin-bottom: 28px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--texto-muted);
+}
+.empty-state i {
+  font-size: 30px;
+  color: var(--primario-claro);
+  margin-bottom: 12px;
+  display: block;
+}

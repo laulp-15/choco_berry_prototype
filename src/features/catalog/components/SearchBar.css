@@ -1,0 +1,56 @@
+/* src/features/catalog/components/SearchBar.css */
+
+.search-row {
+  margin-bottom: 20px;
+}
+
+/* --- Pisa estilos por defecto de MUI OutlinedInput --- */
+.search-pill.MuiOutlinedInput-root {
+  border-radius: 999px;
+  background: var(--blanco);
+  font-size: 14px;
+  color: var(--texto);
+  padding-right: 16px;
+}
+.search-pill .MuiOutlinedInput-notchedOutline {
+  border-color: var(--borde);
+}
+.search-pill:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--borde);
+}
+.search-pill.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primario-claro) !important;
+  border-width: 1px !important;
+}
+.search-pill input::placeholder {
+  color: var(--texto-suave);
+  opacity: 1;
+}
+.search-pill input {
+  padding: 12px 4px 12px 20px;
+}
+.search-pill i {
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+/* --- Botón de filtro (MUI IconButton) --- */
+.filter-btn.MuiIconButton-root {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid var(--primario);
+  background: var(--blanco);
+  color: var(--primario);
+  font-size: 15px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.filter-btn.MuiIconButton-root:hover {
+  background: var(--secundario-1);
+}
+.filter-btn.MuiIconButton-root.active {
+  background: var(--primario);
+  color: var(--blanco);
+  border-color: var(--primario);
+}

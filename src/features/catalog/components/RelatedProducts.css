@@ -1,0 +1,35 @@
+/* src/features/catalog/components/RelatedProducts.css */
+
+.related-products {
+  margin-bottom: 40px;
+}
+
+.related-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.related-title {
+  font-weight: 700;
+  font-size: 24px; /* H2 */
+  line-height: 32px;
+}
+
+.related-view-all {
+  border: none;
+  background: none;
+  color: var(--primario);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.related-view-all:hover {
+  color: var(--primario-oscuro);
+}
+
+.related-products .product-col {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,84 @@
+/* src/features/catalog/pages/ProductDetail.css
+   Tokens de color vienen de shared/styles/tokens.css (importado globalmente).
+*/
+
+.detail-page {
+  background: var(--secundario-3);
+  color: var(--texto);
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.detail-wrap {
+  max-width: 1200px;
+  padding: 32px 20px 40px;
+}
+
+.detail-top {
+  margin-bottom: 8px;
+}
+
+.product-info {
+  padding-top: 4px;
+}
+
+@media (min-width: 992px) {
+  .product-info {
+    padding-left: 32px;
+  }
+}
+
+.product-badge {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--primario);
+  margin-bottom: 8px;
+}
+
+.product-title {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primario-oscuro);
+}
+
+.product-divider {
+  border: none;
+  border-top: 1px solid var(--borde);
+  margin: 16px 0;
+}
+
+.product-description {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--texto-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* --- Pisa estilos por defecto de MUI Button --- */
+.btn-add-to-cart.MuiButton-root {
+  background: var(--primario) !important;
+  color: var(--blanco) !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: none;
+  border-radius: 999px !important;
+  padding: 14px 0 !important;
+  box-shadow: none !important;
+  margin-top: 8px;
+}
+.btn-add-to-cart.MuiButton-root:hover {
+  background: var(--primario-oscuro) !important;
+  box-shadow: none !important;
+}
