@@ -1,21 +1,22 @@
 // src/features/catalog/components/ProductCard.jsx
 import React from "react";
-import { Button, IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 import { formatPrice } from "../../../shared/utils/formatPrice";
-import { MIN_PRICE } from "../data/Pricing";
+import { MIN_PRICE } from "../data/pricing";
 import "./ProductCard.css";
 
 /**
  * Tarjeta de producto.
  * El precio mostrado es el mínimo posible (6 fresas); el precio real
  * se define en el detalle según la cantidad elegida (ver data/pricing.js).
+ * La personalización (cantidad, color, mensajes) solo se hace desde el
+ * detalle del producto, por eso esta tarjeta solo tiene "Ver Detalle".
  *
  * @param {object} props
  * @param {object} props.product - { name, catLabel, desc, image }
- * @param {(product: object) => void} [props.onAddToCart]
  * @param {(product: object) => void} [props.onViewDetail]
  */
-export default function ProductCard({ product, onAddToCart, onViewDetail }) {
+export default function ProductCard({ product, onViewDetail }) {
   const { name, catLabel, desc, image } = product;
 
   return (
@@ -37,18 +38,11 @@ export default function ProductCard({ product, onAddToCart, onViewDetail }) {
             className="btn-detail"
             variant="outlined"
             disableRipple
+            fullWidth
             onClick={() => onViewDetail?.(product)}
           >
-            Ver Detalle
+            Ver más
           </Button>
-          <IconButton
-            className="btn-cart"
-            title="Añadir al carrito"
-            disableRipple
-            onClick={() => onAddToCart?.(product)}
-          >
-            <i className="fa-solid fa-cart-plus" />
-          </IconButton>
         </div>
       </div>
     </div>

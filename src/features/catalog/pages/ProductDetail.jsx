@@ -2,31 +2,24 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { useCart } from "../../cart/hooks/useCart";
 import ProductGallery from "../components/ProductGallery";
 import QuantitySelector from "../components/QuantitySelector";
 import ColorSelector from "../components/ColorSelector";
 import FeatureHighlights from "../components/FeatureHighlights";
 import RelatedProducts from "../components/RelatedProducts";
-import { getProductById, PRODUCTS } from "../data/Products";
-import { PRICE_BY_QUANTITY, getPriceByQuantity } from "../data/Pricing";
+import { getProductById, PRODUCTS } from "../data/products";
+import { PRICE_BY_QUANTITY, getPriceByQuantity } from "../data/pricing";
+import { COLOR_OPTIONS } from "../data/colors";
 import { formatPrice } from "../../../shared/utils/formatPrice";
 import "./ProductDetail.css";
 
 const QUANTITY_OPTIONS = Object.keys(PRICE_BY_QUANTITY).map(Number); // [6, 8, 12, 16, 30]
 
-const COLOR_OPTIONS = [
-  { value: "rosa", hex: "#EF818A", label: "Rosa" },
-  { value: "azul", hex: "#3B82F6", label: "Azul" },
-  { value: "morado", hex: "#A855F7", label: "Morado" },
-  { value: "amarillo", hex: "#FACC15", label: "Amarillo" },
-  { value: "verde", hex: "#4ADE80", label: "Verde" },
-  { value: "chocolate", hex: "#3B2415", label: "Chocolate" },
-  { value: "blanco", hex: "#FFFFFF", label: "Blanco" },
-];
-
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addItem } = useCart();
   const product = getProductById(id);
 
   const [quantity, setQuantity] = useState(12);
@@ -44,16 +37,21 @@ export default function ProductDetail() {
 
   // El precio depende de la cantidad elegida, es igual para todos los productos.
   const currentPrice = getPriceByQuantity(quantity);
+  const selectedColor = COLOR_OPTIONS.find((c) => c.value === color);
 
   // TODO: reemplazar por una selección real (misma categoría, más vendidos, etc.)
   const relatedProducts = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 4);
 
   const handleAddToCart = () => {
-    console.log("Añadir al carrito:", { ...product, quantity, color, price: currentPrice });
-  };
-
-  const handleRelatedAddToCart = (p) => {
-    console.log("Añadir al carrito:", p);
+    addItem({
+      productId: product.id,
+      name: product.name,
+      image: product.image,
+      quantity,
+      color: selectedColor?.label ?? color,
+      colorHex: selectedColor?.hex,
+    });
+    navigate("/carrito");
   };
 
   const handleRelatedViewDetail = (p) => {
@@ -110,7 +108,6 @@ export default function ProductDetail() {
         <RelatedProducts
           products={relatedProducts}
           onViewAll={handleViewAll}
-          onAddToCart={handleRelatedAddToCart}
           onViewDetail={handleRelatedViewDetail}
         />
       </div>

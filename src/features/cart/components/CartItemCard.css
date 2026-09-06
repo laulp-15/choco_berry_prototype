@@ -1,0 +1,175 @@
+/* src/features/cart/components/CartItemCard.css */
+
+.cart-item-card {
+  display: flex;
+  gap: 16px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.cart-item-image {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: linear-gradient(160deg, var(--secundario-2), var(--secundario-1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cart-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cart-item-image i {
+  font-size: 28px;
+  color: var(--primario-claro);
+}
+
+.cart-item-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.cart-item-name {
+  font-size: 16px; /* H5 */
+  font-weight: 700;
+}
+
+.cart-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--texto-muted);
+  margin-top: 4px;
+}
+
+.cart-item-color {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--borde);
+  display: inline-block;
+}
+
+.cart-item-remove.MuiIconButton-root {
+  color: var(--texto-muted);
+}
+.cart-item-remove.MuiIconButton-root:hover {
+  color: var(--primario);
+}
+
+.cart-field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texto-muted);
+  margin-bottom: 4px;
+}
+
+.cart-field-hint {
+  font-size: 11px;
+  color: var(--texto-suave);
+  margin-top: 6px;
+}
+
+.cart-item-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.cart-item-input.MuiOutlinedInput-root {
+  width: 100%;
+  border-radius: 10px;
+  background: var(--secundario-3);
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+}
+.cart-item-input .MuiOutlinedInput-notchedOutline {
+  border-color: var(--borde);
+}
+.cart-item-input.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primario-claro) !important;
+  border-width: 1px !important;
+}
+.cart-item-input input::placeholder,
+.cart-item-input textarea::placeholder {
+  color: var(--texto-suave);
+  opacity: 1;
+}
+
+.cart-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.cart-item-bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-add-another.MuiButton-root {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primario);
+  text-transform: none;
+  padding: 4px 8px;
+  min-width: 0;
+}
+.btn-add-another.MuiButton-root:hover {
+  background: var(--secundario-1);
+  color: var(--primario-oscuro);
+}
+
+.cart-item-stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--secundario-1);
+  border-radius: 999px;
+  padding: 2px 6px;
+}
+.cart-item-stepper .MuiIconButton-root {
+  width: 28px;
+  height: 28px;
+  color: var(--primario);
+  font-size: 11px;
+}
+.cart-item-units {
+  min-width: 22px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cart-item-price {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primario);
+}

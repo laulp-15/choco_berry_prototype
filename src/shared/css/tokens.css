@@ -1,4 +1,4 @@
-/* src/shared/styles/tokens.css
+/* src/shared/css/tokens.css
    Importar una sola vez de forma global (ej: en src/index.js o src/App.jsx):
    import "./shared/styles/tokens.css";
 */
@@ -19,4 +19,18 @@
   --texto-muted: #675A51;
   --texto-suave: #A4968B;
   --borde: #E9D9DE;
+}
+
+/* --- Hover de opciones en menús de MUI (Select, Autocomplete, etc.) ---
+   Se define aquí porque MUI monta el menú en un portal fuera del
+   componente que lo usa, así que un CSS "local" al componente no llega. */
+.MuiMenuItem-root:hover,
+.MuiMenuItem-root.Mui-focusVisible {
+  background-color: var(--secundario-1) !important;
+}
+.MuiMenuItem-root.Mui-selected {
+  background-color: var(--secundario-2) !important;
+}
+.MuiMenuItem-root.Mui-selected:hover {
+  background-color: var(--secundario-1) !important;
 }
