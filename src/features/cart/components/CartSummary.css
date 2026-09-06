@@ -1,0 +1,86 @@
+/* src/features/cart/components/CartSummary.css */
+
+.cart-summary {
+  background: var(--secundario-2);
+  border-radius: 16px;
+  padding: 28px 24px;
+  position: sticky;
+  top: 24px;
+}
+
+.cart-summary-title {
+  font-weight: 700;
+  font-size: 24px; /* H2 */
+  margin-bottom: 20px;
+}
+
+.cart-summary-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.cart-summary-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--texto);
+}
+
+.cart-summary-line-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-summary-line-units {
+  color: var(--texto-muted);
+  font-size: 12px;
+}
+
+.cart-summary-line-price {
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--texto);
+  margin-bottom: 12px;
+}
+
+.cart-summary-divider {
+  border: none;
+  border-top: 1px solid var(--borde);
+  margin: 16px 0;
+}
+
+.cart-summary-total {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primario);
+  margin-bottom: 24px;
+}
+
+.btn-checkout.MuiButton-root {
+  background: var(--primario) !important;
+  color: var(--blanco) !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: none;
+  border-radius: 999px !important;
+  padding: 14px 0 !important;
+  box-shadow: none !important;
+}
+.btn-checkout.MuiButton-root:hover {
+  background: var(--primario-oscuro) !important;
+  box-shadow: none !important;
+}

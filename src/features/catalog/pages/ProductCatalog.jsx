@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import CategoryChips from "../components/CategoryChips";
 import ProductCard from "../components/ProductCard";
-import { CATEGORIES, PRODUCTS } from "../data/Products";
+import { CATEGORIES, PRODUCTS } from "../data/products";
 import "./ProductCatalog.css";
 
 export default function ProductCatalog() {
@@ -20,11 +20,6 @@ export default function ProductCatalog() {
       return matchesCat && matchesQuery;
     });
   }, [activeCategory, query]);
-
-  // TODO: conectar con el store/servicio real del carrito
-  const handleAddToCart = (product) => {
-    console.log("Añadir al carrito:", product);
-  };
 
   const handleViewDetail = (product) => {
     navigate(`/productos/${product.id}`);
@@ -60,7 +55,6 @@ export default function ProductCatalog() {
               >
                 <ProductCard
                   product={product}
-                  onAddToCart={handleAddToCart}
                   onViewDetail={handleViewDetail}
                 />
               </div>

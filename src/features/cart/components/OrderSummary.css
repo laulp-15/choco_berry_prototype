@@ -1,0 +1,109 @@
+/* src/features/cart/components/OrderSummary.css */
+
+.order-summary {
+  background: var(--secundario-2);
+  border-radius: 16px;
+  padding: 28px 24px;
+  position: sticky;
+  top: 24px;
+}
+
+.order-summary-title {
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.order-summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.order-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-summary-thumb {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--secundario-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.order-summary-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.order-summary-thumb i {
+  font-size: 16px;
+  color: var(--primario-claro);
+}
+
+.order-summary-item-info {
+  flex: 1;
+  min-width: 0;
+}
+.order-summary-item-name {
+  font-size: 13px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.order-summary-item-qty {
+  font-size: 12px;
+  color: var(--texto-muted);
+}
+
+.order-summary-item-price {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primario);
+}
+
+.order-summary-divider {
+  border: none;
+  border-top: 1px solid var(--borde);
+  margin: 16px 0;
+}
+
+.order-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--texto);
+  margin-bottom: 10px;
+}
+
+.order-summary-total {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--primario);
+  margin-bottom: 20px;
+}
+
+.btn-finish-order.MuiButton-root {
+  background: var(--primario) !important;
+  color: var(--blanco) !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: none;
+  border-radius: 999px !important;
+  padding: 14px 0 !important;
+  box-shadow: none !important;
+}
+.btn-finish-order.MuiButton-root:hover {
+  background: var(--primario-oscuro) !important;
+  box-shadow: none !important;
+}
