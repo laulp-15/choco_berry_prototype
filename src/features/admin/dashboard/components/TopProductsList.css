@@ -1,0 +1,69 @@
+/* src/features/admin/dashboard/components/TopProductsList.css */
+
+.top-products-card {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 24px;
+  height: 100%;
+}
+
+.top-products-title {
+  font-size: 16px; /* H5 */
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.top-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.top-products-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.top-products-rank {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--secundario-2);
+  color: var(--primario);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-products-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.top-products-sold {
+  flex-shrink: 0;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primario);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.top-products-sold-label {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--texto-suave);
+}
