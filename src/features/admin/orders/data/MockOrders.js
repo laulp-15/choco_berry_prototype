@@ -1,15 +1,9 @@
-// src/features/admin/orders/pages/OrdersListPage.jsx
-import React, { useState } from "react";
-import DataTable from "../../../../shared/components/DataTable";
-import FormSelect from "../../../../shared/components/FormSelect";
-import OrderStatusBadge from "../components/OrderStatusBadge";
-import OrderFormModal from "../components/OrderFormModal";
-import OrderDetailModal from "../components/OrderDetailModal";
-import { ORDER_STATUSES } from "../data/orderStatus";
-import { formatPrice } from "../../../../shared/utils/formatPrice";
+// src/features/admin/orders/data/mockOrders.js
+// TODO: reemplazar por fetch a la API real. Tanto Pedidos como Ventas leen
+// de esta misma fuente — Ventas es una VISTA FILTRADA de pedidos
+// (en_preparacion / despachado), no una tabla aparte.
 
-// TODO: reemplazar por fetch a la API real (features/admin/orders/services)
-const INITIAL_ORDERS = [
+export const INITIAL_ORDERS = [
   {
     id: 101, cliente: "Laura Gómez", direccion: "Calle 48 # 72-18", fecha: "2026-09-01",
     municipio: "bello", instrucciones: "Tocar el timbre dos veces.", medioPago: "nequi",
@@ -67,98 +61,3 @@ const INITIAL_ORDERS = [
     subtotal: 90000, shippingCost: 13000, total: 103000,
   },
 ];
-
-export default function OrdersListPage() {
-  const [orders, setOrders] = useState(INITIAL_ORDERS);
-  const [statusFilter, setStatusFilter] = useState("");
-  const [formOpen, setFormOpen] = useState(false);
-  const [editingOrder, setEditingOrder] = useState(null);
-  const [detailOrder, setDetailOrder] = useState(null);
-
-  const filtered = orders.filter((o) => !statusFilter || o.estado === statusFilter);
-
-  const handleCreate = () => {
-    setEditingOrder(null);
-    setFormOpen(true);
-  };
-
-  const handleEdit = (order) => {
-    setEditingOrder(order);
-    setFormOpen(true);
-  };
-
-  const handleSave = (order) => {
-    if (editingOrder) {
-      setOrders((prev) => prev.map((o) => (o.id === editingOrder.id ? { ...order, id: o.id } : o)));
-    } else {
-      const newId = Math.max(...orders.map((o) => o.id)) + 1;
-      setOrders((prev) => [...prev, { ...order, id: newId }]);
-    }
-    setFormOpen(false);
-  };
-
-  const columns = [
-    { key: "cliente", label: "Cliente" },
-    { key: "direccion", label: "Dirección", render: (row) => row.direccion || "—" },
-    { key: "fecha", label: "Fecha" },
-    { key: "total", label: "Total", render: (row) => formatPrice(row.total) },
-    { key: "estado", label: "Estado", render: (row) => <OrderStatusBadge status={row.estado} /> },
-    {
-      key: "actions",
-      label: "Acciones",
-      render: (row) => (
-        <div style={{ display: "flex", gap: "12px", color: "var(--texto-muted)" }}>
-          <i
-            className="fa-solid fa-eye"
-            style={{ cursor: "pointer" }}
-            title="Ver detalle"
-            onClick={() => setDetailOrder(row)}
-          />
-          <i
-            className="fa-solid fa-pen"
-            style={{ color: "var(--primario)", cursor: "pointer" }}
-            title="Editar"
-            onClick={() => handleEdit(row)}
-          />
-        </div>
-      ),
-    },
-  ];
-
-  return (
-    <>
-      <DataTable
-        title="Pedidos"
-        description="Consulta y administra los pedidos del negocio."
-        createLabel="Crear pedido"
-        onCreate={handleCreate}
-        columns={columns}
-        data={filtered}
-        searchPlaceholder="Buscar por cliente..."
-        extraFilter={
-          <div style={{ minWidth: "180px" }}>
-            <FormSelect
-              value={statusFilter}
-              onChange={setStatusFilter}
-              placeholder="Todos los estados"
-              options={ORDER_STATUSES}
-            />
-          </div>
-        }
-      />
-
-      <OrderFormModal
-        open={formOpen}
-        onClose={() => setFormOpen(false)}
-        initialData={editingOrder}
-        onSave={handleSave}
-      />
-
-      <OrderDetailModal
-        open={Boolean(detailOrder)}
-        onClose={() => setDetailOrder(null)}
-        order={detailOrder}
-      />
-    </>
-  );
-}
