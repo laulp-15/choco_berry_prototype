@@ -21,6 +21,7 @@
 .form-input.MuiOutlinedInput-root,
 .form-input.MuiOutlinedInput-root.MuiInputBase-root {
   width: 100%;
+  min-height: 42px;
   border-radius: 10px;
   background: var(--secundario-3);
   font-size: 14px;
@@ -34,6 +35,8 @@
 .form-input.form-select .MuiSelect-select {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+  display: flex;
+  align-items: center;
 }
 .form-input .MuiOutlinedInput-notchedOutline {
   border-color: var(--borde);
