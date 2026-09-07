@@ -1,0 +1,79 @@
+/* src/features/about/components/RegalarEsTransmitir.css */
+
+.regalar-transmitir {
+  background: var(--texto);
+  padding: 110px 0;
+}
+
+.ret-image-wrap {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  min-height: 340px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+.ret-image {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(35%) brightness(0.85);
+  transition: filter 0.5s ease, transform 0.6s ease;
+}
+.ret-image-wrap:hover .ret-image {
+  filter: grayscale(0%) brightness(0.95);
+  transform: scale(1.04);
+}
+
+.ret-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--blanco);
+  margin-bottom: 20px;
+}
+
+.ret-intro {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--texto-suave);
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.ret-phrases {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ret-phrase {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--secundario-1);
+  margin: 0;
+}
+
+@media (max-width: 991.98px) {
+  .regalar-transmitir {
+    padding: 80px 0;
+  }
+  .ret-title {
+    font-size: 26px;
+  }
+  .ret-image-wrap {
+    min-height: 260px;
+    margin-bottom: 8px;
+  }
+  .ret-image {
+    min-height: 260px;
+  }
+  .ret-phrase {
+    font-size: 19px;
+  }
+}
