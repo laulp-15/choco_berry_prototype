@@ -1,0 +1,35 @@
+/* src/shared/components/Modal.css */
+
+.app-modal .MuiPaper-root {
+  border-radius: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.app-modal-title.MuiDialogTitle-root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--texto);
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.app-modal-close.MuiIconButton-root {
+  color: var(--texto-muted);
+  font-size: 16px;
+}
+.app-modal-close.MuiIconButton-root:hover {
+  color: var(--primario);
+}
+
+.app-modal-content.MuiDialogContent-root {
+  padding: 24px !important;
+}
+
+.app-modal-footer.MuiDialogActions-root {
+  padding: 16px 24px;
+  border-top: 1px solid var(--borde);
+  gap: 10px;
+}
