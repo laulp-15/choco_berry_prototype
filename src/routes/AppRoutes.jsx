@@ -13,7 +13,9 @@ import CheckoutPage from "../features/cart/pages/CheckoutPage";
 import AdminLayout from "../shared/layouts/AdminLayout";
 import DashboardPage from "../features/admin/dashboard/pages/DashboardPage";
 import RolesListPage from "../features/admin/roles/pages/RolesListPage";
-import OrdersListPage from "../features/admin/orders/pages/OrderListPage";
+import OrdersListPage from "../features/admin/orders/pages/OrdersListPage";
+import SalesListPage from "../features/admin/sales/pages/SalesListPage";
+import SaleDetailPage from "../features/admin/sales/pages/SaleDetailPage";
 // import UsersListPage from "../features/admin/users/pages/UsersListPage";
 // import ProductsListPage from "../features/admin/products/pages/ProductsListPage";
 // ...cada compañera agrega la suya aquí mismo cuando la tenga lista
@@ -35,6 +37,8 @@ export default function AppRoutes() {
         <Route index element={<DashboardPage />} />
         <Route path="roles" element={<RolesListPage />} />
         <Route path="pedidos" element={<OrdersListPage />} />
+        <Route path="ventas" element={<SalesListPage />} />
+        <Route path="ventas/:id" element={<SaleDetailPage />} />
         {/* <Route path="usuarios" element={<UsersListPage />} /> */}
         {/* <Route path="productos" element={<ProductsListPage />} /> */}
       </Route>
