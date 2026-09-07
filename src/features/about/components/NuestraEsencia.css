@@ -1,0 +1,293 @@
+
+/* src/features/about/components/NuestraEsencia.css */
+
+.nuestra-esencia {
+  position: relative;
+  background: var(--blanco);
+  padding: 110px 0;
+  overflow: hidden;
+}
+
+/* Detalle decorativo de fondo */
+.nuestra-esencia::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  top: -260px;
+  left: -180px;
+  border-radius: 50%;
+  background: var(--secundario-3);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.nuestra-esencia .about-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+.esencia-heading {
+  max-width: 650px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.esencia-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+
+  color: var(--primario);
+  background: var(--secundario-1);
+}
+
+.esencia-eyebrow i {
+  font-size: 12px;
+}
+
+.esencia-title {
+  margin: 0 0 14px;
+
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 600;
+  line-height: 1.2;
+
+  color: var(--texto);
+}
+
+.esencia-subtitle {
+  max-width: 540px;
+  margin: 0 auto;
+
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: var(--texto-muted);
+}
+
+/* =========================
+   TARJETAS
+========================= */
+
+.esencia-card {
+  position: relative;
+
+  height: 100%;
+  min-height: 280px;
+
+  padding: 42px 28px 34px;
+
+  text-align: center;
+
+  background: var(--secundario-3);
+
+  border: 1px solid transparent;
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    background 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Línea decorativa superior */
+.esencia-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 0;
+  height: 4px;
+
+  border-radius: 0 0 10px 10px;
+
+  background: var(--primario);
+
+  transform: translateX(-50%);
+
+  transition: width 0.4s ease;
+}
+
+.esencia-card:hover {
+  transform: translateY(-10px);
+
+  background: var(--blanco);
+
+  border-color: var(--borde);
+
+  box-shadow:
+    0 24px 50px -22px rgba(42, 35, 29, 0.22);
+}
+
+.esencia-card:hover::before {
+  width: 75px;
+}
+
+/* =========================
+   NÚMERO
+========================= */
+
+.esencia-card-number {
+  position: absolute;
+
+  top: 18px;
+  right: 20px;
+
+  font-family: var(--font-display);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  color: var(--borde);
+}
+
+/* =========================
+   ÍCONO
+========================= */
+
+.esencia-card-icon {
+  width: 68px;
+  height: 68px;
+
+  margin: 0 auto 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--secundario-1);
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.esencia-card:hover .esencia-card-icon {
+  transform: translateY(-4px) scale(1.08);
+
+  box-shadow:
+    0 14px 28px -16px rgba(42, 35, 29, 0.3);
+}
+
+.esencia-card-icon i {
+  font-size: 25px;
+
+  color: var(--primario);
+}
+
+/* =========================
+   TEXTO
+========================= */
+
+.esencia-card-title {
+  margin: 0 0 12px;
+
+  font-family: var(--font-display);
+
+  font-size: 20px;
+  font-weight: 600;
+
+  color: var(--texto);
+}
+
+.esencia-card-line {
+  width: 34px;
+  height: 2px;
+
+  margin: 0 auto 16px;
+
+  border-radius: 999px;
+
+  background: var(--primario);
+
+  opacity: 0.55;
+
+  transition:
+    width 0.4s ease,
+    opacity 0.4s ease;
+}
+
+.esencia-card:hover .esencia-card-line {
+  width: 52px;
+  opacity: 1;
+}
+
+.esencia-card-desc {
+  margin: 0;
+
+  font-family: var(--font-body);
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  color: var(--texto-muted);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 991.98px) {
+  .nuestra-esencia {
+    padding: 80px 0;
+  }
+
+  .esencia-heading {
+    margin-bottom: 45px;
+  }
+
+  .esencia-card {
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .nuestra-esencia {
+    padding: 70px 0;
+  }
+
+  .esencia-heading {
+    margin-bottom: 36px;
+  }
+
+  .esencia-title {
+    font-size: 30px;
+  }
+
+  .esencia-subtitle {
+    font-size: 14px;
+  }
+
+  .esencia-card {
+    min-height: auto;
+
+    padding: 38px 24px 30px;
+  }
+}
+
