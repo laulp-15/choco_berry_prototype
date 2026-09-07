@@ -1,0 +1,56 @@
+/* src/features/admin/orders/components/OrderProductLineForm.css */
+
+.order-line-form {
+  background: var(--secundario-3);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.order-line-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 767px) {
+  .order-line-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.order-line-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.order-line-unit-price {
+  font-size: 12px;
+  color: var(--texto-muted);
+  font-weight: 600;
+}
+
+.btn-add-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--primario);
+  background: var(--blanco);
+  color: var(--primario);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-add-line:hover:not(:disabled) {
+  background: var(--secundario-1);
+}
+.btn-add-line:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

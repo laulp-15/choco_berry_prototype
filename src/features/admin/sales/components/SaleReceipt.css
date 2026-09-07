@@ -1,0 +1,261 @@
+/* src/features/admin/sales/components/SaleReceipt.css */
+
+.sale-receipt {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- Fila superior: info del cliente/pago + total --- */
+.sale-top-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sale-info-card {
+  flex: 1;
+  min-width: 280px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.sale-info-col-full {
+  grid-column: 1 / -1;
+}
+
+.sale-info-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--texto-muted);
+  margin-bottom: 10px;
+}
+
+.sale-client {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sale-client-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--secundario-1);
+  color: var(--primario);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sale-client-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--texto);
+}
+.sale-client-sub {
+  font-size: 12px;
+  color: var(--texto-muted);
+}
+
+.sale-info-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto);
+}
+.sale-info-with-icon i {
+  color: var(--primario);
+  font-size: 13px;
+}
+
+.sale-info-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+/* --- Tarjeta de total, destacada --- */
+.sale-total-card {
+  width: 240px;
+  flex-shrink: 0;
+  background: linear-gradient(160deg, var(--primario) 0%, var(--primario-oscuro) 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: var(--blanco);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sale-total-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.sale-total-value {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.sale-total-caption {
+  font-size: 11px;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+@media (max-width: 767px) {
+  .sale-total-card {
+    width: 100%;
+  }
+}
+
+/* --- Productos --- */
+.sale-products-card {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.sale-products-title {
+  font-size: 16px; /* H5 */
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.sale-products-table {
+  width: 100%;
+}
+
+.sale-products-head {
+  display: grid;
+  grid-template-columns: 2.4fr 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--borde);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--texto-muted);
+}
+
+.sale-products-row {
+  display: grid;
+  grid-template-columns: 2.4fr 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--borde);
+  font-size: 13px;
+  color: var(--texto);
+}
+.sale-products-row:last-child {
+  border-bottom: none;
+}
+
+.sale-product-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.sale-product-thumb {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(160deg, var(--secundario-2), var(--secundario-1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.sale-product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sale-product-thumb i {
+  font-size: 15px;
+  color: var(--primario-claro);
+}
+
+.sale-product-name {
+  font-weight: 700;
+}
+
+.sale-product-personalization {
+  font-size: 11px;
+  color: #1d77ed; /* azul de estado 'información' de la guía de estilo */
+  margin-top: 2px;
+}
+
+.sale-products-qty {
+  color: #1d77ed;
+  font-weight: 600;
+}
+
+.sale-products-subtotal {
+  font-weight: 700;
+  color: var(--primario);
+}
+
+/* --- Totales bajo la tabla --- */
+.sale-products-totals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.sale-totals-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  width: 220px;
+  font-size: 13px;
+  color: var(--texto-muted);
+}
+
+.sale-totals-final {
+  border-top: 1px solid var(--borde);
+  padding-top: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primario);
+}
+
+/* --- Comprobante --- */
+.sale-proof-card {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+
+.sale-proof-thumb {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+}
