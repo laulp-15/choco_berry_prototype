@@ -4,14 +4,14 @@ import Modal from "../../../../shared/components/Modal";
 import FormTextField from "../../../../shared/components/FormTextField";
 import FormSelect from "../../../../shared/components/FormSelect";
 import FormAutocomplete from "../../../../shared/components/FormAutocomplete";
-import DatePicker from "../../../../shared/components/DatePicker";
+import DatePicker, { todayISO } from "../../../../shared/components/DatePicker";
 import FileDropzone from "../../../../shared/components/FileDropzone";
 import OrderProductLineForm from "./OrderProductLineForm";
 import OrderProductLineItem from "./OrderProductLineItem";
 import { MOCK_CLIENTS } from "../data/mockClients";
 import { ORDER_STATUSES } from "../data/orderStatus";
-import { MUNICIPIOS, getShippingCost } from "../../../cart/data/shipping";
-import { PAYMENT_METHODS } from "../../../cart/data/paymentMethods";
+import { MUNICIPIOS, getShippingCost } from "../../../cart/data/Shipping";
+import { PAYMENT_METHODS } from "../../../cart/data/PaymentMethods";
 import { formatPrice } from "../../../../shared/utils/formatPrice";
 import "./OrderFormModal.css";
 
@@ -140,6 +140,7 @@ export default function OrderFormModal({ open, onClose, initialData, onSave }) {
                 value={order.fecha}
                 onChange={(v) => update("fecha", v)}
                 error={errors.fecha}
+                minDate={todayISO()}
               />
             </div>
             <div style={{ flex: 1 }}>
@@ -226,7 +227,7 @@ export default function OrderFormModal({ open, onClose, initialData, onSave }) {
             onChange={(v) => update("cardMessage", v)}
             multiline
             minRows={2}
-            placeholder="Una tarjeta por pedido"
+            placeholder="Una sola tarjeta para todo el pedido, no por producto..."
           />
         </div>
       )}

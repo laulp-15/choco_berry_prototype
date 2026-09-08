@@ -5,5 +5,4 @@ export const PAYMENT_METHODS = [
   { value: "bancolombia", label: "Bancolombia" },
   { value: "nequi", label: "Nequi" },
   { value: "daviplata", label: "Daviplata" },
-  { value: "efectivo", label: "Efectivo contra entrega" },
 ];

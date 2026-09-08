@@ -67,7 +67,10 @@ export default function ProductDetail() {
       <div className="container detail-wrap">
         <div className="row detail-top">
           <div className="col-12 col-lg-6">
-            <ProductGallery />
+            <ProductGallery
+              images={product.image ? [product.image] : []}
+              alt={product.name}
+            />
           </div>
           <div className="col-12 col-lg-6">
             <div className="product-info">

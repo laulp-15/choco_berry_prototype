@@ -1,58 +1,62 @@
-/* src/shared/components/ConfirmModal.css
-   Colores de estado tomados de la guía de estilo ChocoBerry:
-   naranja #F49505 (precaución), azul #1D77ED (información).
-*/
+/* src/shared/components/ConfirmModal.css */
 
 .confirm-modal .MuiPaper-root {
   border-radius: 20px;
-  padding: 32px 28px 28px;
-  max-width: 360px;
-  width: 100%;
-  text-align: center;
-  position: relative;
   font-family: "Poppins", sans-serif;
+}
+
+.confirm-modal-content.MuiDialogContent-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 36px 32px 28px;
 }
 
 .confirm-modal-close.MuiIconButton-root {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
   color: var(--texto-suave);
   font-size: 14px;
 }
 .confirm-modal-close.MuiIconButton-root:hover {
-  color: var(--texto);
+  color: var(--texto-muted);
 }
 
 .confirm-modal-icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 16px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.confirm-modal-icon i {
-  font-size: 22px;
+  font-size: 24px;
   color: var(--blanco);
+  margin-bottom: 18px;
 }
-.confirm-modal-icon-warning {
-  background: #f49505;
+.confirm-modal-icon.danger {
+  background: #dd322d; /* rojo de estado 'error' de la guía de estilo */
 }
-.confirm-modal-icon-info {
-  background: #1d77ed;
+.confirm-modal-icon.warning {
+  background: #f49505; /* naranja de estado 'precaución' de la guía de estilo */
+}
+.confirm-modal-icon.info {
+  background: #1d77ed; /* azul de estado 'información' de la guía de estilo */
 }
 
 .confirm-modal-title {
-  font-size: 18px; /* H4 */
+  font-size: 19px;
   font-weight: 700;
+  color: var(--texto);
   margin-bottom: 8px;
 }
 
 .confirm-modal-description {
   font-size: 13px;
   color: var(--texto-muted);
+  max-width: 300px;
   line-height: 1.5;
   margin-bottom: 24px;
 }
@@ -62,44 +66,46 @@
   gap: 12px;
 }
 
-.confirm-modal-cancel.MuiButton-root {
-  flex: 1;
-  border: 1px solid var(--borde) !important;
-  background: var(--blanco) !important;
-  color: var(--texto) !important;
+.confirm-modal-cancel {
+  border: 1px solid var(--borde);
+  background: var(--blanco);
+  color: var(--texto);
   font-family: "Poppins", sans-serif;
   font-size: 13px;
-  font-weight: 700;
-  text-transform: none;
-  border-radius: 999px !important;
-  padding: 10px 0 !important;
-  box-shadow: none !important;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 10px 22px;
+  cursor: pointer;
 }
-.confirm-modal-cancel.MuiButton-root:hover {
-  background: var(--secundario-3) !important;
-  box-shadow: none !important;
+.confirm-modal-cancel:hover {
+  background: var(--secundario-3);
 }
 
-.confirm-modal-confirm.MuiButton-root {
-  flex: 1;
+.confirm-modal-confirm {
+  border: none;
+  color: var(--blanco);
   font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-weight: 700;
-  text-transform: none;
-  border-radius: 999px !important;
-  padding: 10px 0 !important;
-  box-shadow: none !important;
-  color: var(--blanco) !important;
+  border-radius: 999px;
+  padding: 10px 26px;
+  cursor: pointer;
 }
-.confirm-modal-confirm-warning.MuiButton-root {
-  background: #f49505 !important;
+.confirm-modal-confirm.danger {
+  background: #dd322d;
 }
-.confirm-modal-confirm-warning.MuiButton-root:hover {
-  background: #d97f04 !important;
+.confirm-modal-confirm.danger:hover {
+  background: #c22a26;
 }
-.confirm-modal-confirm-info.MuiButton-root {
-  background: #1d77ed !important;
+.confirm-modal-confirm.warning {
+  background: #f49505;
 }
-.confirm-modal-confirm-info.MuiButton-root:hover {
-  background: #185fc0 !important;
+.confirm-modal-confirm.warning:hover {
+  background: #d98204;
+}
+.confirm-modal-confirm.info {
+  background: #1d77ed;
+}
+.confirm-modal-confirm.info:hover {
+  background: #1663c7;
 }

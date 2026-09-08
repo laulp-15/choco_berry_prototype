@@ -37,6 +37,18 @@ function startOfToday() {
   return t;
 }
 
+/** Fecha de hoy en formato ISO. */
+export function todayISO() {
+  return toISO(startOfToday());
+}
+
+/** Fecha de hoy + N días (puede ser negativo), en formato ISO. */
+export function addDaysISO(days) {
+  const d = startOfToday();
+  d.setDate(d.getDate() + days);
+  return toISO(d);
+}
+
 /** Genera la grilla de 6x7 celdas para un mes, con relleno de mes anterior/siguiente. */
 function getMonthGrid(year, month) {
   const firstDay = new Date(year, month, 1);
@@ -70,12 +82,16 @@ function getMonthGrid(year, month) {
  * @param {(value: string) => void} props.onChange
  * @param {boolean} [props.required]
  * @param {string} [props.error]
- * @param {boolean} [props.disablePast] - si true, no deja elegir fechas anteriores a hoy
+ * @param {string} [props.minDate] - ISO; deshabilita fechas anteriores a esta
+ * @param {string} [props.maxDate] - ISO; deshabilita fechas posteriores a esta
+ * @param {string} [props.hint] - texto de ayuda debajo del campo
  */
-export default function DatePicker({ label, value, onChange, required, error, disablePast = true }) {
+export default function DatePicker({ label, value, onChange, required, error, minDate, maxDate, hint }) {
   const selectedDate = fromISO(value);
+  const min = fromISO(minDate);
+  const max = fromISO(maxDate);
   const [open, setOpen] = useState(false);
-  const [viewDate, setViewDate] = useState(selectedDate ?? new Date());
+  const [viewDate, setViewDate] = useState(selectedDate ?? min ?? new Date());
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -87,7 +103,6 @@ export default function DatePicker({ label, value, onChange, required, error, di
   }, []);
 
   const grid = getMonthGrid(viewDate.getFullYear(), viewDate.getMonth());
-  const today = startOfToday();
 
   const goToMonth = (delta) => {
     setViewDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + delta, 1));
@@ -118,6 +133,7 @@ export default function DatePicker({ label, value, onChange, required, error, di
           {value ? formatDisplay(value) : "Seleccionar fecha"}
         </span>
       </button>
+      {hint && !error && <div className="date-picker-hint">{hint}</div>}
       {error && <div className="form-error">{error}</div>}
 
       {open && (
@@ -144,18 +160,19 @@ export default function DatePicker({ label, value, onChange, required, error, di
 
           <div className="date-picker-grid">
             {grid.map(({ date, currentMonth }, i) => {
-              const isPast = disablePast && date < today && !isSameDay(date, selectedDate);
+              const isOutOfRange = (min && date < min) || (max && date > max);
+              const isDisabled = isOutOfRange && !isSameDay(date, selectedDate);
               const isSelected = isSameDay(date, selectedDate);
               return (
                 <button
                   key={i}
                   type="button"
-                  disabled={isPast}
+                  disabled={isDisabled}
                   className={[
                     "date-picker-day",
                     !currentMonth && "muted",
                     isSelected && "selected",
-                    isPast && "disabled",
+                    isDisabled && "disabled",
                   ]
                     .filter(Boolean)
                     .join(" ")}

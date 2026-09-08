@@ -2,11 +2,12 @@
 import React, { useState } from "react";
 import DataTable from "../../../../shared/components/DataTable";
 import FormSelect from "../../../../shared/components/FormSelect";
+import ConfirmModal from "../../../../shared/components/ConfirmModal";
 import OrderStatusBadge from "../components/OrderStatusBadge";
 import OrderFormModal from "../components/OrderFormModal";
 import OrderDetailModal from "../components/OrderDetailModal";
 import { ORDER_STATUSES } from "../data/orderStatus";
-import { INITIAL_ORDERS } from "../data/MockOrders";
+import { INITIAL_ORDERS } from "../data/mockOrders";
 import { formatPrice } from "../../../../shared/utils/formatPrice";
 
 export default function OrdersListPage() {
@@ -15,6 +16,7 @@ export default function OrdersListPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [editingOrder, setEditingOrder] = useState(null);
   const [detailOrder, setDetailOrder] = useState(null);
+  const [cancelingOrder, setCancelingOrder] = useState(null);
 
   const filtered = orders.filter((o) => !statusFilter || o.estado === statusFilter);
 
@@ -24,6 +26,7 @@ export default function OrdersListPage() {
   };
 
   const handleEdit = (order) => {
+    if (order.estado === "cancelado") return;
     setEditingOrder(order);
     setFormOpen(true);
   };
@@ -38,6 +41,12 @@ export default function OrdersListPage() {
     setFormOpen(false);
   };
 
+  const handleConfirmCancel = () => {
+    setOrders((prev) =>
+      prev.map((o) => (o.id === cancelingOrder.id ? { ...o, estado: "cancelado" } : o))
+    );
+  };
+
   const columns = [
     { key: "cliente", label: "Cliente" },
     { key: "direccion", label: "Dirección", render: (row) => row.direccion || "—" },
@@ -47,22 +56,37 @@ export default function OrdersListPage() {
     {
       key: "actions",
       label: "Acciones",
-      render: (row) => (
-        <div style={{ display: "flex", gap: "12px", color: "var(--texto-muted)" }}>
-          <i
-            className="fa-solid fa-eye"
-            style={{ cursor: "pointer" }}
-            title="Ver detalle"
-            onClick={() => setDetailOrder(row)}
-          />
-          <i
-            className="fa-solid fa-pen"
-            style={{ color: "var(--primario)", cursor: "pointer" }}
-            title="Editar"
-            onClick={() => handleEdit(row)}
-          />
-        </div>
-      ),
+      render: (row) => {
+        const isCancelled = row.estado === "cancelado";
+        return (
+          <div style={{ display: "flex", gap: "12px", color: "var(--texto-muted)" }}>
+            <i
+              className="fa-solid fa-eye"
+              style={{ cursor: "pointer" }}
+              title="Ver detalle"
+              onClick={() => setDetailOrder(row)}
+            />
+            <i
+              className="fa-solid fa-pen"
+              style={{
+                color: isCancelled ? "var(--borde)" : "var(--primario)",
+                cursor: isCancelled ? "not-allowed" : "pointer",
+              }}
+              title={isCancelled ? "No se puede editar un pedido cancelado" : "Editar"}
+              onClick={() => handleEdit(row)}
+            />
+            <i
+              className="fa-solid fa-circle-xmark"
+              style={{
+                color: isCancelled ? "var(--borde)" : "#DD322D",
+                cursor: isCancelled ? "not-allowed" : "pointer",
+              }}
+              title={isCancelled ? "Este pedido ya está cancelado" : "Cancelar pedido"}
+              onClick={() => !isCancelled && setCancelingOrder(row)}
+            />
+          </div>
+        );
+      },
     },
   ];
 
@@ -99,6 +123,17 @@ export default function OrdersListPage() {
         open={Boolean(detailOrder)}
         onClose={() => setDetailOrder(null)}
         order={detailOrder}
+      />
+
+      <ConfirmModal
+        open={Boolean(cancelingOrder)}
+        onClose={() => setCancelingOrder(null)}
+        onConfirm={handleConfirmCancel}
+        variant="danger"
+        title="Cancelar pedido"
+        description={`El pedido de ${cancelingOrder?.cliente ?? ""} será cancelado y esta acción no se puede deshacer.`}
+        confirmLabel="Sí, cancelar pedido"
+        cancelLabel="Volver"
       />
     </>
   );

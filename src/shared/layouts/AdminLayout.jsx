@@ -25,7 +25,9 @@ export default function AdminLayout() {
   return (
     <div className="admin-layout">
       <aside className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
-        <div className="admin-brand">ChocoBerry</div>
+        <div className="admin-brand">
+          <img src="/img/Logo/CHOCOBERRY.png" alt="ChocoBerry" className="admin-brand-logo" />
+        </div>
 
         <nav className="admin-nav">
           {NAV_ITEMS.map((item) => (
