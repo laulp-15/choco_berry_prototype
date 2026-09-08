@@ -1,0 +1,198 @@
+/* FONDO OSCURO */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(30, 15, 20, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* CONTENEDOR DEL MODAL SIN SCROLL VISIBLE */
+.modal-container {
+  background: #FFFFFF;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 20px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid #F3EAE8;
+  box-sizing: border-box;
+  
+  /* Ocultar scrollbar pero mantener navegabilidad en pantallas muy pequeñas */
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.modal-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari y Opera */
+}
+
+/* BOTÓN CERRAR */
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #F8F1EE;
+  border: none;
+  color: #6B5A54;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: #E63946;
+  color: #FFFFFF;
+}
+
+/* ENCABEZADO */
+.modal-header {
+  margin-bottom: 20px;
+  padding-right: 24px;
+}
+
+.modal-header h2 {
+  font-size: 1.35rem;
+  color: #471C26;
+  font-weight: 800;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.modal-header p {
+  color: #7A6A64;
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* FORMULARIO */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #471C26;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #EAE0DC;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #3D322E;
+  background-color: #FAFAF8;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #E63946;
+  background-color: #FFFFFF;
+}
+
+/* SELECCIÓN DE ESTRELLAS */
+.star-picker {
+  display: flex;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease;
+}
+
+.star-btn:hover {
+  transform: scale(1.12);
+}
+
+/* BOTONES DE ACCIÓN */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: none;
+  color: #7A6A64;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-cancel:hover {
+  background: #F8F1EE;
+}
+
+.btn-submit {
+  background-color: #E63946;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+  background-color: #C82F3C;
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}

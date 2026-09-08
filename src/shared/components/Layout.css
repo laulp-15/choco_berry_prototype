@@ -1,0 +1,93 @@
+/* NAVBAR COMPACTO Y ELEGANTE */
+.navbar-custom {
+  background-color: #471C26 !important;
+  border-bottom: 1px solid #7A3245;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 6px 0; /* Controla la altura total de la barra */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo-link {
+  display: flex;
+  align-items: center;
+  background: transparent !important;
+  border: none;
+  padding: 4px 0; /* Ligero espacio vertical */
+}
+
+.nav-logo-img {
+  height: 62px; /* Incrementamos el tamaño visual del logo */
+  width: auto;
+  object-fit: contain;
+  /* Mantenemos el resplandor rosa/blanco para rescatar las letras oscuras */
+  filter: drop-shadow(0px 0px 5px #FAD2E1) drop-shadow(0px 0px 2px #FFFFFF);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.nav-logo-img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0px 0px 8px #FFFFFF);
+}
+/* LISTA DE NAVEGACIÓN */
+.nav-links-list {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links-list a {
+  text-decoration: none;
+  color: #FAD2E1;            /* rosa/100 */
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.nav-links-list a:hover {
+  color: #E63946;            /* carmesi/100 */
+}
+
+/* BOTONES DE ICONO */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-icon-btn {
+  background: transparent;
+  border: none;
+  color: #FAD2E1;            /* rosa/100 */
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.nav-icon-btn:hover {
+  background-color: #7A3245;  /* chocolate/80 */
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.social-btn:hover {
+  background-color: #E63946 !important; /* Carmesí al pasar el cursor */
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
