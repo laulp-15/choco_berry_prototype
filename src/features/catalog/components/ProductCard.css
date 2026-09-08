@@ -16,13 +16,18 @@
 }
 
 .product-image {
-  aspect-ratio: 1 / 1;
-  background: linear-gradient(160deg, var(--secundario-2), var(--secundario-1));
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(
+    160deg,
+    var(--secundario-2),
+    var(--secundario-1)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
+
 .product-image img {
   width: 100%;
   height: 100%;

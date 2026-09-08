@@ -259,3 +259,8 @@
   border-radius: 10px;
   border: 1px solid var(--borde);
 }
+
+.sale-proof-empty {
+  font-size: 13px;
+  color: var(--texto-suave);
+}

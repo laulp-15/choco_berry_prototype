@@ -141,3 +141,9 @@
   color: var(--blanco);
   font-weight: 700;
 }
+
+.date-picker-hint {
+  font-size: 11px;
+  color: var(--texto-suave);
+  margin-top: 6px;
+}

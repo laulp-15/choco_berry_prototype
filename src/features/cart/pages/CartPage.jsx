@@ -29,9 +29,20 @@ export default function CartPage() {
 
         {items.length === 0 ? (
           <div className="cart-empty">
-            <i className="fa-solid fa-cart-plus" />
-            <p>Tu carrito está vacío.</p>
-            <button type="button" className="cart-empty-link" onClick={() => navigate("/productos")}>
+            <i className="fa-solid fa-cart-plus"  />
+
+            <h2>Tu carrito está vacío</h2>
+
+            <p>
+              Aún no has agregado productos a tu carrito.
+              Explora nuestro catálogo y encuentra algo delicioso.
+            </p>
+
+            <button
+              type="button"
+              className="cart-empty-link"
+              onClick={() => navigate("/productos")}
+            >
               Ver catálogo
             </button>
           </div>

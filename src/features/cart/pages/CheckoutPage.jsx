@@ -15,6 +15,7 @@ const INITIAL_FORM = {
   municipio: "",
   instructions: "",
   paymentMethod: "",
+  deliveryDate: "",
 };
 
 export default function CheckoutPage() {
@@ -34,6 +35,7 @@ export default function CheckoutPage() {
   const validate = () => {
     const newErrors = {};
     if (!form.fullName.trim()) newErrors.fullName = "El nombre completo es obligatorio.";
+    if (!form.deliveryDate) newErrors.deliveryDate = "Selecciona la fecha de entrega.";
     if (!form.paymentMethod) newErrors.paymentMethod = "Selecciona un medio de pago.";
     if (!proofFile) newErrors.proofFile = "Debes adjuntar el comprobante de pago.";
     setErrors(newErrors);
@@ -79,6 +81,7 @@ export default function CheckoutPage() {
               values={form}
               onChange={handleFieldChange}
               fullNameError={errors.fullName}
+              deliveryDateError={errors.deliveryDate}
             />
             <PaymentSection
               paymentMethod={form.paymentMethod}

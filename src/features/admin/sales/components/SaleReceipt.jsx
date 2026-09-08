@@ -1,7 +1,7 @@
 // src/features/admin/sales/components/SaleReceipt.jsx
 import React from "react";
 import { formatPrice } from "../../../../shared/utils/formatPrice";
-import { formatDisplayDate, getMunicipioLabel, getPaymentLabel, getProofUrl } from "../utils/orderDisplay.js";
+import { formatDisplayDate, getMunicipioLabel, getPaymentLabel, getProofUrl } from "../utils/orderDisplay";
 import { PRODUCTS } from "../../../catalog/data/products";
 import "./SaleReceipt.css";
 
@@ -125,14 +125,16 @@ export default function SaleReceipt({ sale }) {
         </div>
       </div>
 
-      {proofUrl && (
-        <div className="sale-proof-card">
-          <div className="sale-info-label">Comprobante de pago</div>
+      <div className="sale-proof-card">
+        <div className="sale-info-label">Comprobante de pago</div>
+        {proofUrl ? (
           <a href={proofUrl} target="_blank" rel="noreferrer">
             <img src={proofUrl} alt="Comprobante de pago" className="sale-proof-thumb" />
           </a>
-        </div>
-      )}
+        ) : (
+          <span className="sale-proof-empty">Sin comprobante adjunto</span>
+        )}
+      </div>
     </div>
   );
 }
