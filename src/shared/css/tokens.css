@@ -20,3 +20,10 @@
   --texto-suave: #A4968B;
   --borde: #E9D9DE;
 }
+
+body {
+  background-color: #FBF2F0 !important; /* neutral/100 */
+  color: #2B2320;                       /* neutral/900 */
+  margin: 0;
+  padding: 0;
+}
