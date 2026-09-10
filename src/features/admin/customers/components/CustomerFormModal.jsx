@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
 
 export default function CustomerFormModal({ isOpen, onClose, onSubmit, initialData, isReadOnly = false }) {
   const [nombre, setNombre] = useState('');
@@ -44,7 +43,7 @@ export default function CustomerFormModal({ isOpen, onClose, onSubmit, initialDa
             {isReadOnly ? 'Detalle del Cliente' : initialData ? 'Editar Cliente' : 'Crear Cliente'}
           </h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B5A54' }}>
-            <X size={20} />
+            <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
           </button>
         </div>
 

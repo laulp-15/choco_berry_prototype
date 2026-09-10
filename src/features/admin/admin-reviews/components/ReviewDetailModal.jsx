@@ -1,5 +1,4 @@
 import React from 'react';
-import { X, Star } from 'lucide-react';
 
 export default function ReviewDetailModal({ isOpen, onClose, review }) {
   if (!isOpen || !review) return null;
@@ -13,7 +12,7 @@ export default function ReviewDetailModal({ isOpen, onClose, review }) {
             Detalle de la Reseña
           </h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B5A54' }}>
-            <X size={20} />
+            <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
           </button>
         </div>
 
@@ -27,11 +26,14 @@ export default function ReviewDetailModal({ isOpen, onClose, review }) {
             <label style={{ color: '#6B5A54', fontWeight: 'bold', fontSize: '0.8rem', display: 'block', marginBottom: '0.3rem' }}>CALIFICACIÓN</label>
             <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
               {[1, 2, 3, 4, 5].map((star) => (
-                <Star
+                <i
                   key={star}
-                  size={20}
-                  fill={star <= review.calificacion ? '#FFB800' : 'none'}
-                  color={star <= review.calificacion ? '#FFB800' : '#EADBDA'}
+                  className={star <= review.calificacion ? "fa-solid fa-star" : "fa-regular fa-star"}
+                  style={{
+                    fontSize: '1.25rem',
+                    color: star <= review.calificacion ? '#FFB800' : '#EADBDA'
+                  }}
+                  aria-hidden="true"
                 />
               ))}
               <span style={{ marginLeft: '0.5rem', fontWeight: 'bold', color: '#471C26', fontSize: '0.95rem' }}>{review.calificacion}/5</span>
