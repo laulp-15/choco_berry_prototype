@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useReviews } from '../hooks/useReviews';
 import ReviewCard from '../components/ReviewCard';
 import ReviewFormModal from '../components/ReviewFormModal';
-import { Star, MessageSquarePlus, HeartHandshake, Sparkles } from 'lucide-react';
 import './ReviewsPage.css';
 
 export default function ReviewsPage() {
@@ -20,7 +19,7 @@ export default function ReviewsPage() {
         {/* ENCABEZADO DESTACADO */}
         <header className="reviews-hero">
           <div className="hero-badge">
-            <Sparkles size={14} />
+            <i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" />
             <span>Voces de ChocoBerry</span>
           </div>
           <h1>Historias que nos <span className="highlight-text">Endulzan</span></h1>
@@ -35,7 +34,12 @@ export default function ReviewsPage() {
               <div className="stars-and-label">
                 <div className="stars-row">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} fill="#F49B05" color="#F49B05" />
+                    <i 
+                      key={i} 
+                      className="fa-solid fa-star" 
+                      style={{ color: '#F49B05', fontSize: '1.1rem' }} 
+                      aria-hidden="true" 
+                    />
                   ))}
                 </div>
                 <span className="count-label">Basado en opiniones reales</span>
@@ -43,7 +47,7 @@ export default function ReviewsPage() {
             </div>
 
             <button className="btn-add-review-hero" onClick={() => setIsModalOpen(true)}>
-              <MessageSquarePlus size={20} />
+              <i className="fa-solid fa-comment-medical" aria-hidden="true" />
               <span>Dejar mi Reseña</span>
             </button>
           </div>
@@ -58,7 +62,11 @@ export default function ReviewsPage() {
             </div>
           ) : reviews.length === 0 ? (
             <div className="empty-state">
-              <HeartHandshake size={48} color="#7A3245" />
+              <i 
+                className="fa-solid fa-handshake-angle" 
+                style={{ fontSize: '3rem', color: '#7A3245' }} 
+                aria-hidden="true" 
+              />
               <h3>¡Sé el primero en opinar!</h3>
               <p>Aún no hay reseñas registradas. Cuéntanos tu experiencia con ChocoBerry.</p>
               <button className="btn-add-review-hero" onClick={() => setIsModalOpen(true)}>
