@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, User } from 'lucide-react';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ export default function Navbar() {
           margin: '0 auto',
           padding: '0.8rem 1.5rem',
           display: 'flex',
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
@@ -98,7 +97,7 @@ export default function Navbar() {
             }}
             title="Carrito de Compras"
           >
-            <ShoppingCart size={22} />
+            <i className="fa-solid fa-cart-shopping" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
           </button>
 
           <button
@@ -113,7 +112,7 @@ export default function Navbar() {
             }}
             title="Iniciar Sesión"
           >
-            <User size={22} />
+            <i className="fa-solid fa-user" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
           </button>
         </div>
 

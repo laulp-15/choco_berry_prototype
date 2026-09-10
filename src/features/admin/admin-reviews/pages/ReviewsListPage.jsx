@@ -1,5 +1,4 @@
 import React from 'react';
-import { Search, Filter, Eye, Trash2, AlertTriangle, ArrowLeft, ArrowRight, Star } from 'lucide-react';
 import { useReviews } from '../hooks/useReviews';
 import ReviewDetailModal from '../components/ReviewDetailModal';
 
@@ -52,7 +51,11 @@ export default function ReviewsListPage() {
               boxSizing: 'border-box',
             }}
           />
-          <Search size={18} color="#A0958F" style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)' }} />
+          <i
+            className="fa-solid fa-magnifying-glass"
+            style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: '#A0958F', fontSize: '0.9rem' }}
+            aria-hidden="true"
+          />
         </div>
 
         <button
@@ -70,7 +73,7 @@ export default function ReviewsListPage() {
             cursor: 'pointer',
           }}
         >
-          <Filter size={16} color="#E63950" />
+          <i className="fa-solid fa-filter" style={{ color: '#E63950' }} aria-hidden="true" />
           Filtros
         </button>
 
@@ -129,13 +132,16 @@ export default function ReviewsListPage() {
 
                   {/* CALIFICACIÓN CON ESTRELLAS */}
                   <td style={{ padding: '1rem 1.5rem' }}>
-                    <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '3px', alignItems: 'center' }}>
                       {[1, 2, 3, 4, 5].map((star) => (
-                        <Star
+                        <i
                           key={star}
-                          size={16}
-                          fill={star <= review.calificacion ? '#FFB800' : 'none'}
-                          color={star <= review.calificacion ? '#FFB800' : '#EADBDA'}
+                          className={star <= review.calificacion ? "fa-solid fa-star" : "fa-regular fa-star"}
+                          style={{
+                            color: star <= review.calificacion ? '#FFB800' : '#EADBDA',
+                            fontSize: '0.9rem'
+                          }}
+                          aria-hidden="true"
                         />
                       ))}
                     </div>
@@ -193,14 +199,14 @@ export default function ReviewsListPage() {
                         style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B5A54' }} 
                         title="Ver detalle"
                       >
-                        <Eye size={18} />
+                        <i className="fa-solid fa-eye" style={{ fontSize: '0.95rem' }} aria-hidden="true" />
                       </button>
                       <button 
                         onClick={() => handleOpenDelete(review)}
                         style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#E63950' }} 
                         title="Eliminar"
                       >
-                        <Trash2 size={18} />
+                        <i className="fa-solid fa-trash-can" style={{ fontSize: '0.95rem' }} aria-hidden="true" />
                       </button>
                     </div>
                   </td>
@@ -233,12 +239,12 @@ export default function ReviewsListPage() {
                 color: currentPage === 1 ? '#C5BDBA' : '#471C26',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.3rem',
+                gap: '0.4rem',
                 fontSize: '0.85rem',
                 fontWeight: '600'
               }}
             >
-              <ArrowLeft size={16} /> Anterior
+              <i className="fa-solid fa-arrow-left" aria-hidden="true" /> Anterior
             </button>
 
             <span style={{ fontSize: '0.85rem', color: '#471C26', fontWeight: 'bold', padding: '0 0.5rem' }}>
@@ -255,12 +261,12 @@ export default function ReviewsListPage() {
                 color: currentPage === totalPages ? '#C5BDBA' : '#471C26',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.3rem',
+                gap: '0.4rem',
                 fontSize: '0.85rem',
                 fontWeight: '600'
               }}
             >
-              Siguiente <ArrowRight size={16} />
+              Siguiente <i className="fa-solid fa-arrow-right" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -279,7 +285,7 @@ export default function ReviewsListPage() {
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
           <div style={{ backgroundColor: '#ffffff', borderRadius: '16px', width: '100%', maxWidth: '400px', padding: '1.8rem', textAlign: 'center' }}>
             <div style={{ backgroundColor: '#FDF2F4', width: '50px', height: '50px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto' }}>
-              <AlertTriangle size={24} color="#E63950" />
+              <i className="fa-solid fa-triangle-exclamation" style={{ color: '#E63950', fontSize: '1.25rem' }} aria-hidden="true" />
             </div>
             <h3 style={{ margin: '0 0 0.5rem 0', color: '#471C26' }}>¿Eliminar reseña?</h3>
             <p style={{ color: '#6B5A54', fontSize: '0.9rem', margin: '0 0 1.5rem 0' }}>
