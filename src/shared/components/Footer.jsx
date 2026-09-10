@@ -46,7 +46,7 @@ export default function Footer() {
               fontSize: "1.1rem",
               fontWeight: "600",
               marginBottom: "1rem",
-              color: "#F49B05",
+              color: "#FCFAF8",
             }}
           >
             Navegación
@@ -91,7 +91,7 @@ export default function Footer() {
               fontSize: "1.1rem",
               fontWeight: "600",
               marginBottom: "1rem",
-              color: "#F49B05",
+              color: "#FAF9F8",
             }}
           >
             Contacto
@@ -125,7 +125,7 @@ export default function Footer() {
               fontSize: "0.95rem",
               fontWeight: "600",
               marginBottom: "0.8rem",
-              color: "#F49B05",
+              color: "#F7F4EF",
             }}
           >
             Síguenos
@@ -180,13 +180,13 @@ export default function Footer() {
               fontSize: "1.1rem",
               fontWeight: "600",
               marginBottom: "1rem",
-              color: "#F49B05",
+              color: "#FCFBF9",
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
             }}
           >
-            <i className="fa-solid fa-code" style={{ color: "#F49B05", fontSize: "1rem" }} aria-hidden="true" />
+            <i className="fa-solid fa-code" style={{ color: "#FCFAF8", fontSize: "1rem" }} aria-hidden="true" />
             Desarrolladores
           </h4>
           <ul

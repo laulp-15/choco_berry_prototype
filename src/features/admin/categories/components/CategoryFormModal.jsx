@@ -1,16 +1,21 @@
 // src/features/admin/categories/components/CategoryFormModal.jsx
 import React, { useState, useEffect } from 'react';
-import { X, Heart, User, Sparkles, Cake, Calendar, Gift } from 'lucide-react';
 
 const renderIcon = (name) => {
-  const props = { size: 24, color: '#C2435A' };
+  const iconStyle = { fontSize: '1.5rem', color: '#C2435A' };
   switch (name) {
-    case 'Heart': return <Heart {...props} />;
-    case 'User': return <User {...props} color="#471C26" />;
-    case 'Sparkles': return <Sparkles {...props} color="#F49B05" />;
-    case 'Cake': return <Cake {...props} />;
-    case 'Calendar': return <Calendar {...props} />;
-    default: return <Gift {...props} color="#F49B05" />;
+    case 'Heart':
+      return <i className="fa-solid fa-heart" style={iconStyle} aria-hidden="true" />;
+    case 'User':
+      return <i className="fa-solid fa-user" style={{ ...iconStyle, color: '#471C26' }} aria-hidden="true" />;
+    case 'Sparkles':
+      return <i className="fa-solid fa-wand-magic-sparkles" style={{ ...iconStyle, color: '#F49B05' }} aria-hidden="true" />;
+    case 'Cake':
+      return <i className="fa-solid fa-cake-candles" style={iconStyle} aria-hidden="true" />;
+    case 'Calendar':
+      return <i className="fa-solid fa-calendar-days" style={iconStyle} aria-hidden="true" />;
+    default:
+      return <i className="fa-solid fa-gift" style={{ ...iconStyle, color: '#F49B05' }} aria-hidden="true" />;
   }
 };
 
@@ -46,7 +51,7 @@ export default function CategoryFormModal({ isOpen, onClose, onSubmit, initialDa
             {isReadOnly ? 'Detalle de Categoría' : initialData ? 'Editar Categoría' : 'Crear Categoría'}
           </h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B5A54' }}>
-            <X size={20} />
+            <i className="fa-solid fa-xmark" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
           </button>
         </div>
 
