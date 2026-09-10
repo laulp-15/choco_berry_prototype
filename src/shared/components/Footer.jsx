@@ -1,7 +1,5 @@
-// src/shared/components/Footer.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { Heart, Phone, MapPin, Code } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -112,16 +110,16 @@ export default function Footer() {
             }}
           >
             <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <MapPin size={18} color="#C2435A" />
+              <i className="fa-solid fa-location-dot" style={{ color: "#C2435A", fontSize: "1rem" }} aria-hidden="true" />
               <span>Medellín, Colombia</span>
             </li>
             <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <Phone size={18} color="#C2435A" />
+              <i className="fa-solid fa-phone" style={{ color: "#C2435A", fontSize: "1rem" }} aria-hidden="true" />
               <span>+57 300 000 0000</span>
             </li>
           </ul>
 
-          {/* REDES SOCIALES (Debajo de Contacto) */}
+          {/* REDES SOCIALES */}
           <h5
             style={{
               fontSize: "0.95rem",
@@ -150,20 +148,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-              </svg>
+              <i className="fa-brands fa-instagram" style={{ fontSize: "1.2rem" }} aria-hidden="true" />
             </a>
 
             <a
@@ -183,14 +168,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-1.39V9.08a6.32 6.32 0 1 0 6.34 6.26V9.45a8.21 8.21 0 0 0 4.77 1.51V7.51a4.82 4.82 0 0 1-1.00-.82z" />
-              </svg>
+              <i className="fa-brands fa-tiktok" style={{ fontSize: "1.1rem" }} aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -208,7 +186,7 @@ export default function Footer() {
               gap: "0.5rem",
             }}
           >
-            <Code size={18} color="#F49B05" />
+            <i className="fa-solid fa-code" style={{ color: "#F49B05", fontSize: "1rem" }} aria-hidden="true" />
             Desarrolladores
           </h4>
           <ul
@@ -247,7 +225,7 @@ export default function Footer() {
         }}
       >
         <span>© {new Date().getFullYear()} ChocoBerry. Hecho con</span>
-        <Heart size={14} fill="#C2435A" color="#C2435A" />
+        <i className="fa-solid fa-heart" style={{ color: "#C2435A", fontSize: "0.85rem" }} aria-hidden="true" />
         <span>para endulzar tus días.</span>
       </div>
     </footer>

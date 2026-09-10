@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components/Home.css';
-import { 
-  Heart, Gift, Medal, Plus, ChevronLeft, ChevronRight, Star, Sparkles, ShoppingBag 
-} from 'lucide-react';
 
 export default function HomePage() {
   const [currentReview, setCurrentReview] = useState(0);
@@ -13,23 +10,22 @@ export default function HomePage() {
   const heroImg = "/img/conocenos/cajas.jpg";
 
   const projectInfo = {
-  
     description: "Nacimos inspirados en la creatividad y el amor por el detalle. Elaboramos y comercializamos fresas con chocolate preparadas con la mejor calidad, ideales para sorprender y endulzar momentos especiales."
   };
 
   const pillars = [
     {
-      icon: <Heart size={28} />,
+      icon: <i className="fa-solid fa-heart" style={{ fontSize: '1.75rem', color: '#E63950' }} aria-hidden="true" />,
       title: "Sabor Irresistible",
       desc: "Chocolates seleccionados e ingredientes frescos combinados a la perfección."
     },
     {
-      icon: <Gift size={28} />,
+      icon: <i className="fa-solid fa-gift" style={{ fontSize: '1.75rem', color: '#E63950' }} aria-hidden="true" />,
       title: "Presentación Única",
       desc: "Diseños personalizados y empaques de regalo listos para cautivar."
     },
     {
-      icon: <Medal size={28} />,
+      icon: <i className="fa-solid fa-award" style={{ fontSize: '1.75rem', color: '#E63950' }} aria-hidden="true" />,
       title: "Calidad Garantizada",
       desc: "Preparación ágil, cuidando cada detalle en el proceso artesanal y entrega."
     }
@@ -71,10 +67,12 @@ export default function HomePage() {
       <section className="hero-section">
         <div className="hero-wrapper">
           <div className="hero-content">
-            <div className="badge-trajectory">
-              <Sparkles size={16} />
-              {projectInfo.trajectory}
-            </div>
+            {projectInfo.trajectory && (
+              <div className="badge-trajectory">
+                <i className="fa-solid fa-wand-magic-sparkles" style={{ fontSize: '1rem' }} aria-hidden="true" />
+                {projectInfo.trajectory}
+              </div>
+            )}
             
             <h1 className="hero-title">
               La combinación perfecta entre <span className="text-berry">Arte</span> y <span className="text-choco">Sabor</span>.
@@ -84,7 +82,7 @@ export default function HomePage() {
 
             <div className="hero-buttons">
               <button className="btn-primary" onClick={() => navigate('/productos')}>
-                <Plus size={20} />
+                <i className="fa-solid fa-plus" style={{ fontSize: '1.1rem' }} aria-hidden="true" />
                 Explorar Catálogo
               </button>
               
@@ -105,7 +103,7 @@ export default function HomePage() {
                   <small style={{ color: '#A0958F' }}>Medellín</small>
                   <div style={{ fontWeight: 'bold', color: '#471C26' }}>Sorprende a las personas que mas quieres </div>
                 </div>
-                <ShoppingBag color="#471C26" size={22} />
+                <i className="fa-solid fa-bag-shopping" style={{ color: '#471C26', fontSize: '1.35rem' }} aria-hidden="true" />
               </div>
             </div>
           </div>
@@ -132,12 +130,12 @@ export default function HomePage() {
 
         <div className="carousel-card">
           <button className="nav-btn btn-left" onClick={prevReview} title="Anterior">
-            <ChevronLeft size={24} />
+            <i className="fa-solid fa-chevron-left" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
           </button>
 
           <div className="stars-wrapper">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={20} fill="#F49B05" color="#F49B05" />
+              <i key={i} className="fa-solid fa-star" style={{ color: '#F49B05', fontSize: '1.25rem' }} aria-hidden="true" />
             ))}
           </div>
 
@@ -149,7 +147,7 @@ export default function HomePage() {
           </div>
 
           <button className="nav-btn btn-right" onClick={nextReview} title="Siguiente">
-            <ChevronRight size={24} />
+            <i className="fa-solid fa-chevron-right" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
           </button>
         </div>
 
