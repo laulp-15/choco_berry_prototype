@@ -11,6 +11,7 @@ import {
 import AuthLayout from "../components/AuthLayout";
 import AuthInput from "../components/AuthInput";
 import GoogleButton from "../components/GoogleButton";
+import Navbar from "../../../shared/components/Navbar";
 
 import { useAuth } from "../hooks/useAuth";
 
@@ -22,6 +23,7 @@ import {
 /**
  * Login.
  *
+ * - Incluye el Header (Navbar) superior.
  * - Valida correo y contraseña.
  * - Gestiona el bloqueo temporal tras intentos fallidos.
  * - Permite recordar la sesión.
@@ -199,200 +201,200 @@ export default function LoginPage() {
     loading || isLocked;
 
   return (
-    <AuthLayout
-      variant="split"
-      image="/img/Login/IMG_0516.jpg"
-      imageAlt="Fresas cubiertas de chocolate Chocoberry"
-      
-      
-      title="¡Bienvenido!"
-      subtitle="Inicia sesión para continuar"
-      footer={
-        <>
-          ¿No tienes cuenta?{" "}
-          <Link to="/registro">
-            Regístrate
-          </Link>
-        </>
-      }
-    >
-      <form
-        className="auth-panel-body"
-        onSubmit={handleSubmit}
-        noValidate
-        aria-busy={loading}
+    <>
+      <Navbar />
+      <AuthLayout
+        variant="split"
+        image="/img/Login/IMG_0516.jpg"
+        imageAlt="Fresas cubiertas de chocolate Chocoberry"
+        title="¡Bienvenido!"
+        subtitle="Inicia sesión para continuar"
+        footer={
+          <>
+            ¿No tienes cuenta?{" "}
+            <Link to="/registro">
+              Regístrate
+            </Link>
+          </>
+        }
       >
-        {/* ======================================================
-            ERROR GENERAL
-            ====================================================== */}
+        <form
+          className="auth-panel-body"
+          onSubmit={handleSubmit}
+          noValidate
+          aria-busy={loading}
+        >
+          {/* ======================================================
+              ERROR GENERAL
+              ====================================================== */}
 
-        {serverError && (
-          <div
-            className="auth-banner auth-banner--error"
-            role="alert"
-            aria-live="assertive"
+          {serverError && (
+            <div
+              className="auth-banner auth-banner--error"
+              role="alert"
+              aria-live="assertive"
+            >
+              <i
+                className="fa-solid fa-circle-exclamation"
+                aria-hidden="true"
+              />
+
+              <span>
+                {serverError}
+
+                {isLocked && (
+                  <>
+                    {" "}
+                    <strong>
+                      ({lockSeconds}s)
+                    </strong>
+                  </>
+                )}
+              </span>
+            </div>
+          )}
+
+          {/* ======================================================
+              CORREO
+              ====================================================== */}
+
+          <AuthInput
+            label="Correo electrónico"
+            name="email"
+            type="email"
+            icon="envelope"
+            placeholder="tu correo@email.com"
+            value={form.email}
+            onChange={(value) =>
+              updateField("email", value)
+            }
+            onBlur={() =>
+              handleBlur("email")
+            }
+            error={errors.email}
+            autoComplete="email"
+            disabled={isDisabled}
+            required
+          />
+
+          {/* ======================================================
+              CONTRASEÑA
+              ====================================================== */}
+
+          <AuthInput
+            label="Contraseña"
+            name="password"
+            type="password"
+            icon="lock"
+            placeholder="••••••••"
+            value={form.password}
+            onChange={(value) =>
+              updateField("password", value)
+            }
+            onBlur={() =>
+              handleBlur("password")
+            }
+            error={errors.password}
+            autoComplete="current-password"
+            disabled={isDisabled}
+            required
+          />
+
+          {/* ======================================================
+              RECORDAR + RECUPERAR
+              ====================================================== */}
+
+          <div className="auth-remember-row">
+            <label htmlFor="remember-session">
+              <input
+                id="remember-session"
+                name="remember"
+                type="checkbox"
+                checked={form.remember}
+                onChange={(event) =>
+                  updateField(
+                    "remember",
+                    event.target.checked
+                  )
+                }
+                disabled={isDisabled}
+              />
+
+              <span>
+                Recordarme
+              </span>
+            </label>
+
+            <Link
+              to="/recuperar-contrasena"
+              className="auth-inline-link"
+            >
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </div>
+
+          {/* ======================================================
+              BOTÓN
+              ====================================================== */}
+
+          <button
+            type="submit"
+            className="auth-submit-btn"
+            disabled={isDisabled}
+            aria-disabled={isDisabled}
           >
-            <i
-              className="fa-solid fa-circle-exclamation"
-              aria-hidden="true"
-            />
+            {loading ? (
+              <>
+                <i
+                  className="fa-solid fa-spinner fa-spin"
+                  aria-hidden="true"
+                />
 
+                Ingresando...
+              </>
+            ) : isLocked ? (
+              <>
+                <i
+                  className="fa-solid fa-lock"
+                  aria-hidden="true"
+                />
+
+                Bloqueado ({lockSeconds}s)
+              </>
+            ) : (
+              <>
+                <i
+                  className="fa-solid fa-right-to-bracket"
+                  aria-hidden="true"
+                />
+
+                Ingresar
+              </>
+            )}
+          </button>
+
+          {/* ======================================================
+              SEPARADOR
+              ====================================================== */}
+
+          <div
+            className="auth-divider"
+            role="separator"
+            aria-label="O continúa con"
+          >
             <span>
-              {serverError}
-
-              {isLocked && (
-                <>
-                  {" "}
-
-                  <strong>
-                    ({lockSeconds}s)
-                  </strong>
-                </>
-              )}
+              o continúa con
             </span>
           </div>
-        )}
 
-        {/* ======================================================
-            CORREO
-            ====================================================== */}
+          {/* ======================================================
+              GOOGLE
+              ====================================================== */}
 
-        <AuthInput
-          label="Correo electrónico"
-          name="email"
-          type="email"
-          icon="envelope"
-          placeholder="tu correo@email.com"
-          value={form.email}
-          onChange={(value) =>
-            updateField("email", value)
-          }
-          onBlur={() =>
-            handleBlur("email")
-          }
-          error={errors.email}
-          autoComplete="email"
-          disabled={isDisabled}
-          required
-        />
-
-        {/* ======================================================
-            CONTRASEÑA
-            ====================================================== */}
-
-        <AuthInput
-          label="Contraseña"
-          name="password"
-          type="password"
-          icon="lock"
-          placeholder="••••••••"
-          value={form.password}
-          onChange={(value) =>
-            updateField("password", value)
-          }
-          onBlur={() =>
-            handleBlur("password")
-          }
-          error={errors.password}
-          autoComplete="current-password"
-          disabled={isDisabled}
-          required
-        />
-
-        {/* ======================================================
-            RECORDAR + RECUPERAR
-            ====================================================== */}
-
-        <div className="auth-remember-row">
-          <label htmlFor="remember-session">
-            <input
-              id="remember-session"
-              name="remember"
-              type="checkbox"
-              checked={form.remember}
-              onChange={(event) =>
-                updateField(
-                  "remember",
-                  event.target.checked
-                )
-              }
-              disabled={isDisabled}
-            />
-
-            <span>
-              Recordarme
-            </span>
-          </label>
-
-          <Link
-            to="/recuperar-contrasena"
-            className="auth-inline-link"
-          >
-            ¿Olvidaste tu contraseña?
-          </Link>
-        </div>
-
-        {/* ======================================================
-            BOTÓN
-            ====================================================== */}
-
-        <button
-          type="submit"
-          className="auth-submit-btn"
-          disabled={isDisabled}
-          aria-disabled={isDisabled}
-        >
-          {loading ? (
-            <>
-              <i
-                className="fa-solid fa-spinner fa-spin"
-                aria-hidden="true"
-              />
-
-              Ingresando...
-            </>
-          ) : isLocked ? (
-            <>
-              <i
-                className="fa-solid fa-lock"
-                aria-hidden="true"
-              />
-
-              Bloqueado ({lockSeconds}s)
-            </>
-          ) : (
-            <>
-              <i
-                className="fa-solid fa-right-to-bracket"
-                aria-hidden="true"
-              />
-
-              Ingresar
-            </>
-          )}
-        </button>
-
-        {/* ======================================================
-            SEPARADOR
-            ====================================================== */}
-
-        <div
-          className="auth-divider"
-          role="separator"
-          aria-label="O continúa con"
-        >
-          <span>
-            o continúa con
-          </span>
-        </div>
-
-        {/* ======================================================
-            GOOGLE
-            ====================================================== */}
-
-        <GoogleButton />
-      </form>
-    </AuthLayout>
+          <GoogleButton />
+        </form>
+      </AuthLayout>
+    </>
   );
 }
 

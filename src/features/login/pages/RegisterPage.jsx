@@ -1,4 +1,3 @@
-
 // src/features/login/pages/RegisterPage.jsx
 
 import React, { useState } from "react";
@@ -8,6 +7,7 @@ import AuthLayout from "../components/AuthLayout";
 import AuthInput from "../components/AuthInput";
 import GoogleButton from "../components/GoogleButton";
 import PasswordStrengthChecklist from "../components/PasswordStrengthChecklist";
+import Navbar from "../../../shared/components/Navbar";
 
 import { useAuth } from "../hooks/useAuth";
 
@@ -22,9 +22,8 @@ import {
 /**
  * Registro público.
  *
- * Los usuarios registrados desde este formulario
- * siempre se crean con rol "cliente".
- *
+ * Incluye el Header (Navbar) superior.
+ * Los usuarios registrados desde este formulario siempre se crean con rol "cliente".
  * Los roles administrativos se asignan internamente.
  */
 export default function RegisterPage() {
@@ -214,244 +213,244 @@ export default function RegisterPage() {
   const isDisabled = loading;
 
   return (
-    <AuthLayout
-      variant="split"
-      image="/img/Login/login.jpeg"
-      imageAlt="Caja de fresas cubiertas de chocolate Chocoberry"
-      
-
-      title="¡Registrate!"
-      subtitle="Completa tus datos para comenzar"
-      footer={
-        <>
-          ¿Ya tienes una cuenta?{" "}
-          <Link to="/login">Ingresar</Link>
-        </>
-      }
-    >
-      <form
-        className="auth-panel-body"
-        onSubmit={handleSubmit}
-        noValidate
-        aria-busy={loading}
+    <>
+      <Navbar />
+      <AuthLayout
+        variant="split"
+        image="/img/Login/login.jpeg"
+        imageAlt="Caja de fresas cubiertas de chocolate Chocoberry"
+        title="¡Registrate!"
+        subtitle="Completa tus datos para comenzar"
+        footer={
+          <>
+            ¿Ya tienes una cuenta?{" "}
+            <Link to="/login">Ingresar</Link>
+          </>
+        }
       >
-        {/* ======================================================
-            ERROR GENERAL
-            ====================================================== */}
+        <form
+          className="auth-panel-body"
+          onSubmit={handleSubmit}
+          noValidate
+          aria-busy={loading}
+        >
+          {/* ======================================================
+              ERROR GENERAL
+              ====================================================== */}
 
-        {serverError && (
-          <div
-            className="auth-banner auth-banner--error"
-            role="alert"
-            aria-live="assertive"
-          >
-            <i
-              className="fa-solid fa-circle-exclamation"
-              aria-hidden="true"
-            />
-
-            <span>{serverError}</span>
-          </div>
-        )}
-
-        {/* ======================================================
-            NOMBRE
-            ====================================================== */}
-
-        <AuthInput
-          label="Nombre completo"
-          name="fullName"
-          icon="user"
-          placeholder="Ej. Isabella López"
-          value={form.fullName}
-          onChange={(value) => updateField("fullName", value)}
-          onBlur={() => handleBlur("fullName")}
-          error={errors.fullName}
-          autoComplete="name"
-          disabled={isDisabled}
-          required
-        />
-
-        {/* ======================================================
-            CORREO
-            ====================================================== */}
-
-        <AuthInput
-          label="Correo electrónico"
-          name="email"
-          type="email"
-          icon="envelope"
-          placeholder="Ej. isabella@email.com"
-          value={form.email}
-          onChange={(value) => updateField("email", value)}
-          onBlur={() => handleBlur("email")}
-          error={errors.email}
-          autoComplete="email"
-          disabled={isDisabled}
-          required
-        />
-
-        {/* ======================================================
-            CONTRASEÑA
-            ====================================================== */}
-
-        <AuthInput
-          label="Contraseña"
-          name="password"
-          type="password"
-          icon="lock"
-          placeholder="Crea una contraseña"
-          value={form.password}
-          onChange={handlePasswordChange}
-          onFocus={() => setPasswordFocused(true)}
-          onBlur={() => handleBlur("password")}
-          error={errors.password}
-          autoComplete="new-password"
-          disabled={isDisabled}
-          required
-        />
-
-        {(passwordFocused || form.password) && (
-          <PasswordStrengthChecklist
-            password={form.password}
-          />
-        )}
-
-        {/* ======================================================
-            CONFIRMAR CONTRASEÑA
-            ====================================================== */}
-
-        <AuthInput
-          label="Confirmar contraseña"
-          name="confirmPassword"
-          type="password"
-          icon="lock"
-          placeholder="Confirma tu contraseña"
-          value={form.confirmPassword}
-          onChange={(value) =>
-            updateField("confirmPassword", value)
-          }
-          onBlur={() => handleBlur("confirmPassword")}
-          error={errors.confirmPassword}
-          autoComplete="new-password"
-          disabled={isDisabled}
-          required
-        />
-
-        {/* ======================================================
-            DIRECCIÓN
-            ====================================================== */}
-
-        <AuthInput
-          label="Dirección de entrega (opcional)"
-          name="address"
-          icon="location-dot"
-          placeholder="Ej. Calle 13 #45-67, Barrio Centro"
-          value={form.address}
-          onChange={(value) => updateField("address", value)}
-          autoComplete="street-address"
-          disabled={isDisabled}
-        />
-
-        {/* ======================================================
-            TÉRMINOS
-            ====================================================== */}
-
-        <div className="auth-terms-group">
-          <label className="auth-checkbox-row">
-            <input
-              id="accept-terms"
-              name="acceptTerms"
-              type="checkbox"
-              checked={form.acceptTerms}
-              onChange={(event) =>
-                handleTermsChange(event.target.checked)
-              }
-              disabled={isDisabled}
-              aria-invalid={Boolean(errors.acceptTerms)}
-              aria-describedby={
-                errors.acceptTerms
-                  ? "accept-terms-error"
-                  : undefined
-              }
-              required
-            />
-
-            <span>
-              Acepto los{" "}
-              <a href="#terminos">
-                Términos y Condiciones
-              </a>{" "}
-              y la{" "}
-              <a href="#privacidad">
-                Política de Privacidad
-              </a>
-              .
-            </span>
-          </label>
-
-          {errors.acceptTerms && (
-            <span
-              id="accept-terms-error"
-              className="auth-field-error"
+          {serverError && (
+            <div
+              className="auth-banner auth-banner--error"
               role="alert"
+              aria-live="assertive"
             >
               <i
                 className="fa-solid fa-circle-exclamation"
                 aria-hidden="true"
               />
 
-              <span>{errors.acceptTerms}</span>
-            </span>
+              <span>{serverError}</span>
+            </div>
           )}
-        </div>
 
-        {/* ======================================================
-            REGISTRAR
-            ====================================================== */}
+          {/* ======================================================
+              NOMBRE
+              ====================================================== */}
 
-        <button
-          type="submit"
-          className="auth-submit-btn"
-          disabled={isDisabled}
-          aria-disabled={isDisabled}
-        >
-          {loading ? (
-            <>
-              <i
-                className="fa-solid fa-spinner fa-spin"
-                aria-hidden="true"
+          <AuthInput
+            label="Nombre completo"
+            name="fullName"
+            icon="user"
+            placeholder="Ej. Isabella López"
+            value={form.fullName}
+            onChange={(value) => updateField("fullName", value)}
+            onBlur={() => handleBlur("fullName")}
+            error={errors.fullName}
+            autoComplete="name"
+            disabled={isDisabled}
+            required
+          />
+
+          {/* ======================================================
+              CORREO
+              ====================================================== */}
+
+          <AuthInput
+            label="Correo electrónico"
+            name="email"
+            type="email"
+            icon="envelope"
+            placeholder="Ej. isabella@email.com"
+            value={form.email}
+            onChange={(value) => updateField("email", value)}
+            onBlur={() => handleBlur("email")}
+            error={errors.email}
+            autoComplete="email"
+            disabled={isDisabled}
+            required
+          />
+
+          {/* ======================================================
+              CONTRASEÑA
+              ====================================================== */}
+
+          <AuthInput
+            label="Contraseña"
+            name="password"
+            type="password"
+            icon="lock"
+            placeholder="Crea una contraseña"
+            value={form.password}
+            onChange={handlePasswordChange}
+            onFocus={() => setPasswordFocused(true)}
+            onBlur={() => handleBlur("password")}
+            error={errors.password}
+            autoComplete="new-password"
+            disabled={isDisabled}
+            required
+          />
+
+          {(passwordFocused || form.password) && (
+            <PasswordStrengthChecklist
+              password={form.password}
+            />
+          )}
+
+          {/* ======================================================
+              CONFIRMAR CONTRASEÑA
+              ====================================================== */}
+
+          <AuthInput
+            label="Confirmar contraseña"
+            name="confirmPassword"
+            type="password"
+            icon="lock"
+            placeholder="Confirma tu contraseña"
+            value={form.confirmPassword}
+            onChange={(value) =>
+              updateField("confirmPassword", value)
+            }
+            onBlur={() => handleBlur("confirmPassword")}
+            error={errors.confirmPassword}
+            autoComplete="new-password"
+            disabled={isDisabled}
+            required
+          />
+
+          {/* ======================================================
+              DIRECCIÓN
+              ====================================================== */}
+
+          <AuthInput
+            label="Dirección de entrega (opcional)"
+            name="address"
+            icon="location-dot"
+            placeholder="Ej. Calle 13 #45-67, Barrio Centro"
+            value={form.address}
+            onChange={(value) => updateField("address", value)}
+            autoComplete="street-address"
+            disabled={isDisabled}
+          />
+
+          {/* ======================================================
+              TÉRMINOS
+              ====================================================== */}
+
+          <div className="auth-terms-group">
+            <label className="auth-checkbox-row">
+              <input
+                id="accept-terms"
+                name="acceptTerms"
+                type="checkbox"
+                checked={form.acceptTerms}
+                onChange={(event) =>
+                  handleTermsChange(event.target.checked)
+                }
+                disabled={isDisabled}
+                aria-invalid={Boolean(errors.acceptTerms)}
+                aria-describedby={
+                  errors.acceptTerms
+                    ? "accept-terms-error"
+                    : undefined
+                }
+                required
               />
 
-              Creando cuenta...
-            </>
-          ) : (
-            <>
-              <i
-                className="fa-solid fa-user-plus"
-                aria-hidden="true"
-              />
+              <span>
+                Acepto los{" "}
+                <a href="#terminos">
+                  Términos y Condiciones
+                </a>{" "}
+                y la{" "}
+                <a href="#privacidad">
+                  Política de Privacidad
+                </a>
+                .
+              </span>
+            </label>
 
-              Registrarse
-            </>
-          )}
-        </button>
+            {errors.acceptTerms && (
+              <span
+                id="accept-terms-error"
+                className="auth-field-error"
+                role="alert"
+              >
+                <i
+                  className="fa-solid fa-circle-exclamation"
+                  aria-hidden="true"
+                />
 
-        {/* ======================================================
-            GOOGLE
-            ====================================================== */}
+                <span>{errors.acceptTerms}</span>
+              </span>
+            )}
+          </div>
 
-        <div
-          className="auth-divider"
-          role="separator"
-          aria-label="O continúa con"
-        >
-          <span>o continúa con</span>
-        </div>
+          {/* ======================================================
+              REGISTRAR
+              ====================================================== */}
 
-        <GoogleButton />
-      </form>
-    </AuthLayout>
+          <button
+            type="submit"
+            className="auth-submit-btn"
+            disabled={isDisabled}
+            aria-disabled={isDisabled}
+          >
+            {loading ? (
+              <>
+                <i
+                  className="fa-solid fa-spinner fa-spin"
+                  aria-hidden="true"
+                />
+
+                Creando cuenta...
+              </>
+            ) : (
+              <>
+                <i
+                  className="fa-solid fa-user-plus"
+                  aria-hidden="true"
+                />
+
+                Registrarse
+              </>
+            )}
+          </button>
+
+          {/* ======================================================
+              GOOGLE
+              ====================================================== */}
+
+          <div
+            className="auth-divider"
+            role="separator"
+            aria-label="O continúa con"
+          >
+            <span>o continúa con</span>
+          </div>
+
+          <GoogleButton />
+        </form>
+      </AuthLayout>
+    </>
   );
 }
-
