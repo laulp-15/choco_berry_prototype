@@ -1,0 +1,39 @@
+/* src/features/login/components/ThemeToggle.css */
+
+.auth-theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--auth-border);
+  background: var(--auth-surface);
+  color: var(--carmesi-100, #e63946);
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -10px rgba(42, 35, 29, 0.35);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.auth-theme-toggle:hover {
+  transform: scale(1.06);
+  background: var(--rosa-100, #fad2e1);
+}
+
+.auth-layout[data-theme="dark"] .auth-theme-toggle:hover {
+  background: #2f2420;
+}
+
+.auth-theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.auth-theme-toggle:focus-visible {
+  outline: 2px solid var(--carmesi-60, #ef818a);
+  outline-offset: 2px;
+}
