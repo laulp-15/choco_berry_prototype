@@ -1,0 +1,7 @@
+/* src/features/admin/roles/components/RoleFormModal.css */
+
+.role-form-subtitle {
+  font-size: 13px;
+  color: var(--texto-muted);
+  margin: -6px 0 18px;
+}

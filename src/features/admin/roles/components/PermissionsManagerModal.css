@@ -1,0 +1,30 @@
+/* src/features/admin/roles/components/PermissionsManagerModal.css */
+
+.permissions-manager-create {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.permissions-manager-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  white-space: nowrap;
+}
+
+.permission-edit-btn {
+  border: none;
+  background: none;
+  color: var(--primario);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+}
+.permission-edit-btn:disabled {
+  color: var(--texto-suave);
+  cursor: not-allowed;
+}

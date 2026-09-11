@@ -1,0 +1,33 @@
+/* src/features/admin/users/components/UserFormModal.css */
+
+.user-form-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--error-20, #f7d1d0);
+  color: var(--error-100, #dd322d);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.user-form-status {
+  margin-bottom: 4px;
+}
+
+.user-form-status-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.user-form-status-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--texto-muted);
+}
+.user-form-status-label.is-active {
+  color: var(--success-100, #249434);
+}
