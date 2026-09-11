@@ -50,7 +50,7 @@ export default function AppRoutes() {
           </RequireAuth>
         }
       />
-
+       
       {/* --- PANEL DE ADMINISTRACIÓN (Delegado a AdminRoutes.jsx) --- */}
       <Route path="/admin/*" element={<AdminRoutes />} />
     </Routes>

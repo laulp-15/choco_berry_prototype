@@ -1,0 +1,53 @@
+/* src/features/admin/roles/pages/RolesListPage.css */
+
+.roles-extra-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.roles-permission-count {
+  background: var(--secundario-1);
+  color: var(--texto);
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 3px 12px;
+}
+
+.roles-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--texto);
+}
+.roles-name-cell i {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secundario-1);
+  color: var(--primario);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.roles-row-actions {
+  display: flex;
+  gap: 12px;
+  color: var(--texto-muted);
+}
+.roles-row-actions i {
+  cursor: pointer;
+}
+.roles-row-actions i:nth-child(2) {
+  color: var(--primario);
+}
+.roles-row-actions i.disabled {
+  color: var(--texto-suave);
+  cursor: not-allowed;
+}

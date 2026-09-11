@@ -1,0 +1,103 @@
+/* src/features/admin/roles/components/RoleDetailContent.css */
+
+.role-detail-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.role-detail-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.role-detail-status i {
+  font-size: 8px;
+}
+.role-detail-status.active {
+  color: #24943c;
+}
+.role-detail-status.inactive {
+  color: var(--texto-suave);
+}
+
+.role-detail-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--texto-muted);
+}
+.role-detail-date i {
+  color: var(--primario);
+}
+
+/* --- Secciones tipo tarjeta (mismo patrón que OrderDetailContent) --- */
+.detail-section {
+  background: var(--secundario-3);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+.detail-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 14px;
+}
+.detail-section-title i {
+  color: var(--primario);
+  font-size: 13px;
+}
+
+.role-detail-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--texto-muted);
+  margin-bottom: 6px;
+}
+.role-detail-value {
+  font-size: 14px;
+  color: var(--texto);
+}
+.role-detail-muted {
+  font-size: 13px;
+  color: var(--texto-muted);
+}
+
+.role-detail-permission-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.role-detail-permission-module {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 6px;
+}
+.role-detail-permission-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.role-detail-chip {
+  background: var(--secundario-1);
+  color: var(--texto);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 4px 12px;
+}

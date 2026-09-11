@@ -1,24 +1,54 @@
 // src/features/admin/roles/pages/RolesListPage.jsx
-// EJEMPLO de cómo se usa DataTable en un módulo real, con título, botón
-// "Crear", filtros y la columna de Estado con StatusToggle.
 import React, { useState } from "react";
 import DataTable from "../../../../shared/components/DataTable";
 import StatusToggle from "../../../../shared/components/StatusToggle";
 import FormSelect from "../../../../shared/components/FormSelect";
-
-// TODO: reemplazar por fetch a la API real (features/admin/roles/services)
-const INITIAL_ROLES = [
-  { id: 1, name: "Administrador", description: "Acceso total al sistema", usersCount: 2, active: true },
-  { id: 2, name: "Repartidor", description: "Acceso a entregas asignadas", usersCount: 3, active: true },
-  { id: 3, name: "Editor de catálogo", description: "Solo gestiona productos", usersCount: 1, active: false },
-];
+import ConfirmModal from "../../../../shared/components/ConfirmModal";
+import Toast from "../../../../shared/components/Toast";
+import { useRolesContext } from "../context/RolesContext";
+import { getRoleIcon } from "../data/Permissions";
+import RoleDetailModal from "../components/RoleDetailModal";
+import RoleFormModal from "../components/RoleFormModal";
+import PermissionsManagerModal from "../components/PermissionsManagerModal";
+import "./RolesListPage.css";
 
 export default function RolesListPage() {
-  const [roles, setRoles] = useState(INITIAL_ROLES);
-  const [statusFilter, setStatusFilter] = useState("");
+  const {
+    roles,
+    permissions,
+    isPermissionInUse,
+    deleteRole,
+    toggleRoleActive,
+    createPermission,
+    updatePermission,
+    togglePermissionStatus,
+  } = useRolesContext();
 
-  const toggleActive = (id, value) => {
-    setRoles((prev) => prev.map((r) => (r.id === id ? { ...r, active: value } : r)));
+  const [statusFilter, setStatusFilter] = useState("");
+  const [detailRole, setDetailRole] = useState(null);
+  const [deletingRole, setDeletingRole] = useState(null);
+  const [deleteError, setDeleteError] = useState("");
+  const [permissionsManagerOpen, setPermissionsManagerOpen] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  // Crear/Editar rol: un solo modal (RoleFormModal). formOpen controla si
+  // se ve, editingRole indica si es edición (con datos) o creación (null).
+  const [formOpen, setFormOpen] = useState(false);
+  const [editingRole, setEditingRole] = useState(null);
+
+  const openCreate = () => {
+    setEditingRole(null);
+    setFormOpen(true);
+  };
+
+  const openEdit = (role) => {
+    setEditingRole(role);
+    setFormOpen(true);
+  };
+
+  const handleSaved = (message) => {
+    setFormOpen(false);
+    setToast({ message, severity: "success" });
   };
 
   const filteredByStatus = roles.filter((r) => {
@@ -27,51 +57,137 @@ export default function RolesListPage() {
     return true;
   });
 
+  const confirmDelete = async () => {
+    try {
+      await deleteRole(deletingRole.id);
+      setToast({ message: "Rol eliminado correctamente.", severity: "success" });
+      setDeletingRole(null);
+      setDeleteError("");
+    } catch (err) {
+      setDeleteError(err.message || "No se pudo eliminar el rol.");
+    }
+  };
+
   const columns = [
-    { key: "name", label: "Nombre del rol" },
+    {
+      key: "name",
+      label: "Nombre del rol",
+      render: (row) => (
+        <span className="roles-name-cell">
+          <i className={`fa-solid ${getRoleIcon(row.name)}`} />
+          {row.name}
+        </span>
+      ),
+    },
     { key: "description", label: "Descripción" },
-    { key: "usersCount", label: "Usuarios asignados" },
+    {
+      key: "permissionIds",
+      label: "Permisos",
+      render: (row) => <span className="roles-permission-count">{row.permissionIds.length}</span>,
+    },
+    { key: "usersCount", label: "Usuarios" },
     {
       key: "active",
       label: "Estado",
       render: (row) => (
-        <StatusToggle checked={row.active} onChange={(value) => toggleActive(row.id, value)} />
+        <StatusToggle checked={row.active} onChange={(v) => toggleRoleActive(row.id, v)} />
       ),
     },
     {
       key: "actions",
       label: "Acciones",
       render: (row) => (
-        <div style={{ display: "flex", gap: "12px", color: "var(--texto-muted)" }}>
-          <i className="fa-solid fa-eye" style={{ cursor: "pointer" }} title="Ver detalle" />
-          <i className="fa-solid fa-pen" style={{ color: "var(--primario)", cursor: "pointer" }} title="Editar" />
+        <div className="roles-row-actions">
+          <i className="fa-solid fa-eye" title="Ver detalle" onClick={() => setDetailRole(row)} />
+          <i className="fa-solid fa-pen" title="Editar" onClick={() => openEdit(row)} />
+          <i
+            className={`fa-solid fa-trash ${row.usersCount > 0 ? "disabled" : ""}`}
+            title={row.usersCount > 0 ? "No se puede eliminar: tiene usuarios asociados" : "Eliminar"}
+            onClick={() => {
+              if (row.usersCount > 0) return;
+              setDeleteError("");
+              setDeletingRole(row);
+            }}
+          />
         </div>
       ),
     },
   ];
 
   return (
-    <DataTable
-      title="Roles"
-      description="Administra los roles y permisos del sistema."
-      createLabel="Crear rol"
-      onCreate={() => console.log("TODO: abrir formulario de crear rol")}
-      columns={columns}
-      data={filteredByStatus}
-      searchPlaceholder="Buscar rol por nombre..."
-      extraFilter={
-        <div style={{ minWidth: "160px" }}>
-          <FormSelect
-            value={statusFilter}
-            onChange={setStatusFilter}
-            placeholder="Todos los estados"
-            options={[
-              { value: "activo", label: "Activo" },
-              { value: "inactivo", label: "Inactivo" },
-            ]}
-          />
-        </div>
-      }
-    />
+    <>
+      <DataTable
+        title="Gestión de Roles"
+        description="Define y administra los niveles de acceso para tu equipo de ChocoBerry."
+        createLabel="Nuevo rol"
+        onCreate={openCreate}
+        columns={columns}
+        data={filteredByStatus}
+        searchPlaceholder="Buscar rol por nombre..."
+        emptyMessage="No se encontraron roles."
+        extraFilter={
+          <div className="roles-extra-filter">
+            <div style={{ minWidth: "160px" }}>
+              <FormSelect
+                value={statusFilter}
+                onChange={setStatusFilter}
+                placeholder="Todos los estados"
+                options={[
+                  { value: "activo", label: "Activo" },
+                  { value: "inactivo", label: "Inactivo" },
+                ]}
+              />
+            </div>
+            <button
+              type="button"
+              className="btn-filters"
+              onClick={() => setPermissionsManagerOpen(true)}
+            >
+              <i className="fa-solid fa-gear" />
+              Administrar permisos
+            </button>
+          </div>
+        }
+      />
+
+      <RoleFormModal
+        open={formOpen}
+        onClose={() => setFormOpen(false)}
+        initialData={editingRole}
+        onSaved={handleSaved}
+      />
+
+      <RoleDetailModal
+        open={Boolean(detailRole)}
+        onClose={() => setDetailRole(null)}
+        role={detailRole}
+        permissions={permissions}
+      />
+
+      <ConfirmModal
+        open={Boolean(deletingRole)}
+        onClose={() => setDeletingRole(null)}
+        onConfirm={confirmDelete}
+        variant="warning"
+        title="¿Eliminar este rol?"
+        description={
+          deleteError ||
+          `Esta acción no se puede deshacer. El rol "${deletingRole?.name}" se eliminará del sistema.`
+        }
+        confirmLabel="Eliminar"
+      />
+
+      <PermissionsManagerModal
+        open={permissionsManagerOpen}
+        onClose={() => setPermissionsManagerOpen(false)}
+        permissions={permissions}
+        isPermissionInUse={isPermissionInUse}
+        onCreate={createPermission}
+        onUpdate={updatePermission}
+        onToggleStatus={togglePermissionStatus}
+      />
+
+      <Toast toast={toast} onClose={() => setToast(null)} />
+    </>
   );
 }
