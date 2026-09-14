@@ -9,7 +9,7 @@ import { useRolesContext } from "../context/RolesContext";
 import { getRoleIcon } from "../data/Permissions";
 import RoleDetailModal from "../components/RoleDetailModal";
 import RoleFormModal from "../components/RoleFormModal";
-import PermissionsManagerModal from "../components/PermissionsManagerModal";
+
 import "./RolesListPage.css";
 
 export default function RolesListPage() {
@@ -138,14 +138,7 @@ export default function RolesListPage() {
                 ]}
               />
             </div>
-            <button
-              type="button"
-              className="btn-filters"
-              onClick={() => setPermissionsManagerOpen(true)}
-            >
-              <i className="fa-solid fa-gear" />
-              Administrar permisos
-            </button>
+           
           </div>
         }
       />
@@ -177,15 +170,7 @@ export default function RolesListPage() {
         confirmLabel="Eliminar"
       />
 
-      <PermissionsManagerModal
-        open={permissionsManagerOpen}
-        onClose={() => setPermissionsManagerOpen(false)}
-        permissions={permissions}
-        isPermissionInUse={isPermissionInUse}
-        onCreate={createPermission}
-        onUpdate={updatePermission}
-        onToggleStatus={togglePermissionStatus}
-      />
+      
 
       <Toast toast={toast} onClose={() => setToast(null)} />
     </>

@@ -1,4 +1,6 @@
+// ============================================================
 // src/features/login/pages/RegisterPage.jsx
+// ============================================================
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
 import AuthInput from "../components/AuthInput";
 import GoogleButton from "../components/GoogleButton";
-import PasswordStrengthChecklist from "../components/PasswordStrengthChecklist";
+
 import Navbar from "../../../shared/components/Navbar";
 
 import { useAuth } from "../hooks/useAuth";
@@ -19,19 +21,71 @@ import {
   validateTermsAccepted,
 } from "../utils/validators";
 
-/**
- * Registro público.
- *
- * Incluye el Header (Navbar) superior.
- * Los usuarios registrados desde este formulario siempre se crean con rol "cliente".
- * Los roles administrativos se asignan internamente.
- */
+
+// ============================================================
+// VALIDACIÓN LOCAL DEL TELÉFONO
+// ============================================================
+
+function validatePhone(phone) {
+  const cleanPhone = phone.replace(/\s+/g, "");
+
+  if (!cleanPhone) {
+    return "El número de teléfono es obligatorio.";
+  }
+
+  if (!/^\+?\d{7,15}$/.test(cleanPhone)) {
+    return "Ingresa un número de teléfono válido.";
+  }
+
+  return "";
+}
+
+
+// ============================================================
+// REQUISITOS DE CONTRASEÑA
+// ============================================================
+
+function getPasswordRequirements(password) {
+  return [
+    {
+      key: "length",
+      label: "Mínimo 8 caracteres",
+      valid: password.length >= 8,
+    },
+    {
+      key: "uppercase",
+      label: "Una mayúscula",
+      valid: /[A-Z]/.test(password),
+    },
+    {
+      key: "number",
+      label: "Un número",
+      valid: /\d/.test(password),
+    },
+    {
+      key: "special",
+      label: "Un carácter especial",
+      valid: /[^A-Za-z0-9]/.test(password),
+    },
+  ];
+}
+
+
+// ============================================================
+// PÁGINA DE REGISTRO
+// ============================================================
+
 export default function RegisterPage() {
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  // ============================================================
+  // ESTADO DEL FORMULARIO
+  // ============================================================
+
   const [form, setForm] = useState({
     fullName: "",
+    phone: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -39,18 +93,25 @@ export default function RegisterPage() {
     acceptTerms: false,
   });
 
+  // ============================================================
+  // ESTADO DE ERRORES
+  // ============================================================
+
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
 
-  /* ============================================================
-     HELPERS
-     ============================================================ */
+  // ============================================================
+  // NORMALIZAR EMAIL
+  // ============================================================
 
   function normalizeEmail(value) {
     return value.trim().toLowerCase();
   }
+
+  // ============================================================
+  // ACTUALIZAR CAMPO
+  // ============================================================
 
   function updateField(field, value) {
     setForm((current) => ({
@@ -66,10 +127,17 @@ export default function RegisterPage() {
     setServerError("");
   }
 
+  // ============================================================
+  // VALIDAR CAMPO INDIVIDUAL
+  // ============================================================
+
   function validateField(field, values = form) {
     switch (field) {
       case "fullName":
         return validateFullName(values.fullName);
+
+      case "phone":
+        return validatePhone(values.phone);
 
       case "email":
         return validateEmail(normalizeEmail(values.email));
@@ -83,6 +151,12 @@ export default function RegisterPage() {
           values.confirmPassword
         );
 
+      case "address":
+        if (!values.address.trim()) {
+          return "La dirección es obligatoria.";
+        }
+        return "";
+
       case "acceptTerms":
         return validateTermsAccepted(values.acceptTerms);
 
@@ -91,6 +165,10 @@ export default function RegisterPage() {
     }
   }
 
+  // ============================================================
+  // BLUR
+  // ============================================================
+
   function handleBlur(field) {
     const error = validateField(field);
 
@@ -98,11 +176,11 @@ export default function RegisterPage() {
       ...current,
       [field]: error,
     }));
-
-    if (field === "password") {
-      setPasswordFocused(false);
-    }
   }
+
+  // ============================================================
+  // CAMBIO DE CONTRASEÑA
+  // ============================================================
 
   function handlePasswordChange(value) {
     setForm((current) => ({
@@ -121,6 +199,10 @@ export default function RegisterPage() {
     setServerError("");
   }
 
+  // ============================================================
+  // TÉRMINOS
+  // ============================================================
+
   function handleTermsChange(checked) {
     updateField("acceptTerms", checked);
 
@@ -130,9 +212,9 @@ export default function RegisterPage() {
     }));
   }
 
-  /* ============================================================
-     VALIDACIÓN COMPLETA
-     ============================================================ */
+  // ============================================================
+  // VALIDAR TODO
+  // ============================================================
 
   function validateAll() {
     const values = {
@@ -142,12 +224,16 @@ export default function RegisterPage() {
 
     const nextErrors = {
       fullName: validateFullName(values.fullName),
+      phone: validatePhone(values.phone),
       email: validateEmail(values.email),
       password: validatePassword(values.password),
       confirmPassword: validateConfirmPassword(
         values.password,
         values.confirmPassword
       ),
+      address: !values.address.trim()
+        ? "La dirección es obligatoria."
+        : "",
       acceptTerms: validateTermsAccepted(values.acceptTerms),
     };
 
@@ -156,9 +242,9 @@ export default function RegisterPage() {
     return Object.values(nextErrors).every((error) => !error);
   }
 
-  /* ============================================================
-     SUBMIT
-     ============================================================ */
+  // ============================================================
+  // SUBMIT
+  // ============================================================
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -175,8 +261,9 @@ export default function RegisterPage() {
 
     const normalizedForm = {
       ...form,
-      email: normalizeEmail(form.email),
       fullName: form.fullName.trim(),
+      email: normalizeEmail(form.email),
+      phone: form.phone.trim(),
       address: form.address.trim(),
     };
 
@@ -212,32 +299,33 @@ export default function RegisterPage() {
 
   const isDisabled = loading;
 
+  // Requisitos dinámicos en tiempo real (se obtiene solo el primero pendiente o el estado completo)
+  const passwordRequirements = getPasswordRequirements(form.password);
+  const currentReq = passwordRequirements.find((req) => !req.valid);
+  const allValid = passwordRequirements.every((req) => req.valid);
+
   return (
     <>
       <Navbar />
+
       <AuthLayout
         variant="split"
         image="/img/Login/login.jpeg"
         imageAlt="Caja de fresas cubiertas de chocolate Chocoberry"
-        title="¡Registrate!"
+        title="¡Regístrate!"
         subtitle="Completa tus datos para comenzar"
         footer={
           <>
-            ¿Ya tienes una cuenta?{" "}
-            <Link to="/login">Ingresar</Link>
+            ¿Ya tienes una cuenta? <Link to="/login">Ingresar</Link>
           </>
         }
       >
         <form
-          className="auth-panel-body"
+          className="auth-panel-body auth-register-form"
           onSubmit={handleSubmit}
           noValidate
           aria-busy={loading}
         >
-          {/* ======================================================
-              ERROR GENERAL
-              ====================================================== */}
-
           {serverError && (
             <div
               className="auth-banner auth-banner--error"
@@ -248,207 +336,183 @@ export default function RegisterPage() {
                 className="fa-solid fa-circle-exclamation"
                 aria-hidden="true"
               />
-
               <span>{serverError}</span>
             </div>
           )}
 
-          {/* ======================================================
-              NOMBRE
-              ====================================================== */}
-
-          <AuthInput
-            label="Nombre completo"
-            name="fullName"
-            icon="user"
-            placeholder="Ej. Isabella López"
-            value={form.fullName}
-            onChange={(value) => updateField("fullName", value)}
-            onBlur={() => handleBlur("fullName")}
-            error={errors.fullName}
-            autoComplete="name"
-            disabled={isDisabled}
-            required
-          />
-
-          {/* ======================================================
-              CORREO
-              ====================================================== */}
-
-          <AuthInput
-            label="Correo electrónico"
-            name="email"
-            type="email"
-            icon="envelope"
-            placeholder="Ej. isabella@email.com"
-            value={form.email}
-            onChange={(value) => updateField("email", value)}
-            onBlur={() => handleBlur("email")}
-            error={errors.email}
-            autoComplete="email"
-            disabled={isDisabled}
-            required
-          />
-
-          {/* ======================================================
-              CONTRASEÑA
-              ====================================================== */}
-
-          <AuthInput
-            label="Contraseña"
-            name="password"
-            type="password"
-            icon="lock"
-            placeholder="Crea una contraseña"
-            value={form.password}
-            onChange={handlePasswordChange}
-            onFocus={() => setPasswordFocused(true)}
-            onBlur={() => handleBlur("password")}
-            error={errors.password}
-            autoComplete="new-password"
-            disabled={isDisabled}
-            required
-          />
-
-          {(passwordFocused || form.password) && (
-            <PasswordStrengthChecklist
-              password={form.password}
+          {/* NOMBRE COMPLETO */}
+          <div className="auth-register-field">
+            <AuthInput
+              label="Nombre completo"
+              name="fullName"
+              icon="user"
+              placeholder="Ej. Isabella López"
+              value={form.fullName}
+              onChange={(value) => updateField("fullName", value)}
+              onBlur={() => handleBlur("fullName")}
+              error={errors.fullName}
+              autoComplete="name"
+              disabled={isDisabled}
+              required
             />
-          )}
+          </div>
 
-          {/* ======================================================
-              CONFIRMAR CONTRASEÑA
-              ====================================================== */}
+          {/* TELÉFONO */}
+          <div className="auth-register-field">
+            <AuthInput
+              label="Número de teléfono"
+              type="tel"
+              name="phone"
+              icon="phone"
+              placeholder="Ej. 300 123 4567"
+              value={form.phone}
+              onChange={(value) => updateField("phone", value)}
+              onBlur={() => handleBlur("phone")}
+              error={errors.phone}
+              autoComplete="tel"
+              disabled={isDisabled}
+              required
+            />
+          </div>
 
-          <AuthInput
-            label="Confirmar contraseña"
-            name="confirmPassword"
-            type="password"
-            icon="lock"
-            placeholder="Confirma tu contraseña"
-            value={form.confirmPassword}
-            onChange={(value) =>
-              updateField("confirmPassword", value)
-            }
-            onBlur={() => handleBlur("confirmPassword")}
-            error={errors.confirmPassword}
-            autoComplete="new-password"
-            disabled={isDisabled}
-            required
-          />
+          {/* CORREO ELECTRÓNICO */}
+          <div className="auth-register-field">
+            <AuthInput
+              label="Correo electrónico"
+              type="email"
+              name="email"
+              icon="envelope"
+              placeholder="Ej. isabella@email.com"
+              value={form.email}
+              onChange={(value) => updateField("email", value)}
+              onBlur={() => handleBlur("email")}
+              error={errors.email}
+              autoComplete="email"
+              disabled={isDisabled}
+              required
+            />
+          </div>
 
-          {/* ======================================================
-              DIRECCIÓN
-              ====================================================== */}
+          {/* CONTRASEÑA */}
+          <div className="auth-register-field">
+            <AuthInput
+              label="Contraseña"
+              type="password"
+              name="password"
+              icon="lock"
+              placeholder="Crea una contraseña"
+              value={form.password}
+              onChange={handlePasswordChange}
+              onBlur={() => handleBlur("password")}
+              error={errors.password}
+              autoComplete="new-password"
+              disabled={isDisabled}
+              required
+            />
 
-          <AuthInput
-            label="Dirección de entrega (opcional)"
-            name="address"
-            icon="location-dot"
-            placeholder="Ej. Calle 13 #45-67, Barrio Centro"
-            value={form.address}
-            onChange={(value) => updateField("address", value)}
-            autoComplete="street-address"
-            disabled={isDisabled}
-          />
+            {/* VALIDACIÓN EN TIEMPO REAL: 1 POR 1 EN UNA SOLA FILA */}
+            <div className="auth-password-requirements">
+              {form.password && (
+                allValid ? (
+                  <span className="auth-password-requirement is-valid">
+                    <i className="fa-solid fa-circle-check" aria-hidden="true" />
+                    Contraseña segura
+                  </span>
+                ) : (
+                  currentReq && (
+                    <span className="auth-password-requirement is-invalid">
+                      <i className="fa-solid fa-circle-xmark" aria-hidden="true" />
+                      Falta: {currentReq.label}
+                    </span>
+                  )
+                )
+              )}
+            </div>
+          </div>
 
-          {/* ======================================================
-              TÉRMINOS
-              ====================================================== */}
+          {/* CONFIRMAR CONTRASEÑA */}
+          <div className="auth-register-field">
+            <AuthInput
+              label="Confirmar contraseña"
+              type="password"
+              name="confirmPassword"
+              icon="lock"
+              placeholder="Confirma tu contraseña"
+              value={form.confirmPassword}
+              onChange={(value) => updateField("confirmPassword", value)}
+              onBlur={() => handleBlur("confirmPassword")}
+              error={errors.confirmPassword}
+              autoComplete="new-password"
+              disabled={isDisabled}
+              required
+            />
+          </div>
 
+          {/* DIRECCIÓN DE ENTREGA */}
+          <div className="auth-register-field">
+            <AuthInput
+              label="Dirección de entrega"
+              name="address"
+              icon="location-dot"
+              placeholder="Ej. Calle 13 #45 - 67"
+              value={form.address}
+              onChange={(value) => updateField("address", value)}
+              onBlur={() => handleBlur("address")}
+              error={errors.address}
+              autoComplete="street-address"
+              disabled={isDisabled}
+              required
+            />
+          </div>
+
+          {/* TÉRMINOS Y CONDICIONES */}
           <div className="auth-terms-group">
             <label className="auth-checkbox-row">
               <input
-                id="accept-terms"
-                name="acceptTerms"
                 type="checkbox"
                 checked={form.acceptTerms}
-                onChange={(event) =>
-                  handleTermsChange(event.target.checked)
-                }
+                onChange={(e) => handleTermsChange(e.target.checked)}
                 disabled={isDisabled}
-                aria-invalid={Boolean(errors.acceptTerms)}
-                aria-describedby={
-                  errors.acceptTerms
-                    ? "accept-terms-error"
-                    : undefined
-                }
-                required
               />
-
               <span>
-                Acepto los{" "}
-                <a href="#terminos">
-                  Términos y Condiciones
-                </a>{" "}
-                y la{" "}
-                <a href="#privacidad">
-                  Política de Privacidad
-                </a>
-                .
+                Acepto los <Link to="/terms">Términos y Condiciones</Link> y la{" "}
+                <Link to="/privacy">Política de Privacidad</Link>.
               </span>
             </label>
-
             {errors.acceptTerms && (
-              <span
-                id="accept-terms-error"
-                className="auth-field-error"
-                role="alert"
+              <div
+                className="auth-password-requirement is-invalid"
+                style={{ marginTop: "2px" }}
               >
-                <i
-                  className="fa-solid fa-circle-exclamation"
-                  aria-hidden="true"
-                />
-
-                <span>{errors.acceptTerms}</span>
-              </span>
+                <i className="fa-solid fa-circle-xmark" aria-hidden="true" />
+                {errors.acceptTerms}
+              </div>
             )}
           </div>
 
-          {/* ======================================================
-              REGISTRAR
-              ====================================================== */}
-
+          {/* BOTÓN DE REGISTRO */}
           <button
             type="submit"
             className="auth-submit-btn"
             disabled={isDisabled}
-            aria-disabled={isDisabled}
           >
-            {loading ? (
-              <>
-                <i
-                  className="fa-solid fa-spinner fa-spin"
-                  aria-hidden="true"
-                />
 
-                Creando cuenta...
-              </>
-            ) : (
               <>
-                <i
-                  className="fa-solid fa-user-plus"
-                  aria-hidden="true"
-                />
-
+                <i className="fa-solid fa-user-plus" aria-hidden="true" />
                 Registrarse
               </>
-            )}
+
           </button>
 
-          {/* ======================================================
-              GOOGLE
-              ====================================================== */}
-
-          <div
-            className="auth-divider"
-            role="separator"
-            aria-label="O continúa con"
-          >
+          {/* DIVIDER */}
+          <div className="auth-divider">
             <span>o continúa con</span>
           </div>
 
-          <GoogleButton />
+          {/* BOTÓN GOOGLE */}
+          <div className="auth-register-google">
+            <GoogleButton disabled={isDisabled} />
+          </div>
         </form>
       </AuthLayout>
     </>

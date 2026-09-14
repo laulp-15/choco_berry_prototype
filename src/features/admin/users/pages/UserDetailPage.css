@@ -54,7 +54,7 @@
 }
 .user-detail-status-pill.is-active {
   background: var(--success-20, #cee7d2);
-  color: var(--success-100, #249434);
+  color: var(--success-100, #69a973);
 }
 .user-detail-status-pill.is-inactive {
   background: var(--secundario-3);

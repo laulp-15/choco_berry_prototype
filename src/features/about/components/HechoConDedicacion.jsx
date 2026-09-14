@@ -100,7 +100,7 @@ export default function HechoConDedicacion() {
                 <div className="hd-image-wrap">
 
                   <img
-                    src="/img/conocenos/About_3.jpeg"
+                    src="/img/conocenos/cajas.jpg"
                     alt="Preparación artesanal de fresas ChocoBerry"
                     className="hd-image"
                     onError={(e) => {
