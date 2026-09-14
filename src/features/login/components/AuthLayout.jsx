@@ -1,30 +1,18 @@
 // src/features/login/components/AuthLayout.jsx
 
 import React from "react";
-
-import {
-  Link,
-} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import "./AuthLayout.css";
 
 export default function AuthLayout({
   variant = "split",
-
   image,
-
   imageAlt = "Chocoberry",
-
   visualEyebrow,
-
   visualTitle,
-
   title,
-
   subtitle,
-
   children,
-
   footer,
 }) {
   /* ============================================================
@@ -35,19 +23,27 @@ export default function AuthLayout({
 
   /* ============================================================
      LOGO
+     
+     IMPORTANTE:
+     Si la imagen está en:
+     
+     public/img/Logo/logo_login.jpg
+     
+     entonces en React se llama con:
+   
      ============================================================ */
 
   const logoSrc =
     theme === "dark"
       ? "/img/Logo/LogoDark_2.png"
-      : "/img/Logo/LogoLight_2.png";
+      : "/img/Login/logo_login.png";
 
   /* ============================================================
      VARIANTE
      ============================================================ */
 
-  const isSplit =
-    variant === "split";
+  const isSplit = variant === "split";
+  const isCentered = variant === "centered";
 
   return (
     <main
@@ -61,35 +57,37 @@ export default function AuthLayout({
       <div className="auth-container">
 
         {/* ======================================================
-            PANEL IZQUIERDO / IMAGEN
+            IMAGEN
+            ======================================================
+
+            En split:
+            aparece como panel izquierdo.
+
+            En centered:
+            funciona como fondo detrás del formulario.
             ====================================================== */}
 
-        {isSplit && (
+        {(isSplit || isCentered) && image && (
           <aside className="auth-visual">
 
             {/* IMAGEN */}
 
-            {image && (
-              <div className="auth-visual-media">
+            <div className="auth-visual-media">
+              <img
+                src={image}
+                alt={imageAlt}
+                className="auth-visual-image"
+              />
 
-                <img
-                  src={image}
-                  alt={imageAlt}
-                  className="auth-visual-image"
-                />
+              {/* OVERLAY */}
 
-                {/* OVERLAY */}
-
-                <div className="auth-visual-overlay" />
-
-              </div>
-            )}
+              <div className="auth-visual-overlay" />
+            </div>
 
             {/* CONTENIDO SOBRE LA IMAGEN */}
 
             {(visualEyebrow || visualTitle) && (
               <div className="auth-visual-content">
-
                 <div className="auth-visual-caption">
 
                   {visualEyebrow && (
@@ -105,7 +103,6 @@ export default function AuthLayout({
                   )}
 
                 </div>
-
               </div>
             )}
 
@@ -113,7 +110,7 @@ export default function AuthLayout({
         )}
 
         {/* ======================================================
-            PANEL DERECHO / FORMULARIO
+            PANEL DEL FORMULARIO
             ====================================================== */}
 
         <section className="auth-panel">
@@ -125,9 +122,9 @@ export default function AuthLayout({
                 ================================================== */}
 
             <Link
-            
+              to="/"
               className="auth-logo-link auth-logo-link--form"
-              
+              aria-label="Ir al inicio de Chocoberry"
             >
               <img
                 src={logoSrc}
