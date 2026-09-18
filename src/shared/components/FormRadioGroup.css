@@ -1,0 +1,68 @@
+/* src/shared/components/FormRadioGroup.css */
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+}
+.radio-group.column {
+  flex-direction: column;
+  gap: 14px;
+}
+.radio-group.row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.radio-option input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-dot {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid var(--borde);
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+.radio-dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primario);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.15s ease;
+}
+
+.radio-option.selected .radio-dot {
+  border-color: var(--primario);
+}
+.radio-option.selected .radio-dot::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.radio-text {
+  font-size: 14px;
+  color: var(--texto);
+  font-weight: 500;
+}
+.radio-option.selected .radio-text {
+  color: var(--primario);
+  font-weight: 700;
+}

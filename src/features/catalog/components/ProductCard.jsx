@@ -42,6 +42,7 @@ export default function ProductCard({ product, onViewDetail }) {
             onClick={() => onViewDetail?.(product)}
           >
             Ver más
+            <i className="fa-solid fa-arrow-right" />
           </Button>
         </div>
       </div>

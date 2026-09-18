@@ -12,11 +12,11 @@ const NAV_ITEMS = [
   { to: "/admin/usuarios", label: "Usuarios", icon: "fa-users" },
   { to: "/admin/categorias", label: "Categorías", icon: "fa-tag" },
   { to: "/admin/productos", label: "Productos", icon: "fa-store" },
-  { to: "/admin/clientes", label: "Clientes", icon: "fa-user-group" },
-  { to: "/admin/resenas", label: "Reseñas", icon: "fa-star" },
   { to: "/admin/pedidos", label: "Pedidos", icon: "fa-box" },
   { to: "/admin/ventas", label: "Ventas", icon: "fa-credit-card" },
   { to: "/admin/entregas", label: "Entregas", icon: "fa-truck-fast" },
+  { to: "/admin/clientes", label: "Clientes", icon: "fa-user-group" },
+  { to: "/admin/resenas", label: "Reseñas", icon: "fa-star" },
 ];
 
 export default function AdminLayout() {

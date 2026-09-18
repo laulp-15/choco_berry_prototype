@@ -22,6 +22,7 @@ export default function CategoryChips({ categories, activeCategory, onChange }) 
           clickable
           onClick={() => onChange(cat.value)}
           className={`chip ${activeCategory === cat.value ? "active" : ""}`}
+          aria-pressed={activeCategory === cat.value}
         />
       ))}
     </div>

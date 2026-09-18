@@ -80,3 +80,61 @@
   color: var(--primario);
   margin-top: 6px;
 }
+
+/* --- Aviso de horarios de entrega a domicilio --- */
+.delivery-hours-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--secundario-3);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--texto-muted);
+}
+.delivery-hours-hint i {
+  color: var(--primario);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.delivery-hours-hint strong {
+  color: var(--primario);
+}
+.pickup-info {
+  display: flex;
+  gap: 14px;
+  background: var(--secundario-3);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 18px;
+}
+.pickup-info i {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--secundario-1);
+  color: var(--primario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.pickup-info-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 4px;
+}
+.pickup-info-text {
+  font-size: 12px;
+  color: var(--texto-muted);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.pickup-info-address {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primario);
+}

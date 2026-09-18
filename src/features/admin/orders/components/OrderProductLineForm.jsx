@@ -1,8 +1,9 @@
 // src/features/admin/orders/components/OrderProductLineForm.jsx
 import React, { useState } from "react";
 import FormSelect from "../../../../shared/components/FormSelect";
+import FormSearchableSelect from "../../../../shared/components/FormSearchableSelect";
 import FormTextField from "../../../../shared/components/FormTextField";
-import { PRODUCTS } from "../../../catalog/data/products";
+import { PRODUCTS } from "../../../catalog/data/Products";
 import { PRICE_BY_QUANTITY, getPriceByQuantity } from "../../../catalog/data/pricing";
 import { COLOR_OPTIONS } from "../../../catalog/data/colors";
 import { formatPrice } from "../../../../shared/utils/formatPrice";
@@ -61,12 +62,12 @@ export default function OrderProductLineForm({ onAdd }) {
   return (
     <div className="order-line-form">
       <div className="order-line-form-grid">
-        <FormSelect
+        <FormSearchableSelect
           label="Producto"
           value={line.productId}
           onChange={(v) => update("productId", v)}
           options={PRODUCT_OPTIONS}
-          placeholder="Selecciona un producto"
+          placeholder="Escribe o selecciona un producto"
         />
         <FormSelect
           label="Cantidad de fresas"
@@ -83,7 +84,7 @@ export default function OrderProductLineForm({ onAdd }) {
           placeholder="Color"
         />
         <FormTextField
-          label="Cantidad del producto"
+          label="Cantidad de este producto"
           type="number"
           value={line.units}
           onChange={(v) => update("units", v)}

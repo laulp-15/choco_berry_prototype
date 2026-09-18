@@ -1,30 +1,66 @@
-/* src/features/catalog/components/CategoryChips.css */
-
 .categories-scroll {
   margin-bottom: 28px;
 }
 
-/* --- Pisa estilos por defecto de MUI Chip --- */
+/* Estilo base */
 .chip.MuiChip-root {
   border: 1px solid var(--primario);
   background: var(--blanco);
   color: var(--primario);
+
   font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-weight: 600;
+
   height: auto;
-  padding: 9px 6px;
+  min-height: 38px;
+  padding: 8px 6px;
+
   border-radius: 999px;
-  transition: background 0.15s ease, color 0.15s ease;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
+
+/* Hover de las categorías que NO están seleccionadas */
 .chip.MuiChip-root:hover {
   background: var(--secundario-1);
   color: var(--primario);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 4px 10px rgba(19, 5, 59, 0.10);
 }
+
+/* Categoría seleccionada */
 .chip.MuiChip-root.active {
   background: var(--primario);
   color: var(--blanco);
+
+  border-color: var(--primario);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 14px rgba(19, 5, 59, 0.18);
 }
+
+/* Hover sobre la categoría seleccionada */
+.chip.MuiChip-root.active:hover {
+  background: var(--primario-oscuro);
+  color: var(--blanco);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 16px rgba(19, 5, 59, 0.20);
+}
+
 .chip.MuiChip-root .MuiChip-label {
   padding: 0 8px;
 }

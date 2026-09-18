@@ -28,6 +28,14 @@
   margin-bottom: 16px;
 }
 
+.cancel-reason-section {
+  background: rgba(221, 50, 45, 0.06);
+  border-color: rgba(221, 50, 45, 0.25);
+}
+.cancel-reason-section .detail-section-title i {
+  color: #dd322d;
+}
+
 .detail-section-title {
   display: flex;
   align-items: center;
@@ -82,6 +90,10 @@
 }
 .order-detail-proof-link {
   display: inline-block;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 /* --- Productos --- */

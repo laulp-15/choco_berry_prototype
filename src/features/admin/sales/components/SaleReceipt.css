@@ -252,6 +252,14 @@
   padding: 20px 24px;
 }
 
+.sale-proof-link {
+  display: inline-block;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 .sale-proof-thumb {
   width: 72px;
   height: 72px;

@@ -1,5 +1,5 @@
 // src/App.jsx
-import { CartProvider } from "./features/cart/hooks/useCart";
+import { CartProvider } from "./features/cart/hooks/UseCart";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {

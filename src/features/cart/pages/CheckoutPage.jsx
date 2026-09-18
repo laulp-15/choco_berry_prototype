@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
-import { useCart } from "../hooks/useCart";
+import { useCart } from "../hooks/UseCart";
 import ShippingForm from "../components/ShippingForm";
 import PaymentSection from "../components/PaymentSection";
 import OrderSummary from "../components/OrderSummary";
@@ -16,6 +16,7 @@ const INITIAL_FORM = {
   instructions: "",
   paymentMethod: "",
   deliveryDate: "",
+  deliveryMethod: "",
 };
 
 export default function CheckoutPage() {
@@ -26,7 +27,7 @@ export default function CheckoutPage() {
   const [proofFile, setProofFile] = useState(null);
   const [errors, setErrors] = useState({});
 
-  const shippingCost = getShippingCost(form.municipio);
+  const shippingCost = form.deliveryMethod === "domicilio" ? getShippingCost(form.municipio) : 0;
 
   const handleFieldChange = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -36,6 +37,13 @@ export default function CheckoutPage() {
     const newErrors = {};
     if (!form.fullName.trim()) newErrors.fullName = "El nombre completo es obligatorio.";
     if (!form.deliveryDate) newErrors.deliveryDate = "Selecciona la fecha de entrega.";
+    if (!form.deliveryMethod) newErrors.deliveryMethod = "Selecciona si deseas domicilio o no.";
+    if (form.deliveryMethod === "domicilio" && !form.municipio) {
+      newErrors.municipio = "Selecciona el municipio de entrega.";
+    }
+    if (form.deliveryMethod === "domicilio" && !form.address.trim()) {
+      newErrors.address = "Debe escribir una dirección para su entrega.";
+    }
     if (!form.paymentMethod) newErrors.paymentMethod = "Selecciona un medio de pago.";
     if (!proofFile) newErrors.proofFile = "Debes adjuntar el comprobante de pago.";
     setErrors(newErrors);
@@ -82,6 +90,9 @@ export default function CheckoutPage() {
               onChange={handleFieldChange}
               fullNameError={errors.fullName}
               deliveryDateError={errors.deliveryDate}
+              deliveryMethodError={errors.deliveryMethod}
+              municipioError={errors.municipio}
+              addressError={errors.address}
             />
             <PaymentSection
               paymentMethod={form.paymentMethod}

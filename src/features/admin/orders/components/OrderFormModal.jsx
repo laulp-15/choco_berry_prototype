@@ -3,17 +3,21 @@ import React, { useState } from "react";
 import Modal from "../../../../shared/components/Modal";
 import FormTextField from "../../../../shared/components/FormTextField";
 import FormSelect from "../../../../shared/components/FormSelect";
-import FormAutocomplete from "../../../../shared/components/FormAutocomplete";
+import FormSearchableSelect from "../../../../shared/components/FormSearchableSelect";
 import DatePicker, { todayISO } from "../../../../shared/components/DatePicker";
 import FileDropzone from "../../../../shared/components/FileDropzone";
 import OrderProductLineForm from "./OrderProductLineForm";
 import OrderProductLineItem from "./OrderProductLineItem";
 import { MOCK_CLIENTS } from "../data/mockClients";
 import { ORDER_STATUSES } from "../data/orderStatus";
-import { MUNICIPIOS, getShippingCost } from "../../../cart/data/Shipping";
-import { PAYMENT_METHODS } from "../../../cart/data/PaymentMethods";
+import { MUNICIPIOS, getShippingCost } from "../../../cart/data/shipping";
+import { PAYMENT_METHODS } from "../../../cart/data/paymentMethods";
 import { formatPrice } from "../../../../shared/utils/formatPrice";
 import "./OrderFormModal.css";
+
+// TODO: mientras no exista el módulo real de Clientes, el "value" es el
+// mismo nombre. Cuando exista, esto se reemplaza por { value: id, label: nombre }.
+const CLIENT_OPTIONS = MOCK_CLIENTS.map((name) => ({ value: name, label: name }));
 
 const EMPTY_ORDER = {
   cliente: "",
@@ -122,12 +126,12 @@ export default function OrderFormModal({ open, onClose, initialData, onSave }) {
 
       {tab === "datos" && (
         <div className="order-form-section">
-          <FormAutocomplete
+          <FormSearchableSelect
             label="Cliente"
             required
             value={order.cliente}
             onChange={(v) => update("cliente", v)}
-            options={MOCK_CLIENTS}
+            options={CLIENT_OPTIONS}
             placeholder="Escribe o selecciona un cliente"
             error={errors.cliente}
           />
@@ -169,7 +173,7 @@ export default function OrderFormModal({ open, onClose, initialData, onSave }) {
                 value={order.municipio}
                 onChange={(v) => update("municipio", v)}
                 options={MUNICIPIOS}
-                placeholder="Recojo en tienda / sin domicilio"
+                placeholder="Selecciona un municipio"
               />
             </div>
             <div className="order-form-shipping-hint">

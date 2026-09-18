@@ -1,7 +1,9 @@
 // src/features/cart/components/PaymentSection.jsx
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Select, MenuItem } from "@mui/material";
-import { PAYMENT_METHODS } from "../data/PaymentMethods";
+import FileDropzone from "../../../shared/components/FileDropzone";
+import { PAYMENT_METHODS } from "../data/paymentMethods";
+import { NEQUI_ACCOUNT } from "../data/paymentInfo";
 import "./PaymentSection.css";
 
 /**
@@ -21,16 +23,6 @@ export default function PaymentSection({
   paymentMethodError,
   proofFileError,
 }) {
-  const inputRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleFiles = (fileList) => {
-    const file = fileList?.[0];
-    if (file && file.type.startsWith("image/")) {
-      onProofFileChange(file);
-    }
-  };
-
   return (
     <div className="checkout-section">
       <div className="checkout-section-title">
@@ -41,6 +33,10 @@ export default function PaymentSection({
       <p className="payment-intro">
         Por favor, realiza la transferencia y adjunta tu comprobante para procesar tu pedido.
       </p>
+      <div className="payment-nequi">
+        <i className="fa-solid fa-phone" />
+        Transferencias a Nequi: <strong>{NEQUI_ACCOUNT}</strong>
+      </div>
 
       <div className="form-field">
         <label className="form-label">Medio de pago *</label>
@@ -65,52 +61,12 @@ export default function PaymentSection({
 
       <div className="form-field">
         <label className="form-label">Comprobante de pago *</label>
-
-        {proofFile ? (
-          <div className="proof-preview">
-            <img src={URL.createObjectURL(proofFile)} alt="Comprobante de pago" />
-            <div className="proof-preview-info">
-              <span className="proof-preview-name">{proofFile.name}</span>
-              <button
-                type="button"
-                className="proof-remove"
-                onClick={() => onProofFileChange(null)}
-              >
-                <i className="fa-solid fa-xmark" />
-                Quitar
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div
-            className={`dropzone ${isDragging ? "dragging" : ""} ${proofFileError ? "has-error" : ""}`}
-            onClick={() => inputRef.current?.click()}
-            onDragOver={(e) => {
-              e.preventDefault();
-              setIsDragging(true);
-            }}
-            onDragLeave={() => setIsDragging(false)}
-            onDrop={(e) => {
-              e.preventDefault();
-              setIsDragging(false);
-              handleFiles(e.dataTransfer.files);
-            }}
-          >
-            <div className="dropzone-icon">
-              <i className="fa-solid fa-file-import" />
-            </div>
-            <div className="dropzone-title">Subir comprobante de pago</div>
-            <div className="dropzone-subtitle">Arrastra tu archivo aquí o haz clic para buscarlo</div>
-            <input
-              ref={inputRef}
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={(e) => handleFiles(e.target.files)}
-            />
-          </div>
-        )}
-        {proofFileError && <div className="form-error">{proofFileError}</div>}
+        <FileDropzone
+          file={proofFile}
+          onChange={onProofFileChange}
+          label="Subir comprobante de pago"
+          error={proofFileError}
+        />
       </div>
     </div>
   );
