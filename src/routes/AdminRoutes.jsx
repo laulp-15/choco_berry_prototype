@@ -55,17 +55,14 @@ export default function AdminRoutes() {
         
        {/* Usuarios y accesos */}
 
-
         <Route path="usuarios" element={<UsersListPage />} />
         <Route path="usuarios/:id" element={<UserDetailPage />} />
 
 
-        <Route path="clientes" element={<CustomersListPage />} />
-
-        {/* Catálogo de productos y reseñas */}
+        {/* Catálogo de productos */}
         <Route path="categorias" element={<CategoriesListPage />} />
         <Route path="productos" element={<ProductsListPage />} />
-        <Route path="resenas" element={<ReviewsListPage />} />
+        
 
         {/* Pedidos y ventas */}
         <Route path="pedidos" element={<OrdersListPage />} />
@@ -73,6 +70,8 @@ export default function AdminRoutes() {
         <Route path="ventas/:id" element={<SaleDetailPage />} />
 
          <Route path="entregas" element={<DeliveriesListPage />} />
+         <Route path="clientes" element={<CustomersListPage />} />
+         <Route path="resenas" element={<ReviewsListPage />} />
 
       </Route>
     </Routes>

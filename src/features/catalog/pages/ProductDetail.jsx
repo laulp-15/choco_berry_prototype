@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { useCart } from "../../cart/hooks/useCart";
+import { useCart } from "../../cart/hooks/UseCart";
 import ProductGallery from "../components/ProductGallery";
 import QuantitySelector from "../components/QuantitySelector";
 import ColorSelector from "../components/ColorSelector";
 import FeatureHighlights from "../components/FeatureHighlights";
 import RelatedProducts from "../components/RelatedProducts";
-import { getProductById, PRODUCTS } from "../data/products";
+import { getProductById, PRODUCTS } from "../data/Products";
 import { PRICE_BY_QUANTITY, getPriceByQuantity } from "../data/pricing";
 import { COLOR_OPTIONS } from "../data/colors";
 import { formatPrice } from "../../../shared/utils/formatPrice";
@@ -43,7 +43,7 @@ export default function ProductDetail() {
   const relatedProducts = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 4);
 
   const handleAddToCart = () => {
-    addItem({
+    const { merged } = addItem({
       productId: product.id,
       name: product.name,
       image: product.image,
@@ -51,7 +51,7 @@ export default function ProductDetail() {
       color: selectedColor?.label ?? color,
       colorHex: selectedColor?.hex,
     });
-    navigate("/carrito");
+    navigate("/carrito", merged ? { state: { merged: true } } : undefined);
   };
 
   const handleRelatedViewDetail = (p) => {

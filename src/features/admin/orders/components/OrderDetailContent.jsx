@@ -1,40 +1,25 @@
 // src/features/admin/orders/components/OrderDetailContent.jsx
-import React from "react";
+import React, { useState } from "react";
 import OrderStatusBadge from "./OrderStatusBadge";
+import ImageLightbox from "../../../../shared/components/ImageLightbox";
 import { formatPrice } from "../../../../shared/utils/formatPrice";
-import { MUNICIPIOS } from "../../../cart/data/shipping";
-import { PAYMENT_METHODS } from "../../../cart/data/paymentMethods";
+import { formatDisplayDate, getMunicipioLabel, getPaymentLabel, getProofUrl } from "../utils/orderDisplay";
 import "./OrderDetailContent.css";
-
-function formatDisplayDate(iso) {
-  if (!iso) return "—";
-  const [y, m, d] = iso.split("-");
-  return `${d}/${m}/${y}`;
-}
-
-/**
- * Devuelve una URL utilizable en <img>, ya sea que `comprobante` sea un
- * File (subido en esta sesión) o una URL/string (ya guardado en backend).
- */
-function getProofUrl(comprobante) {
-  if (!comprobante) return null;
-  if (typeof comprobante === "string") return comprobante;
-  return URL.createObjectURL(comprobante);
-}
 
 /**
  * Contenido de "ver detalle" de un pedido — sin ningún wrapper (ni Modal,
- * ni layout de página). Se reutiliza en:
- *  - OrderDetailModal (Pedidos: ver detalle dentro de un modal)
- *  - SaleDetailPage (Ventas: la misma información como página completa)
+ * ni layout de página). Se usa dentro de OrderDetailModal (Pedidos).
+ * Ventas tiene su propia presentación (SaleReceipt), aunque usa la misma
+ * data y los mismos helpers de utils/orderDisplay.js.
  *
  * @param {object} props
  * @param {object} props.order
  */
 export default function OrderDetailContent({ order }) {
-  const municipioLabel = MUNICIPIOS.find((m) => m.value === order.municipio)?.label ?? "Recojo en tienda";
-  const paymentLabel = PAYMENT_METHODS.find((p) => p.value === order.medioPago)?.label ?? "—";
+  const municipioLabel = getMunicipioLabel(order.municipio);
+  const paymentLabel = getPaymentLabel(order.medioPago);
   const proofUrl = getProofUrl(order.comprobante);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   return (
     <div className="order-detail-content">
@@ -44,6 +29,21 @@ export default function OrderDetailContent({ order }) {
           <i className="fa-solid fa-calendar" /> {formatDisplayDate(order.fecha)}
         </span>
       </div>
+
+      {order.estado === "cancelado" && order.motivoCancelacion && (
+        <div className="detail-section cancel-reason-section">
+          <div className="detail-section-title">
+            <i className="fa-solid fa-circle-xmark" />
+            Motivo de cancelación
+          </div>
+          <div className="order-detail-value">{order.motivoCancelacion}</div>
+          {order.fechaCancelacion && (
+            <div className="order-detail-label" style={{ marginTop: "8px" }}>
+              Cancelado el {formatDisplayDate(order.fechaCancelacion)}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* --- Datos del cliente y entrega --- */}
       <div className="detail-section">
@@ -87,9 +87,9 @@ export default function OrderDetailContent({ order }) {
           <div>
             <div className="order-detail-label">Comprobante</div>
             {proofUrl ? (
-              <a href={proofUrl} target="_blank" rel="noreferrer" className="order-detail-proof-link">
+              <button type="button" className="order-detail-proof-link" onClick={() => setLightboxOpen(true)}>
                 <img src={proofUrl} alt="Comprobante de pago" className="order-detail-proof-thumb" />
-              </a>
+              </button>
             ) : (
               <div className="order-detail-value order-detail-muted">Sin comprobante adjunto</div>
             )}
@@ -156,6 +156,13 @@ export default function OrderDetailContent({ order }) {
           <span>{formatPrice(order.total)}</span>
         </div>
       </div>
+
+      <ImageLightbox
+        open={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        src={proofUrl}
+        alt="Comprobante de pago"
+      />
     </div>
   );
 }

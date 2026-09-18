@@ -168,6 +168,18 @@
   font-size: 14px;
 }
 
+.cart-item-prices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.cart-item-unit-price {
+  font-size: 11px;
+  color: var(--texto-muted);
+}
+
 .cart-item-price {
   font-size: 17px;
   font-weight: 700;

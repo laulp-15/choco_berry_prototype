@@ -1,8 +1,9 @@
 // src/features/admin/sales/components/SaleReceipt.jsx
-import React from "react";
+import React, { useState } from "react";
 import { formatPrice } from "../../../../shared/utils/formatPrice";
-import { formatDisplayDate, getMunicipioLabel, getPaymentLabel, getProofUrl } from "../utils/orderDisplay";
+import { formatDisplayDate, getMunicipioLabel, getPaymentLabel, getProofUrl } from "../../orders/utils/orderDisplay";
 import { PRODUCTS } from "../../../catalog/data/products";
+import ImageLightbox from "../../../../shared/components/ImageLightbox";
 import "./SaleReceipt.css";
 
 function getInitials(name) {
@@ -30,6 +31,7 @@ export default function SaleReceipt({ sale }) {
   const municipioLabel = getMunicipioLabel(sale.municipio);
   const paymentLabel = getPaymentLabel(sale.medioPago);
   const proofUrl = getProofUrl(sale.comprobante);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   return (
     <div className="sale-receipt">
@@ -128,13 +130,20 @@ export default function SaleReceipt({ sale }) {
       <div className="sale-proof-card">
         <div className="sale-info-label">Comprobante de pago</div>
         {proofUrl ? (
-          <a href={proofUrl} target="_blank" rel="noreferrer">
+          <button type="button" className="sale-proof-link" onClick={() => setLightboxOpen(true)}>
             <img src={proofUrl} alt="Comprobante de pago" className="sale-proof-thumb" />
-          </a>
+          </button>
         ) : (
           <span className="sale-proof-empty">Sin comprobante adjunto</span>
         )}
       </div>
+
+      <ImageLightbox
+        open={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        src={proofUrl}
+        alt="Comprobante de pago"
+      />
     </div>
   );
 }

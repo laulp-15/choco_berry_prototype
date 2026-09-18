@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../../features/cart/hooks/UseCart';
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const { items } = useCart();
+
+  const cartCount = items.reduce((sum, item) => sum + item.units, 0);
 
   return (
     <nav
@@ -94,10 +98,34 @@ export default function Navbar() {
               color: '#471C26',
               display: 'flex',
               alignItems: 'center',
+              position: 'relative',
             }}
             title="Carrito de Compras"
           >
             <i className="fa-solid fa-cart-shopping" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
+            {cartCount > 0 && (
+              <span
+                style={{
+                  position: 'absolute',
+                  top: '-6px',
+                  right: '-8px',
+                  backgroundColor: '#C2435A',
+                  color: '#ffffff',
+                  fontSize: '0.65rem',
+                  fontWeight: '700',
+                  lineHeight: 1,
+                  minWidth: '16px',
+                  height: '16px',
+                  borderRadius: '999px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0 4px',
+                }}
+              >
+                {cartCount}
+              </span>
+            )}
           </button>
 
           <button
