@@ -1,27 +1,23 @@
-
 // src/main.jsx
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-
 import App from "./App.jsx";
 
-import { AuthProvider } from "./features/login/hooks/useAuth.jsx";
-import { ToastProvider } from "./shared/components/Toast.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./shared/css/tokens.css";
+// Importaciones de contextos globales
+import { AuthProvider } from "./features/login/context/AuthContext"; 
+import { ToastProvider } from "./shared/components/Toast"; // 👈 1. Importa el ToastProvider
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <ToastProvider>
+        <ToastProvider>     {/* 👈 2. Envuélvelo aquí para que esté disponible en toda la app */}
           <App />
         </ToastProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
-

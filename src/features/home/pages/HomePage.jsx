@@ -1,166 +1,502 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../components/Home.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import HeroBanner from "../components/HeroBanner";
+import "../components/Home.css";
 
 export default function HomePage() {
-  const [currentReview, setCurrentReview] = useState(0);
   const navigate = useNavigate();
+  const [currentReview, setCurrentReview] = useState(0);
 
-  // Ruta absoluta directa desde la carpeta /public
-  const heroImg = "/img/conocenos/cajas.jpg";
-
-  const projectInfo = {
-    description: "Nacimos inspirados en la creatividad y el amor por el detalle. Elaboramos y comercializamos fresas con chocolate preparadas con la mejor calidad, ideales para sorprender y endulzar momentos especiales."
-  };
-
-  const pillars = [
+  const categories = [
     {
-      icon: <i className="fa-solid fa-heart" style={{ fontSize: '1.75rem', color: '#E63950' }} aria-hidden="true" />,
-      title: "Sabor Irresistible",
-      desc: "Chocolates seleccionados e ingredientes frescos combinados a la perfección."
+      id: 1,
+      title: "Cumpleaños",
+      description:
+        "Detalles dulces y personalizados para celebrar un año más de vida.",
+      image: "/img/categorias/hbd tqm nb.jpg",
+      tag: "Celebración",
     },
     {
-      icon: <i className="fa-solid fa-gift" style={{ fontSize: '1.75rem', color: '#E63950' }} aria-hidden="true" />,
-      title: "Presentación Única",
-      desc: "Diseños personalizados y empaques de regalo listos para cautivar."
+      id: 2,
+      title: "Fechas Especiales",
+      description:
+        "Arreglos exclusivos para San Valentín, Día de la Madre y más.",
+      image: "/img/categorias/feliz dia mujer rb.jpg",
+      tag: "Momentos",
     },
     {
-      icon: <i className="fa-solid fa-award" style={{ fontSize: '1.75rem', color: '#E63950' }} aria-hidden="true" />,
-      title: "Calidad Garantizada",
-      desc: "Preparación ágil, cuidando cada detalle en el proceso artesanal y entrega."
-    }
+      id: 3,
+      title: "Aniversarios",
+      description:
+        "Expresa tu amor con combinaciones elegantes de chocolate.",
+      image: "/img/categorias/feliz aniversario.jpg",
+      tag: "Romance",
+    },
+    {
+      id: 4,
+      title: "Regalos Sorpresa",
+      description:
+        "Cajas sorpresas llenas de sabor para robar sonrisas imprevistas.",
+      image: "/img/categorias/mi hermoso nb.jpg",
+      tag: "Detalles",
+    },
   ];
 
   const reviews = [
     {
       id: 1,
-      comment: "¡Las fresas más deliciosas que he probado! La presentación de la caja fue impecable y llegó justo a tiempo para nuestro aniversario.",
-      client: "Mariana Gómez",
-      tag: "Cliente Verificado"
+      comment:
+        "¡Las fresas cubiertas con chocolate superaron mis expectativas! Llegaron súper frescas y la presentación fue hermosa.",
+      client: "María Fernanda G.",
+      badge: "Cliente Verificado",
     },
     {
       id: 2,
-      comment: "El detalle personalizado en el chocolate superó mis expectativas. Mi pareja quedó fascinada con la sorpresa. 100% recomendados.",
-      client: "Carlos Restrepo",
-      tag: "Regalo de Cumpleaños"
+      comment:
+        "El detalle perfecto para nuestro aniversario. La combinación del chocolate dorado y los arreglos florales es increíble.",
+      client: "Carlos Mendoza",
+      badge: "Cliente Frecuente",
     },
     {
       id: 3,
-      comment: "Excelente servicio de atención y la calidad del chocolate es superior. Sin duda volveré a comprar para mis eventos especiales.",
-      client: "Andrea Morales",
-      tag: "Cliente Frecuente"
-    }
+      comment:
+        "Sabor inigualable y la entrega fue muy puntual. Definitivamente volveré a pedir para mis ocasiones especiales.",
+      client: "Valeria Gómez",
+      badge: "Cliente Verificado",
+    },
   ];
 
-  const nextReview = () => {
+  const nextReview = () =>
     setCurrentReview((prev) => (prev + 1) % reviews.length);
-  };
 
-  const prevReview = () => {
+  const prevReview = () =>
     setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
-  };
 
   return (
-    <div className="home-container">
-      
-      {/* HERO SECTION */}
-      <section className="hero-section">
-        <div className="hero-wrapper">
-          <div className="hero-content">
-            {projectInfo.trajectory && (
-              <div className="badge-trajectory">
-                <i className="fa-solid fa-wand-magic-sparkles" style={{ fontSize: '1rem' }} aria-hidden="true" />
-                {projectInfo.trajectory}
-              </div>
-            )}
-            
-            <h1 className="hero-title">
-              La combinación perfecta entre <span className="text-berry">Arte</span> y <span className="text-choco">Sabor</span>.
-            </h1>
-            
-            <p className="hero-description">{projectInfo.description}</p>
+    <div className="home-page-wrapper">
 
-            <div className="hero-buttons">
-              <button className="btn-primary" onClick={() => navigate('/productos')}>
-                <i className="fa-solid fa-plus" style={{ fontSize: '1.1rem' }} aria-hidden="true" />
-                Explorar Catálogo
-              </button>
-              
-              {/* Botón Saber más sin ícono */}
-              <button className="btn-secondary" onClick={() => navigate('/conocenos')}>
-                Saber más
-              </button>
-            </div>
+      {/* =====================================================
+          1. CARRUSEL PRINCIPAL
+          ===================================================== */}
+      <HeroBanner />
+
+
+      {/* =====================================================
+          2. CONTENEDOR PRINCIPAL
+          ===================================================== */}
+      <div className="home-container">
+
+        {/* =================================================
+            SECCIÓN PILARES
+            ================================================= */}
+        <section className="pillars-section">
+
+          <div className="pillars-header">
+            <span className="section-badge">
+              ¿Por qué elegirnos?
+            </span>
+
+            <h2 className="pillars-title">
+              La Experiencia Chocoberry
+            </h2>
           </div>
 
-          <div className="hero-visual">
-            <div className="card-showcase" onClick={() => navigate('/productos')} style={{ cursor: 'pointer' }}>
-              <div className="card-image-container" style={{ height: '240px', overflow: 'hidden', borderRadius: '16px' }}>
-                <img src={heroImg} alt="Caja de fresas decoradas ChocoBerry" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-              <div className="card-footer-info" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px' }}>
-                <div>
-                  <small style={{ color: '#A0958F' }}>Medellín</small>
-                  <div style={{ fontWeight: 'bold', color: '#471C26' }}>Sorprende a las personas que mas quieres </div>
+
+          <div className="pillars-grid">
+
+            {/* PILLAR 1 */}
+            <div className="pillar-card">
+
+              <span className="pillar-tag">
+                100% Cacao
+              </span>
+
+              <div className="pillar-icon-wrapper">
+                <div className="pillar-icon">
+                  <i className="fa-solid fa-heart" />
                 </div>
-                <i className="fa-solid fa-bag-shopping" style={{ color: '#471C26', fontSize: '1.35rem' }} aria-hidden="true" />
+              </div>
+
+              <h3 className="pillar-title">
+                Sabor Irresistible
+              </h3>
+
+              <p className="pillar-text">
+                Elaborados con chocolate de cobertura premium y
+                fresas frescas seleccionadas diariamente.
+              </p>
+
+              <ul className="pillar-list">
+                <li>
+                  <i className="fa-solid fa-check" />
+                  Cacao fino de aroma
+                </li>
+
+                <li>
+                  <i className="fa-solid fa-check" />
+                  Fruta 100% natural
+                </li>
+              </ul>
+
+            </div>
+
+
+            {/* PILLAR 2 */}
+            <div className="pillar-card highlight">
+
+              <span className="pillar-tag badge-star">
+                Más Popular
+              </span>
+
+              <div className="pillar-icon-wrapper">
+                <div className="pillar-icon">
+                  <i className="fa-solid fa-gift" />
+                </div>
+              </div>
+
+              <h3 className="pillar-title">
+                Presentación Única
+              </h3>
+
+              <p className="pillar-text">
+                Cada arreglo se diseña artesanalmente con empaques
+                de lujo y detalles personalizados.
+              </p>
+
+              <ul className="pillar-list">
+                <li>
+                  <i className="fa-solid fa-check" />
+                  Cajas de diseño exclusivo
+                </li>
+
+                <li>
+                  <i className="fa-solid fa-check" />
+                  Tarjeta con dedicatoria
+                </li>
+              </ul>
+
+            </div>
+
+
+            {/* PILLAR 3 */}
+            <div className="pillar-card">
+
+              <span className="pillar-tag">
+                Garantía
+              </span>
+
+              <div className="pillar-icon-wrapper">
+                <div className="pillar-icon">
+                  <i className="fa-solid fa-award" />
+                </div>
+              </div>
+
+              <h3 className="pillar-title">
+                Calidad Garantizada
+              </h3>
+
+              <p className="pillar-text">
+                Procesos cuidadosos de desinfección y armado para
+                garantizar la máxima frescura.
+              </p>
+
+              <ul className="pillar-list">
+                <li>
+                  <i className="fa-solid fa-check" />
+                  Envíos en transporte frío
+                </li>
+
+                <li>
+                  <i className="fa-solid fa-check" />
+                  Entrega puntual asegurada
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        {/* =====================================================
+            3. SECCIÓN TIKTOK
+            ===================================================== */}
+        <section className="tiktok-section">
+
+          <div className="tiktok-header">
+            <span className="section-badge">
+              Síguenos
+            </span>
+
+            <h2 className="tiktok-title">
+              Conoce más de Chocoberry
+            </h2>
+
+            <p className="tiktok-subtitle">
+              Descubre nuestras creaciones, detalles y momentos especiales.
+            </p>
+          </div>
+
+
+          <div className="tiktok-content">
+
+            {/* Decoración izquierda */}
+            <div className="tiktok-decoration tiktok-decoration-left">
+              <i className="fa-solid fa-heart"></i>
+              <i className="fa-solid fa-strawberry"></i>
+              <i className="fa-solid fa-heart"></i>
+            </div>
+
+
+            {/* Marco del video */}
+            <div className="tiktok-phone">
+
+              <div className="tiktok-phone-header">
+                <span className="tiktok-camera"></span>
+                <span className="tiktok-speaker"></span>
+              </div>
+
+              <iframe
+                src="https://www.tiktok.com/player/v1/7119258539125656837?description=1&music_info=1"
+                title="Video de Chocoberry en TikTok"
+                className="tiktok-video"
+                allow="fullscreen; autoplay"
+                scrolling="no"
+              />
+
+              <div className="tiktok-phone-bottom">
+                <span></span>
+              </div>
+
+            </div>
+
+
+            {/* Información derecha */}
+            <div className="tiktok-info">
+
+              <span className="tiktok-small-title">
+                CHOCOBERRY
+              </span>
+
+              <h3>
+                Un poquito de lo que hacemos 
+              </h3>
+
+              <p>
+                Conoce nuestras fresas, diseños y detalles
+                preparados especialmente para cada ocasión.
+              </p>
+
+              <div className="tiktok-features">
+
+                <div className="tiktok-feature">
+                  <i className="fa-solid fa-heart"></i>
+                  <span>Detalles personalizados</span>
+                </div>
+
+                <div className="tiktok-feature">
+                  <i className="fa-solid fa-gift"></i>
+                  <span>Presentaciones especiales</span>
+                </div>
+
+                <div className="tiktok-feature">
+                  <i className="fa-solid fa-star"></i>
+                  <span>Elaborados con cariño</span>
+                </div>
+
+              </div>
+
+              <a
+                href="https://www.tiktok.com/@fresasmedellin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="tiktok-button"
+              >
+                Ver nuestro TikTok
+                <i className="fa-solid fa-arrow-right"></i>
+              </a>
+
+            </div>
+
+
+            {/* Decoración derecha */}
+            <div className="tiktok-decoration tiktok-decoration-right">
+              <i className="fa-solid fa-heart"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-heart"></i>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* =====================================================
+            4. SECCIÓN CATEGORÍAS
+            ===================================================== */}
+        <section className="categories-section">
+
+          <div className="categories-header">
+
+            <span className="section-badge">
+              Nuestra Colección
+            </span>
+
+            <h2 className="categories-title">
+              Categorías de Nuestros Productos
+            </h2>
+
+            <p className="categories-subtitle">
+              Explora nuestras creaciones diseñadas para cada
+              momento especial
+            </p>
+
+          </div>
+
+
+          <div className="categories-grid">
+
+            {categories.map((cat) => (
+
+              <div
+                key={cat.id}
+                className="category-card"
+                onClick={() => navigate("/productos")}
+                role="button"
+                tabIndex={0}
+              >
+
+                <div className="category-image-wrapper">
+
+                  <img
+                    src={cat.image}
+                    alt={cat.title}
+                    className="category-img"
+                  />
+
+                  <span className="category-tag">
+                    {cat.tag}
+                  </span>
+
+                  <div className="category-overlay">
+
+                    <span className="view-more-btn">
+                      Ver Productos
+                      <i className="fa-solid fa-arrow-right" />
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <div className="category-content">
+
+                  <h3 className="category-card-title">
+                    {cat.title}
+                  </h3>
+
+                  <p className="category-card-desc">
+                    {cat.description}
+                  </p>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </section>
+
+
+        {/* =====================================================
+            5. SECCIÓN RESEÑAS (MODERNA E INTERACTIVA)
+            ===================================================== */}
+        <section className="reviews-section">
+
+          <div className="reviews-header-modern">
+            <span className="section-badge">
+              Testimonios
+            </span>
+            <h2 className="reviews-title">
+              Lo Que Dicen Nuestros Clientes
+            </h2>
+            <p className="reviews-subtitle">
+              Experiencias dulces compartidas por quienes ya probaron la magia de Chocoberry
+            </p>
+          </div>
+
+          <div className="reviews-interactive-wrapper">
+            
+            {/* Botón Anterior */}
+            <button
+              className="review-arrow-btn btn-left-modern"
+              onClick={prevReview}
+              title="Reseña anterior"
+            >
+              <i className="fa-solid fa-chevron-left" />
+            </button>
+
+            {/* Tarjeta de Reseña Central */}
+            <div className="review-card-modern" key={reviews[currentReview].id}>
+              <div className="quote-watermark">
+                <i className="fa-solid fa-quote-left"></i>
+              </div>
+
+              <div className="stars-wrapper">
+                {[...Array(5)].map((_, index) => (
+                  <i key={index} className="fa-solid fa-star star-icon" />
+                ))}
+              </div>
+
+              <p className="review-comment-modern">
+                "{reviews[currentReview].comment}"
+              </p>
+
+              <div className="client-info-wrapper">
+                <div className="client-avatar">
+                  {reviews[currentReview].client.charAt(0)}
+                </div>
+                <div className="client-details">
+                  <h4 className="client-name-modern">{reviews[currentReview].client}</h4>
+                  <span className="client-badge-modern">
+                    <i className="fa-solid fa-circle-check" /> {reviews[currentReview].badge}
+                  </span>
+                </div>
               </div>
             </div>
+
+            {/* Botón Siguiente */}
+            <button
+              className="review-arrow-btn btn-right-modern"
+              onClick={nextReview}
+              title="Reseña siguiente"
+            >
+              <i className="fa-solid fa-chevron-right" />
+            </button>
+
           </div>
-        </div>
-      </section>
 
-      {/* PILARES */}
-      <section id="conocenos" className="pillars-section">
-        <div className="pillars-grid">
-          {pillars.map((pillar, idx) => (
-            <div key={idx} className="pillar-card">
-              <div className="pillar-icon">{pillar.icon}</div>
-              <h3 style={{ color: '#471C26', fontSize: '1.25rem', marginBottom: '8px' }}>{pillar.title}</h3>
-              <p style={{ fontSize: '0.9rem', color: '#6B5A54', margin: 0 }}>{pillar.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SECCIÓN RESEÑAS */}
-      <section id="reseñas" className="reviews-section">
-        <h2 className="reviews-title">Lo que dicen nuestros clientes</h2>
-        <p className="reviews-subtitle">Experiencias dulces que nos inspiran a seguir creando momentos mágicos.</p>
-
-        <div className="carousel-card">
-          <button className="nav-btn btn-left" onClick={prevReview} title="Anterior">
-            <i className="fa-solid fa-chevron-left" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
-          </button>
-
-          <div className="stars-wrapper">
-            {[...Array(5)].map((_, i) => (
-              <i key={i} className="fa-solid fa-star" style={{ color: '#F49B05', fontSize: '1.25rem' }} aria-hidden="true" />
+          {/* Indicadores Interactivos con Iniciales */}
+          <div className="reviews-avatars-indicators">
+            {reviews.map((rev, idx) => (
+              <button
+                key={rev.id}
+                className={`avatar-dot ${idx === currentReview ? "active" : ""}`}
+                onClick={() => setCurrentReview(idx)}
+                title={`Ver reseña de ${rev.client}`}
+              >
+                <span>{rev.client.charAt(0)}</span>
+                <span className="dot-tooltip">{rev.client}</span>
+              </button>
             ))}
           </div>
 
-          <p className="review-comment">"{reviews[currentReview].comment}"</p>
+        </section>
 
-          <div className="client-info">
-            <div className="client-name">{reviews[currentReview].client}</div>
-            <span className="client-badge">{reviews[currentReview].tag}</span>
-          </div>
-
-          <button className="nav-btn btn-right" onClick={nextReview} title="Siguiente">
-            <i className="fa-solid fa-chevron-right" style={{ fontSize: '1.25rem' }} aria-hidden="true" />
-          </button>
-        </div>
-
-        <div className="dots-container">
-          {reviews.map((_, idx) => (
-            <button
-              key={idx}
-              className={`dot ${idx === currentReview ? 'active' : ''}`}
-              onClick={() => setCurrentReview(idx)}
-            />
-          ))}
-        </div>
-      </section>
+      </div>
 
     </div>
   );

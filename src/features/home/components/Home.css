@@ -1,393 +1,1707 @@
-/* SECCIÓN RESEÑAS */
-.reviews-section {
-  max-width: 800px;
-  margin: 60px auto 20px auto;
-  padding: 0 24px;
-  text-align: center;
+
+/* ========================================================
+   RESET Y SEGURIDAD GLOBAL
+   ========================================================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
 }
 
-.reviews-title {
-  font-size: 2.25rem;
-  color: #471C26; /* chocolate/100 */
-  margin-bottom: 8px;
-  font-weight: 800;
+.home-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
 }
-
-.reviews-subtitle { 
-  color: #6B5A54; /* neutral/700 */
-  margin-bottom: 32px; 
-}
-
-.carousel-card {
-  position: relative;
-  background: #FFFFFF;
-  border-radius: 24px;
-  padding: 40px 48px;
-  box-shadow: 0 12px 28px rgba(71, 28, 38, 0.08);
-  border: 1px solid #EDE2DE;
-}
-
-.stars-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-bottom: 20px;
-}
-
-.review-comment {
-  font-size: 1.15rem;
-  font-style: italic;
-  color: #2B2320;
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-.client-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #471C26;
-}
-
-.client-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  background: #FAD2E1; /* rosa/100 */
-  color: #471C26;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 12px;
-  margin-top: 6px;
-}
-
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #FFFFFF;
-  border: 1px solid #D6C9C4;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #471C26;
-  transition: all 0.2s ease;
-}
-
-.nav-btn:hover {
-  background: #E63946; /* carmesi/100 */
-  color: #FFFFFF;
-  border-color: #E63946;
-}
-
-.btn-left { left: -20px; }
-.btn-right { right: -20px; }
-
-.dots-container {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 24px;
-}
-
-.dot {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  background: #D6C9C4;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.dot.active {
-  width: 28px;
-  border-radius: 10px;
-  background: #E63946;
-}
-
-/* src/features/home/components/Home.css */
 
 .home-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 0 1.5rem 4rem;
+  box-sizing: border-box;
   font-family: inherit;
   color: #471C26;
 }
 
-/* --- HERO SECTION --- */
-.hero-section {
-  background-color: #FDF8F5;
-  border-radius: 24px;
-  padding: 3rem 2rem;
-  margin-bottom: 3rem;
-  box-shadow: 0 10px 30px rgba(71, 28, 38, 0.05);
+
+/* =========================================================
+   1. CARRUSEL PRINCIPAL
+   ========================================================= */
+
+.full-width-carousel {
+  width: 100%;
+  margin-bottom: 2.5rem;
 }
 
-.hero-wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  align-items: center;
-}
-
-@media (min-width: 768px) {
-  .hero-wrapper {
-    grid-template-columns: 1.2fr 0.8fr;
-  }
-}
-
-.badge-trajectory {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #FBEBE8;
-  color: #C2435A;
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 1.2rem;
-}
-
-.hero-title {
-  font-size: 2.2rem;
-  line-height: 1.2;
-  font-weight: 800;
-  color: #471C26;
-  margin-bottom: 1rem;
-}
-
-@media (min-width: 768px) {
-  .hero-title {
-    font-size: 2.8rem;
-  }
-}
-
-.text-berry {
-  color: #C2435A;
-}
-
-.text-choco {
-  color: #7A3542;
-}
-
-.hero-description {
-  font-size: 1rem;
-  color: #6B5A54;
-  line-height: 1.6;
-  margin-bottom: 1.8rem;
-}
-
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #C2435A;
-  color: #ffffff;
-  border: none;
-  padding: 0.8rem 1.6rem;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-primary:hover {
-  background-color: #a8354a;
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: transparent;
-  color: #471C26;
-  border: 1.5px solid #E5DCD8;
-  padding: 0.8rem 1.6rem;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-secondary:hover {
-  background-color: #F5EFEA;
-  transform: translateY(-2px);
-}
-
-/* Card Showcase */
-.card-showcase {
-  background: #ffffff;
-  padding: 1rem;
-  border-radius: 20px;
-  box-shadow: 0 12px 24px rgba(71, 28, 38, 0.08);
-  transition: transform 0.3s ease;
-}
-
-.card-showcase:hover {
-  transform: translateY(-4px);
-}
-
-/* --- PILARES --- */
-.pillars-section {
-  margin-bottom: 4rem;
-}
-
-.pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
-
-.pillar-card {
-  background: #ffffff;
-  border: 1px solid #F0E8E6;
-  border-radius: 16px;
-  padding: 1.8rem;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-
-.pillar-card:hover {
-  border-color: #C2435A;
-  box-shadow: 0 8px 20px rgba(194, 67, 90, 0.08);
-}
-
-.pillar-icon {
-  width: 56px;
-  height: 56px;
-  background-color: #FBEBE8;
-  color: #C2435A;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.2rem auto;
-}
-
-/* --- SECCIÓN RESEÑAS --- */
-.reviews-section {
-  text-align: center;
-  padding: 2rem 0;
-}
-
-.reviews-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #471C26;
-  margin-bottom: 0.5rem;
-}
-
-.reviews-subtitle {
-  color: #6B5A54;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-}
-
-.carousel-card {
+.carousel-inner {
   position: relative;
-  max-width: 650px;
-  margin: 0 auto;
-  background: #ffffff;
-  border: 1px solid #F0E8E6;
-  border-radius: 20px;
-  padding: 2.5rem 3rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background-color: #FAF4F2;
 }
 
-.stars-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 0.3rem;
-  margin-bottom: 1rem;
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
-.review-comment {
-  font-size: 1.05rem;
-  color: #471C26;
-  font-style: italic;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
 
-.client-name {
-  font-weight: 700;
-  color: #471C26;
-}
+/* --- Botones de navegación --- */
 
-.client-badge {
-  display: inline-block;
-  margin-top: 0.3rem;
-  font-size: 0.75rem;
-  background-color: #F5EFEA;
-  color: #7A3542;
-  padding: 0.2rem 0.6rem;
-  border-radius: 10px;
-  font-weight: 600;
-}
-
-.nav-btn {
+.carousel-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: #ffffff;
-  border: 1px solid #E5DCD8;
-  color: #471C26;
-  width: 40px;
-  height: 40px;
+
+  width: 44px;
+  height: 44px;
+
+  background: rgba(255, 255, 255, 0.88);
+  border: none;
   border-radius: 50%;
+
+  color: #471C26;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
-  transition: all 0.2s ease;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  z-index: 10;
+
+  transition: all 0.25s ease;
 }
 
-.nav-btn:hover {
+.carousel-nav-btn:hover {
   background: #C2435A;
-  color: #ffffff;
-  border-color: #C2435A;
+  color: #FFFFFF;
+
+  transform: translateY(-50%) scale(1.05);
 }
 
 .btn-left {
-  left: -20px;
+  left: 20px;
 }
 
 .btn-right {
-  right: -20px;
+  right: 20px;
 }
 
-.dots-container {
+
+/* --- Puntos del carrusel --- */
+
+.carousel-dots {
+  position: absolute;
+
+  bottom: 20px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  z-index: 10;
+}
+
+.carousel-dots .dot {
+  width: 10px;
+  height: 10px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background-color: rgba(255, 255, 255, 0.65);
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  width: 28px;
+
+  border-radius: 10px;
+
+  background-color: #C2435A;
+}
+
+
+/* =========================================================
+   2. SECCIÓN PILARES
+   ========================================================= */
+
+.pillars-section {
+  margin: 4rem 0 5rem;
+}
+
+.pillars-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+
+/* --- Badge general --- */
+
+.section-badge {
+  display: inline-block;
+
+  padding: 0.4rem 1rem;
+
+  background-color: #FBEBE8;
+  color: #C2435A;
+
+  border-radius: 20px;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/* --- Título pilares --- */
+
+.pillars-title {
+  margin: 0.6rem 0 0;
+
+  font-size: 2rem;
+  font-weight: 800;
+
+  color: #471C26;
+}
+
+
+/* --- Grid --- */
+
+.pillars-grid {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  );
+
+  gap: 2rem;
+}
+
+
+/* --- Tarjeta --- */
+
+.pillar-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 2.5rem 1.8rem 2rem;
+
+  background: #FFFFFF;
+
+  border: 1px solid #F0E8E6;
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 15px rgba(71, 28, 38, 0.04);
+
+  text-align: left;
+
+  transition: all 0.35s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-8px);
+
+  border-color: #C2435A;
+
+  box-shadow:
+    0 15px 30px rgba(194, 67, 90, 0.12);
+}
+
+
+/* --- Etiqueta --- */
+
+.pillar-tag {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  padding: 0.25rem 0.75rem;
+
+  background: #F5EFEA;
+  color: #7A3542;
+
+  border-radius: 12px;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.pillar-tag.badge-star {
+  background: #C2435A;
+  color: #FFFFFF;
+}
+
+
+/* --- Icono --- */
+
+.pillar-icon-wrapper {
+  margin-bottom: 1.2rem;
+}
+
+.pillar-icon {
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #FBEBE8;
+  color: #C2435A;
+
+  border-radius: 16px;
+
+  font-size: 1.5rem;
+
+  transition: all 0.3s ease;
+}
+
+.pillar-card:hover .pillar-icon {
+  background-color: #C2435A;
+  color: #FFFFFF;
+
+  transform:
+    rotate(-8deg)
+    scale(1.08);
+}
+
+
+/* --- Contenido --- */
+
+.pillar-title {
+  margin: 0 0 0.6rem;
+
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  color: #471C26;
+}
+
+.pillar-text {
+  margin: 0 0 1.2rem;
+
+  font-size: 0.92rem;
+
+  color: #6B5A54;
+
+  line-height: 1.5;
+}
+
+
+/* --- Lista --- */
+
+.pillar-list {
+  list-style: none;
+
+  padding: 1rem 0 0;
+  margin: auto 0 0;
+
+  border-top: 1px dashed #EDE2DE;
+}
+
+.pillar-list li {
+  display: flex;
+  align-items: center;
+
+  gap: 0.5rem;
+
+  margin-bottom: 0.4rem;
+
+  color: #471C26;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pillar-list li i {
+  color: #C2435A;
+
+  font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   3. SECCIÓN TIKTOK
+   ========================================================= */
+
+.tiktok-section {
+  width: 100%;
+
+  margin: 5rem 0 6rem;
+
+  text-align: center;
+}
+
+
+/* --- Encabezado --- */
+
+.tiktok-header {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto 3rem;
+
+  text-align: center;
+}
+
+.tiktok-title {
+  margin: 0.6rem 0 0.5rem;
+
+  font-size: 2rem;
+  font-weight: 800;
+
+  color: #471C26;
+}
+
+.tiktok-subtitle {
+  margin: 0;
+
+  color: #6B5A54;
+
+  font-size: 0.95rem;
+}
+
+
+/* --- Contenedor TikTok --- */
+
+.tiktok-content {
+  position: relative;
+
+  width: 100%;
+  max-width: 900px;
+
+  min-height: 650px;
+
+  margin: 0 auto;
+
+  padding: 3rem 2rem;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5rem;
+
+  background: linear-gradient(
+    135deg,
+    #FEF7F9 0%,
+    #FCE8EF 50%,
+    #FAF4F2 100%
+  );
+
+  border-radius: 30px;
+
+  overflow: hidden;
+}
+
+
+/* --- Celular --- */
+
+.tiktok-phone {
+  position: relative;
+
+  width: 330px;
+  height: 590px;
+
+  flex-shrink: 0;
+
+  background: #1F1F1F;
+
+  border: 7px solid #471C26;
+  border-radius: 38px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 40px rgba(71, 28, 38, 0.20);
+
+  z-index: 2;
+}
+
+
+/* --- Cámara / parte superior --- */
+
+.tiktok-phone-header {
+  position: absolute;
+
+  top: 8px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 105px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  background: #1B1B1B;
+
+  border-radius: 20px;
+
+  z-index: 10;
+}
+
+.tiktok-camera {
+  width: 7px;
+  height: 7px;
+
+  background: #555555;
+
+  border-radius: 50%;
+}
+
+.tiktok-speaker {
+  width: 35px;
+  height: 4px;
+
+  background: #444444;
+
+  border-radius: 10px;
+}
+
+
+/* --- Video --- */
+
+.tiktok-video {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  background: #000000;
+}
+
+
+/* --- Barra inferior --- */
+
+.tiktok-phone-bottom {
+  position: absolute;
+
+  bottom: 8px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 90px;
+  height: 5px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  border-radius: 10px;
+
+  z-index: 10;
+}
+
+
+/* --- Información --- */
+
+.tiktok-info {
+  width: 320px;
+
+  text-align: left;
+
+  z-index: 2;
+}
+
+.tiktok-small-title {
+  display: inline-block;
+
+  margin-bottom: 0.7rem;
+
+  color: #C2435A;
+
+  font-size: 0.8rem;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.tiktok-info h3 {
+  margin: 0 0 1rem;
+
+  color: #471C26;
+
+  font-size: 1.8rem;
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+.tiktok-info > p {
+  margin: 0 0 1.5rem;
+
+  color: #6B5A54;
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
+}
+
+
+/* --- Características --- */
+
+.tiktok-features {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.8rem;
+
+  margin-bottom: 1.8rem;
+}
+
+.tiktok-feature {
+  display: flex;
+  align-items: center;
+
+  gap: 0.7rem;
+
+  color: #471C26;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.tiktok-feature i {
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #FBEBE8;
+  color: #C2435A;
+
+  border-radius: 50%;
+
+  font-size: 0.8rem;
+}
+
+
+/* --- Botón --- */
+
+.tiktok-button {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.6rem;
+
+  padding: 0.75rem 1.3rem;
+
+  background: #C2435A;
+  color: #FFFFFF;
+
+  border-radius: 25px;
+
+  text-decoration: none;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  transition: all 0.3s ease;
+}
+
+.tiktok-button:hover {
+  background: #A83249;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 18px rgba(194, 67, 90, 0.20);
+}
+
+
+/* --- Decoraciones --- */
+
+.tiktok-decoration {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+
+  color: #EFA5B5;
+
+  opacity: 0.55;
+
+  font-size: 1.4rem;
+
+  z-index: 1;
+}
+
+.tiktok-decoration-left {
+  left: 30px;
+  bottom: 40px;
+
+  transform: rotate(-15deg);
+}
+
+.tiktok-decoration-right {
+  right: 30px;
+  top: 40px;
+
+  transform: rotate(15deg);
+}
+
+
+/* =========================================================
+   4. SECCIÓN CATEGORÍAS
+   ========================================================= */
+
+.categories-section {
+  margin-bottom: 5rem;
+}
+
+.categories-header {
+  text-align: center;
+
+  margin-bottom: 3rem;
+}
+
+.categories-title {
+  margin: 0.6rem 0 0.4rem;
+
+  color: #471C26;
+
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.categories-subtitle {
+  margin: 0;
+
+  color: #6B5A54;
+
+  font-size: 0.95rem;
+}
+
+
+/* --- Grid --- */
+
+.categories-grid {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  );
+
+  gap: 2rem;
+}
+
+
+/* --- Tarjeta --- */
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+
+  background: #F3A6B5;
+
+  border: 1px solid #E8899C;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 5px 18px rgba(194, 67, 90, 0.10);
+
+  cursor: pointer;
+
+  transition: all 0.35s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+
+  background: #EF9AAA;
+
+  border-color: #C2435A;
+
+  box-shadow:
+    0 15px 30px rgba(194, 67, 90, 0.20);
+}
+
+
+/* --- Imagen --- */
+
+.category-image-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 220px;
+
+  overflow: hidden;
+}
+
+.category-img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.category-card:hover .category-img {
+  transform: scale(1.08);
+}
+
+
+/* --- Etiqueta --- */
+
+.category-tag {
+  position: absolute;
+
+  top: 15px;
+  left: 15px;
+
+  padding: 0.25rem 0.75rem;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  color: #471C26;
+
+  border-radius: 12px;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  z-index: 2;
+}
+
+
+/* --- Overlay --- */
+
+.category-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(71, 28, 38, 0.35);
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+
+  z-index: 3;
+}
+
+.category-card:hover .category-overlay {
+  opacity: 1;
+}
+
+
+/* --- Botón del overlay --- */
+
+.view-more-btn {
+  display: flex;
+  align-items: center;
+
+  gap: 0.5rem;
+
+  padding: 0.6rem 1.2rem;
+
+  background: #C2435A;
+  color: #FFFFFF;
+
+  border-radius: 25px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+/* --- Contenido --- */
+
+.category-content {
+  padding: 1.5rem;
+
+  text-align: left;
+
+  flex: 1;
+}
+
+.category-card-title {
+  margin: 0 0 0.5rem;
+
+  color: #471C26;
+
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.category-card-desc {
+  margin: 0;
+
+  color: #5A2732;
+
+  font-size: 0.88rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   5. SECCIÓN RESEÑAS
+   ========================================================= */
+
+.reviews-section {
+  width: 100%;
+
+  padding: 2rem 0;
+
+  text-align: center;
+}
+
+
+/* --- Encabezado --- */
+
+.reviews-header-modern {
+  max-width: 800px;
+
+  margin: 0 auto 2.5rem;
+
+  text-align: center;
+}
+
+.reviews-title {
+  margin: 0.6rem 0 0.5rem;
+
+  color: #471C26;
+
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.reviews-subtitle {
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  color: #6B5A54;
+
+  font-size: 0.95rem;
+
+  line-height: 1.5;
+}
+
+
+/* --- Contenedor interactivo --- */
+
+.reviews-interactive-wrapper {
+  position: relative;
+
+  width: 100%;
+  max-width: 850px;
+
+  min-height: 300px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* --- Tarjeta moderna --- */
+
+.review-card-modern {
+  position: relative;
+
+  width: 100%;
+  max-width: 650px;
+
+  min-height: 240px;
+
+  box-sizing: border-box;
+
+  padding: 3rem 4rem;
+
+  background: #FFFFFF;
+
+  border: 1px solid #F0E8E6;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 12px 35px rgba(71, 28, 38, 0.07);
+
+  overflow: hidden;
+
+  animation: reviewFadeIn 0.35s ease;
+}
+
+@keyframes reviewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* --- Marca de comillas --- */
+
+.quote-watermark {
+  position: absolute;
+
+  top: 15px;
+  right: 25px;
+
+  color: #FCE8EF;
+
+  font-size: 4rem;
+
+  line-height: 1;
+
+  z-index: 0;
+}
+
+.quote-watermark i {
+  opacity: 0.9;
+}
+
+
+/* --- Estrellas --- */
+
+.review-card-modern .stars-wrapper {
+  position: relative;
+
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
+
+  gap: 0.3rem;
+
+  margin-bottom: 1.2rem;
+
+  z-index: 1;
+}
+
+.star-icon {
+  color: #C2435A;
+
+  font-size: 1rem;
+}
+
+
+/* --- Comentario --- */
+
+.review-comment-modern {
+  position: relative;
+
+  margin: 0 auto 1.8rem;
+
+  max-width: 560px;
+
+  color: #471C26;
+
+  font-size: 1.05rem;
+
+  font-style: italic;
+
+  line-height: 1.65;
+
+  z-index: 1;
+}
+
+
+/* --- Información del cliente --- */
+
+.client-info-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8rem;
+
+  z-index: 1;
+}
+
+.client-avatar {
+  width: 45px;
+  height: 45px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #C2435A;
+  color: #FFFFFF;
+
+  border-radius: 50%;
+
+  font-size: 1rem;
+  font-weight: 800;
+
+  box-shadow:
+    0 5px 12px rgba(194, 67, 90, 0.20);
+}
+
+.client-details {
+  text-align: left;
+}
+
+.client-name-modern {
+  margin: 0 0 0.2rem;
+
+  color: #471C26;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.client-badge-modern {
+  display: flex;
+  align-items: center;
+
+  gap: 0.3rem;
+
+  color: #7A3542;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.client-badge-modern i {
+  color: #C2435A;
+}
+
+
+/* =========================================================
+   FLECHAS DE RESEÑAS
+   ========================================================= */
+
+.review-arrow-btn {
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #FBEBE8;
+
+  border: none;
+  border-radius: 50%;
+
+  color: #C2435A;
+
+  cursor: pointer;
+
+  z-index: 5;
+
+  transition: all 0.25s ease;
+}
+
+.review-arrow-btn:hover {
+  background: #C2435A;
+  color: #FFFFFF;
+
+  transform:
+    translateY(-50%)
+    scale(1.05);
+
+  box-shadow:
+    0 7px 15px rgba(194, 67, 90, 0.20);
+}
+
+.btn-left-modern {
+  left: 25px;
+}
+
+.btn-right-modern {
+  right: 25px;
+}
+
+
+/* =========================================================
+   INDICADORES DE RESEÑAS
+   ========================================================= */
+
+.reviews-avatars-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8rem;
+
   margin-top: 1.5rem;
 }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  background-color: #E5DCD8;
-  cursor: pointer;
+.avatar-dot {
+  position: relative;
+
+  width: 38px;
+  height: 38px;
+
   padding: 0;
-  transition: all 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #FCE8EF;
+
+  border: 2px solid transparent;
+  border-radius: 50%;
+
+  color: #7A3542;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
 }
 
-.dot.active {
-  background-color: #C2435A;
-  width: 24px;
-  border-radius: 10px;
+.avatar-dot span:first-child {
+  font-size: 0.8rem;
+  font-weight: 800;
 }
+
+.avatar-dot:hover {
+  transform: translateY(-3px);
+
+  border-color: #E8899C;
+}
+
+.avatar-dot.active {
+  background: #C2435A;
+
+  color: #FFFFFF;
+
+  border-color: #C2435A;
+
+  transform: scale(1.12);
+
+  box-shadow:
+    0 5px 12px rgba(194, 67, 90, 0.20);
+}
+
+
+/* --- Tooltip --- */
+
+.dot-tooltip {
+  position: absolute;
+
+  bottom: calc(100% + 10px);
+
+  left: 50%;
+
+  transform:
+    translateX(-50%)
+    translateY(5px);
+
+  width: max-content;
+
+  max-width: 180px;
+
+  padding: 0.4rem 0.7rem;
+
+  background: #471C26;
+  color: #FFFFFF;
+
+  border-radius: 8px;
+
+  font-size: 0.7rem;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: all 0.2s ease;
+
+  z-index: 20;
+}
+
+.dot-tooltip::after {
+  content: "";
+
+  position: absolute;
+
+  top: 100%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #471C26;
+}
+
+.avatar-dot:hover .dot-tooltip {
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+/* =========================================================
+   RESPONSIVE TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .tiktok-content {
+    gap: 3rem;
+
+    padding: 3rem 1.5rem;
+  }
+
+  .tiktok-phone {
+    width: 290px;
+    height: 520px;
+  }
+
+  .tiktok-info {
+    width: 280px;
+  }
+
+  .tiktok-info h3 {
+    font-size: 1.5rem;
+  }
+
+
+  /* Reseñas */
+
+  .reviews-interactive-wrapper {
+    max-width: 760px;
+  }
+
+  .review-card-modern {
+    max-width: 580px;
+
+    padding: 2.8rem 3.5rem;
+  }
+
+  .btn-left-modern {
+    left: 10px;
+  }
+
+  .btn-right-modern {
+    right: 10px;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE MÓVIL
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  /* --- Contenedor --- */
+
+  .home-container {
+    padding: 0 1rem 3rem;
+  }
+
+
+  /* --- Carrusel --- */
+
+  .carousel-inner,
+  .carousel-img {
+    height: 280px;
+  }
+
+  .carousel-img {
+    object-position: center top;
+  }
+
+  .carousel-nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-left {
+    left: 10px;
+  }
+
+  .btn-right {
+    right: 10px;
+  }
+
+
+  /* --- Pilares --- */
+
+  .pillars-section {
+    margin: 3rem 0 4rem;
+  }
+
+  .pillars-header {
+    margin-bottom: 2rem;
+  }
+
+  .pillars-title,
+  .categories-title {
+    font-size: 1.6rem;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+  }
+
+
+  /* --- TikTok --- */
+
+  .tiktok-section {
+    margin: 4rem 0;
+  }
+
+  .tiktok-header {
+    margin-bottom: 2rem;
+  }
+
+  .tiktok-title {
+    font-size: 1.6rem;
+  }
+
+  .tiktok-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .tiktok-content {
+    flex-direction: column;
+
+    gap: 2.5rem;
+
+    min-height: auto;
+
+    padding: 2.5rem 1.5rem;
+
+    border-radius: 25px;
+  }
+
+  .tiktok-phone {
+    width: 290px;
+    height: 515px;
+  }
+
+  .tiktok-info {
+    width: 100%;
+    max-width: 360px;
+
+    text-align: center;
+  }
+
+  .tiktok-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .tiktok-features {
+    align-items: center;
+  }
+
+  .tiktok-button {
+    justify-content: center;
+  }
+
+  .tiktok-decoration {
+    display: none;
+  }
+
+
+  /* --- Categorías --- */
+
+  .categories-section {
+    margin-bottom: 4rem;
+  }
+
+  .categories-header {
+    margin-bottom: 2rem;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+  }
+
+  .category-image-wrapper {
+    height: 220px;
+  }
+
+
+  /* --- Reseñas --- */
+
+  .reviews-section {
+    padding: 1rem 0;
+  }
+
+  .reviews-title {
+    font-size: 1.6rem;
+  }
+
+  .reviews-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .reviews-interactive-wrapper {
+    min-height: 0;
+
+    padding: 0 0.5rem;
+
+    box-sizing: border-box;
+  }
+
+  .review-card-modern {
+    max-width: 100%;
+
+    min-height: 260px;
+
+    padding: 2.5rem 2rem;
+
+    border-radius: 20px;
+  }
+
+  .review-comment-modern {
+    font-size: 0.95rem;
+  }
+
+  .review-arrow-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-left-modern {
+    left: -5px;
+  }
+
+  .btn-right-modern {
+    right: -5px;
+  }
+
+  .reviews-avatars-indicators {
+    margin-top: 1.3rem;
+  }
+}
+
+
+/* =========================================================
+   MÓVILES PEQUEÑOS
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  /* --- Carrusel --- */
+
+  .carousel-inner,
+  .carousel-img {
+    height: 250px;
+  }
+
+  .carousel-img {
+    object-position: center top;
+  }
+
+  .carousel-nav-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btn-left {
+    left: 8px;
+  }
+
+  .btn-right {
+    right: 8px;
+  }
+
+  .carousel-dots {
+    bottom: 12px;
+  }
+
+  .carousel-dots .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .carousel-dots .dot.active {
+    width: 22px;
+  }
+
+
+  /* --- Pilares --- */
+
+  .pillar-card {
+    padding: 2.2rem 1.4rem 1.8rem;
+  }
+
+  .pillar-title {
+    font-size: 1.15rem;
+  }
+
+
+  /* --- TikTok --- */
+
+  .tiktok-content {
+    padding: 2rem 1rem;
+  }
+
+  .tiktok-phone {
+    width: 270px;
+    height: 480px;
+
+    border-width: 6px;
+  }
+
+  .tiktok-title {
+    font-size: 1.5rem;
+  }
+
+  .tiktok-info h3 {
+    font-size: 1.4rem;
+  }
+
+
+  /* --- Categorías --- */
+
+  .category-image-wrapper {
+    height: 190px;
+  }
+
+  .category-content {
+    padding: 1.2rem;
+  }
+
+  .category-card-title {
+    font-size: 1.1rem;
+  }
+
+
+  /* --- Reseñas --- */
+
+  .reviews-title {
+    font-size: 1.45rem;
+  }
+
+  .review-card-modern {
+    min-height: 290px;
+
+    padding: 2.2rem 1.4rem;
+  }
+
+  .review-comment-modern {
+    font-size: 0.9rem;
+
+    line-height: 1.55;
+
+    margin-bottom: 1.4rem;
+  }
+
+  .review-arrow-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btn-left-modern {
+    left: -2px;
+  }
+
+  .btn-right-modern {
+    right: -2px;
+  }
+
+  .client-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .client-name-modern {
+    font-size: 0.85rem;
+  }
+
+  .client-badge-modern {
+    font-size: 0.65rem;
+  }
+
+  .avatar-dot {
+    width: 34px;
+    height: 34px;
+  }
+
+  .dot-tooltip {
+    display: none;
+  }
+}
+

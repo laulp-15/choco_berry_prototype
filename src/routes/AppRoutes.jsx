@@ -20,8 +20,9 @@ import ForgotPasswordPage from "../features/login/pages/ForgotPasswordPage";
 import ChangePasswordPage from "../features/login/pages/ChangePasswordPage";
 import RequireAuth from "../shared/components/RequireAuth";
 
-// Módulo de Rutas de Administración
+// Módulo de Rutas de Administración y Perfil
 import AdminRoutes from "./AdminRoutes";
+import ProfileRoutes from "./ProfileRoutes";
 
 export default function AppRoutes() {
   return (
@@ -36,6 +37,16 @@ export default function AppRoutes() {
         <Route path="/carrito/pago" element={<CheckoutPage />} />
         <Route path="/reseñas" element={<ReviewsPage />} />
         <Route path="/conocenos" element={<AboutPage />} />
+
+        {/* --- PANEL DE CLIENTE / MI CUENTA (Protegido) --- */}
+        <Route
+          path="/users/*"
+          element={
+            <RequireAuth>
+              <ProfileRoutes />
+            </RequireAuth>
+          }
+        />
       </Route>
 
       {/* --- GESTIÓN DE ACCESO --- */}
@@ -51,7 +62,7 @@ export default function AppRoutes() {
         }
       />
        
-      {/* --- PANEL DE ADMINISTRACIÓN (Delegado a AdminRoutes.jsx) --- */}
+      {/* --- PANEL DE ADMINISTRACIÓN --- */}
       <Route path="/admin/*" element={<AdminRoutes />} />
     </Routes>
   );

@@ -1,42 +1,60 @@
-// src/features/home/components/HeroBanner.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-export default function HeroBanner({ banner }) {
-  if (!banner) return null;
+export default function HeroBanner() {
+  const [currentBanner, setCurrentBanner] = useState(0);
+
+  const banners = [
+    { id: 1, image: "/img/carrusel/imagen1.png", alt: "Imagen 1" },
+    { id: 2, image: "/img/carrusel/imagen2.png", alt: "Imagen 2" },
+    { id: 3, image: "/img/carrusel/imagen3.png", alt: "Imagen 3" },
+    { id: 4, image: "/img/carrusel/imagen4.png", alt: "Imagen 4" }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentBanner((prev) => (prev + 1) % banners.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [banners.length]);
+
+  const nextBanner = () => {
+    setCurrentBanner((prev) => (prev + 1) % banners.length);
+  };
+
+  const prevBanner = () => {
+    setCurrentBanner((prev) => (prev - 1 + banners.length) % banners.length);
+  };
 
   return (
-    <div
-      style={{
-        backgroundColor: "var(--primary-color, #5c1d24)",
-        color: "#ffffff",
-        padding: "3rem 1.5rem",
-        borderRadius: "12px",
-        textAlign: "center",
-        marginBottom: "2rem",
-      }}
-    >
-      <h1 style={{ fontSize: "2.2rem", fontWeight: "bold", marginBottom: "1rem" }}>
-        {banner.title}
-      </h1>
-      <p style={{ fontSize: "1.1rem", marginBottom: "1.5rem", opacity: 0.9 }}>
-        {banner.subtitle}
-      </p>
-      <Link
-        to={banner.buttonLink}
-        className="btn btn-primary"
-        style={{
-          backgroundColor: "#ffffff",
-          color: "var(--primary-color, #5c1d24)",
-          padding: "0.75rem 1.5rem",
-          fontWeight: "bold",
-          borderRadius: "8px",
-          textDecoration: "none",
-          display: "inline-block",
-        }}
-      >
-        {banner.buttonText}
-      </Link>
+    <div className="full-width-carousel">
+      <div className="carousel-inner">
+        <img
+          src={banners[currentBanner].image}
+          alt={banners[currentBanner].alt}
+          className="carousel-img"
+        />
+
+        {/* Botón Izquierda */}
+        <button onClick={prevBanner} className="carousel-nav-btn btn-left" title="Anterior">
+          <i className="fa-solid fa-chevron-left" aria-hidden="true" />
+        </button>
+
+        {/* Botón Derecha */}
+        <button onClick={nextBanner} className="carousel-nav-btn btn-right" title="Siguiente">
+          <i className="fa-solid fa-chevron-right" aria-hidden="true" />
+        </button>
+
+        {/* Puntos Indicadores */}
+        <div className="carousel-dots">
+          {banners.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentBanner(idx)}
+              className={`dot ${idx === currentBanner ? "active" : ""}`}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

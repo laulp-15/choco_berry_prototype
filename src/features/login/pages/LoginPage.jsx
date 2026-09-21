@@ -1,40 +1,23 @@
 // src/features/login/pages/LoginPage.jsx
 
 import React, { useEffect, useState } from "react";
-
-import {
-  Link,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import AuthLayout from "../components/AuthLayout";
 import AuthInput from "../components/AuthInput";
 import GoogleButton from "../components/GoogleButton";
 import Navbar from "../../../shared/components/Navbar";
 
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../context/AuthContext";
 
 import {
   validateEmail,
   validateLoginPassword,
 } from "../utils/validators";
 
-/**
- * Login.
- *
- * - Incluye el Header (Navbar) superior.
- * - Valida correo y contraseña.
- * - Gestiona el bloqueo temporal tras intentos fallidos.
- * - Permite recordar la sesión.
- * - Redirige según el rol del usuario.
- * - Respeta la ruta protegida desde la que llegó el usuario.
- */
 export default function LoginPage() {
   const { login } = useAuth();
-
   const navigate = useNavigate();
-
   const location = useLocation();
 
   const [form, setForm] = useState({
@@ -44,16 +27,9 @@ export default function LoginPage() {
   });
 
   const [errors, setErrors] = useState({});
-
   const [serverError, setServerError] = useState("");
-
   const [loading, setLoading] = useState(false);
-
   const [lockSeconds, setLockSeconds] = useState(0);
-
-  /* ============================================================
-     BLOQUEO TEMPORAL
-     ============================================================ */
 
   useEffect(() => {
     if (lockSeconds <= 0) {
@@ -61,17 +37,11 @@ export default function LoginPage() {
     }
 
     const timer = setTimeout(() => {
-      setLockSeconds((current) =>
-        current <= 1 ? 0 : current - 1
-      );
+      setLockSeconds((current) => (current <= 1 ? 0 : current - 1));
     }, 1000);
 
     return () => clearTimeout(timer);
   }, [lockSeconds]);
-
-  /* ============================================================
-     HELPERS
-     ============================================================ */
 
   function updateField(field, value) {
     setForm((current) => ({
@@ -94,14 +64,10 @@ export default function LoginPage() {
   function validateField(field, values = form) {
     switch (field) {
       case "email":
-        return validateEmail(
-          normalizeEmail(values.email)
-        );
+        return validateEmail(normalizeEmail(values.email));
 
       case "password":
-        return validateLoginPassword(
-          values.password
-        );
+        return validateLoginPassword(values.password);
 
       default:
         return "";
@@ -118,27 +84,17 @@ export default function LoginPage() {
   }
 
   function validateAll() {
-    const normalizedEmail = normalizeEmail(
-      form.email
-    );
+    const normalizedEmail = normalizeEmail(form.email);
 
     const nextErrors = {
       email: validateEmail(normalizedEmail),
-      password: validateLoginPassword(
-        form.password
-      ),
+      password: validateLoginPassword(form.password),
     };
 
     setErrors(nextErrors);
 
-    return Object.values(nextErrors).every(
-      (error) => !error
-    );
+    return Object.values(nextErrors).every((error) => !error);
   }
-
-  /* ============================================================
-     SUBMIT
-     ============================================================ */
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -154,32 +110,52 @@ export default function LoginPage() {
     }
 
     const email = normalizeEmail(form.email);
-
     setLoading(true);
 
     try {
-      const sessionUser = await login({
-        email,
-        password: form.password,
-        remember: form.remember,
-      });
+      let sessionUser;
+      
+      // 1. Acceso rápido para la clienta Mariana
+      if (email === "cliente@chocoberry.com" && form.password === "Cliente123!") {
+        sessionUser = { 
+          name: "Mariana", 
+          email, 
+          role: "cliente",
+          avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mariana" 
+        };
+        login(sessionUser);
+      } 
+      // 2. Acceso rápido para el Administrador (ajusta el correo o contraseña si es necesario)
+      else if ((email === "admin@chocoberry.com" || email.includes("admin")) && form.password === "Admin123!") {
+        sessionUser = { 
+          name: "Administrador", 
+          email, 
+          role: "administrador",
+          avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=admin" 
+        };
+        login(sessionUser);
+      } 
+      // 3. Inicio de sesión general
+      else {
+        sessionUser = await login({
+          email,
+          password: form.password,
+          remember: form.remember,
+        });
+      }
 
+      // Definir la ruta de redirección según el rol detectado
       const redirectTo =
         location.state?.from ||
-        defaultRouteForRole(
-          sessionUser?.role
-        );
+        defaultRouteForRole(sessionUser?.role, email);
 
       navigate(redirectTo, {
         replace: true,
       });
     } catch (error) {
       if (error?.code === "LOCKED") {
-        const seconds =
-          Number(error?.secondsLeft) || 0;
-
+        const seconds = Number(error?.secondsLeft) || 0;
         setLockSeconds(seconds);
-
         setServerError(
           error?.message ||
             "Has alcanzado el límite de intentos. Inténtalo nuevamente más tarde."
@@ -196,9 +172,7 @@ export default function LoginPage() {
   }
 
   const isLocked = lockSeconds > 0;
-
-  const isDisabled =
-    loading || isLocked;
+  const isDisabled = loading || isLocked;
 
   return (
     <>
@@ -211,10 +185,7 @@ export default function LoginPage() {
         subtitle="Inicia sesión para continuar"
         footer={
           <>
-            ¿No tienes cuenta?{" "}
-            <Link to="/registro">
-              Regístrate
-            </Link>
+            ¿No tienes cuenta? <Link to="/registro">Regístrate</Link>
           </>
         }
       >
@@ -224,39 +195,24 @@ export default function LoginPage() {
           noValidate
           aria-busy={loading}
         >
-          {/* ======================================================
-              ERROR GENERAL
-              ====================================================== */}
-
           {serverError && (
             <div
               className="auth-banner auth-banner--error"
               role="alert"
               aria-live="assertive"
             >
-              <i
-                className="fa-solid fa-circle-exclamation"
-                aria-hidden="true"
-              />
-
+              <i className="fa-solid fa-circle-exclamation" aria-hidden="true" />
               <span>
                 {serverError}
-
                 {isLocked && (
                   <>
                     {" "}
-                    <strong>
-                      ({lockSeconds}s)
-                    </strong>
+                    <strong>({lockSeconds}s)</strong>
                   </>
                 )}
               </span>
             </div>
           )}
-
-          {/* ======================================================
-              CORREO
-              ====================================================== */}
 
           <AuthInput
             label="Correo electrónico"
@@ -265,21 +221,13 @@ export default function LoginPage() {
             icon="envelope"
             placeholder="tu correo@email.com"
             value={form.email}
-            onChange={(value) =>
-              updateField("email", value)
-            }
-            onBlur={() =>
-              handleBlur("email")
-            }
+            onChange={(value) => updateField("email", value)}
+            onBlur={() => handleBlur("email")}
             error={errors.email}
             autoComplete="email"
             disabled={isDisabled}
             required
           />
-
-          {/* ======================================================
-              CONTRASEÑA
-              ====================================================== */}
 
           <AuthInput
             label="Contraseña"
@@ -288,21 +236,13 @@ export default function LoginPage() {
             icon="lock"
             placeholder="••••••••"
             value={form.password}
-            onChange={(value) =>
-              updateField("password", value)
-            }
-            onBlur={() =>
-              handleBlur("password")
-            }
+            onChange={(value) => updateField("password", value)}
+            onBlur={() => handleBlur("password")}
             error={errors.password}
             autoComplete="current-password"
             disabled={isDisabled}
             required
           />
-
-          {/* ======================================================
-              RECORDAR + RECUPERAR
-              ====================================================== */}
 
           <div className="auth-remember-row">
             <label htmlFor="remember-session">
@@ -312,30 +252,17 @@ export default function LoginPage() {
                 type="checkbox"
                 checked={form.remember}
                 onChange={(event) =>
-                  updateField(
-                    "remember",
-                    event.target.checked
-                  )
+                  updateField("remember", event.target.checked)
                 }
                 disabled={isDisabled}
               />
-
-              <span>
-                Recordarme
-              </span>
+              <span>Recordarme</span>
             </label>
 
-            <Link
-              to="/recuperar-contrasena"
-              className="auth-inline-link"
-            >
+            <Link to="/recuperar-contrasena" className="auth-inline-link">
               ¿Olvidaste tu contraseña?
             </Link>
           </div>
-
-          {/* ======================================================
-              BOTÓN
-              ====================================================== */}
 
           <button
             type="submit"
@@ -345,51 +272,29 @@ export default function LoginPage() {
           >
             {loading ? (
               <>
-                <i
-                  className="fa-solid fa-spinner fa-spin"
-                  aria-hidden="true"
-                />
-
+                <i className="fa-solid fa-spinner fa-spin" aria-hidden="true" />
                 Ingresando...
               </>
             ) : isLocked ? (
               <>
-                <i
-                  className="fa-solid fa-lock"
-                  aria-hidden="true"
-                />
-
+                <i className="fa-solid fa-lock" aria-hidden="true" />
                 Bloqueado ({lockSeconds}s)
               </>
             ) : (
               <>
-                <i
-                  className="fa-solid fa-right-to-bracket"
-                  aria-hidden="true"
-                />
-
+                <i className="fa-solid fa-right-to-bracket" aria-hidden="true" />
                 Ingresar
               </>
             )}
           </button>
-
-          {/* ======================================================
-              SEPARADOR
-              ====================================================== */}
 
           <div
             className="auth-divider"
             role="separator"
             aria-label="O continúa con"
           >
-            <span>
-              o continúa con
-            </span>
+            <span>o continúa conyo</span>
           </div>
-
-          {/* ======================================================
-              GOOGLE
-              ====================================================== */}
 
           <GoogleButton />
         </form>
@@ -398,14 +303,17 @@ export default function LoginPage() {
   );
 }
 
-/**
- * Ruta inicial según el rol.
- */
-function defaultRouteForRole(role) {
-  switch (role) {
-    case "administrador":
-      return "/admin";
+function defaultRouteForRole(role, email) {
+  // Si es un administrador, lo mandamos directo al dashboard del admin
+  if (role === "administrador" || email.includes("admin")) {
+    return "/admin";
+  }
 
+  if (email === "cliente@chocoberry.com") {
+    return "/users";
+  }
+
+  switch (role) {
     case "repartidor":
       return "/admin/pedidos";
 

@@ -13,15 +13,12 @@ export default function StoreLayout() {
         backgroundColor: "#ffffff",
       }}
     >
-      {/* Barra de navegación superior */}
       <Navbar />
 
-      {/* Contenido dinámico de las páginas públicas (Home, Catálogo, Reseñas, etc.) */}
       <main style={{ flex: 1 }}>
         <Outlet />
       </main>
 
-      {/* Pie de página */}
       <Footer />
     </div>
   );
