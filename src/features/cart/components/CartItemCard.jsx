@@ -113,7 +113,10 @@ export default function CartItemCard({ item, onUnitsChange, onFieldChange, onRem
             </Button>
           </div>
 
-          <div className="cart-item-price">{formatPrice(lineTotal)}</div>
+          <div className="cart-item-prices">
+            <span className="cart-item-unit-price">{formatPrice(unitPrice)} c/u</span>
+            <span className="cart-item-price">{formatPrice(lineTotal)}</span>
+          </div>
         </div>
       </div>
     </div>

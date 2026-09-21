@@ -1,17 +1,29 @@
 // src/features/cart/pages/CartPage.jsx
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useCart } from "../hooks/useCart";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useCart } from "../hooks/UseCart";
 import CartItemCard from "../components/CartItemCard";
 import OrderCardMessage from "../components/OrderCardMessage";
 import CartSummary from "../components/CartSummary";
+import CartNotification from "../components/CartNotification";
 import ConfirmModal from "../../../shared/components/ConfirmModal";
 import "./CartPage.css";
 
 export default function CartPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { items, removeItem, updateUnits, updateField, clearCart, cardMessage, setCardMessage } = useCart();
   const [clearModalOpen, setClearModalOpen] = useState(false);
+  const [mergedNotificationOpen, setMergedNotificationOpen] = useState(false);
+
+  // Si venimos de "Añadir al Carrito" y el producto se fusionó con una línea
+  // ya existente (mismo producto + cantidad + color), avisamos aquí.
+  useEffect(() => {
+    if (location.state?.merged) {
+      setMergedNotificationOpen(true);
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location.state, location.pathname, navigate]);
 
   const handleCheckout = () => {
     navigate("/carrito/pago");
@@ -94,6 +106,13 @@ export default function CartPage() {
         title="Vaciar carrito"
         description="Vas a eliminar todos los productos de tu carrito. Esta acción no se puede deshacer."
         confirmLabel="Sí, vaciar"
+      />
+
+      <CartNotification
+        open={mergedNotificationOpen}
+        onClose={() => setMergedNotificationOpen(false)}
+        title="Producto ya en el carrito"
+        message="El producto ya estaba en el carrito. Se ha añadido una cantidad más."
       />
     </div>
   );

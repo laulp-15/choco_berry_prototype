@@ -14,7 +14,6 @@ const KPIS = [
     iconColor: "#24943C",
     value: "48",
     label: "Pedidos entregados",
-    delta: { text: "5% menos respecto al mes anterior", positive: false },
   },
   {
     icon: "fa-sack-dollar",
@@ -52,6 +51,10 @@ const TOP_PRODUCTS = [
 ];
 
 export default function DashboardPage() {
+  const handleGenerate = () => {
+    console.log("TODO: generar reporte");
+  };
+
   const handleExport = () => {
     console.log("TODO: exportar reporte (PDF/Excel)");
   };
@@ -63,10 +66,16 @@ export default function DashboardPage() {
           <h1 className="dashboard-title">¡Bienvenida a ChocoBerry!</h1>
           <p className="dashboard-subtitle">Aquí tienes un resumen del comportamiento de tu negocio.</p>
         </div>
-        <button type="button" className="btn-export" onClick={handleExport}>
-          <i className="fa-solid fa-download" />
-          Exportar reporte
-        </button>
+        <div className="dashboard-header-actions">
+          <button type="button" className="btn-generate-report" onClick={handleGenerate}>
+            <i className="fa-solid fa-file-word" />
+            Generar reporte
+          </button>
+          <button type="button" className="btn-export" onClick={handleExport}>
+            <i className="fa-solid fa-download" />
+            Exportar reporte
+          </button>
+        </div>
       </div>
 
       <div className="row dashboard-kpis">

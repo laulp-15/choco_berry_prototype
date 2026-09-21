@@ -1,11 +1,14 @@
-// src/shared/components/Navbar.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
-// Importación única y correcta hacia el contexto centralizado de autenticación
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../features/login/context/AuthContext';
+import { useCart } from '../../features/cart/hooks/UseCart';
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const { user } = useAuth();
+  const { items } = useCart();
+
+  const cartCount = items.reduce((sum, item) => sum + item.units, 0);
 
   return (
     <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: '#fff', borderBottom: '1px solid #F0E8E6' }}>
@@ -39,9 +42,44 @@ export default function Navbar() {
       </nav>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-        <Link to="/carrito" style={{ color: '#471C26', fontSize: '1.2rem', textDecoration: 'none' }}>
-          <i className="fa-solid fa-cart-shopping" />
-        </Link>
+        <button
+          onClick={() => navigate('/carrito')}
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: '#471C26',
+            display: 'flex',
+            alignItems: 'center',
+            position: 'relative',
+          }}
+          title="Carrito de Compras"
+        >
+          <i className="fa-solid fa-cart-shopping" style={{ fontSize: '1.2rem' }} aria-hidden="true" />
+          {cartCount > 0 && (
+            <span
+              style={{
+                position: 'absolute',
+                top: '-6px',
+                right: '-8px',
+                backgroundColor: '#C2435A',
+                color: '#ffffff',
+                fontSize: '0.65rem',
+                fontWeight: '700',
+                lineHeight: 1,
+                minWidth: '16px',
+                height: '16px',
+                borderRadius: '999px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0 4px',
+              }}
+            >
+              {cartCount}
+            </span>
+          )}
+        </button>
 
         {/* Si el usuario existe, muestra un ícono de usuario y su nombre completo; si no, el botón de login */}
         {user ? (
@@ -64,7 +102,7 @@ export default function Navbar() {
             </span>
           </Link>
         ) : (
-          <Link to="/login" style={{ color: '#471C26', fontSize: '1.2rem', textDecoration: 'none' }}>
+          <Link to="/login" style={{ color: '#471C26', fontSize: '1.2rem', textDecoration: 'none' }} title="Iniciar Sesión">
             <i className="fa-solid fa-user" />
           </Link>
         )}

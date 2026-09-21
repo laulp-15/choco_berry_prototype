@@ -15,22 +15,41 @@ export function CartProvider({ children }) {
   // El mensaje de tarjeta es UNO por pedido completo (no por caja/producto).
   const [cardMessage, setCardMessage] = useState("");
 
-  // Cada "Añadir al Carrito" crea una línea nueva a propósito:
-  // el mensaje decorativo y la personalización extra son por caja, así que
-  // no fusionamos automáticamente aunque producto/cantidad/color coincidan.
-  const addItem = useCallback((item) => {
-    const cartItemId = `${item.productId}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-    setItems((prev) => [
-      ...prev,
-      {
-        cartItemId,
-        units: 1,
-        decorativeMessage: "",
-        extraCustomization: "",
-        ...item,
-      },
-    ]);
-  }, []);
+  // Si ya hay una línea con el mismo producto + misma cantidad de fresas +
+  // mismo color, se suma una unidad ahí en vez de crear una línea nueva
+  // (el mensaje decorativo y la personalización extra de esa línea existente
+  // no se tocan). Devuelve { merged } para que quien llame pueda avisar al
+  // usuario si fue fusión o línea nueva.
+  const addItem = useCallback(
+    (item) => {
+      const existing = items.find(
+        (it) => it.productId === item.productId && it.quantity === item.quantity && it.color === item.color
+      );
+
+      if (existing) {
+        setItems(
+          items.map((it) =>
+            it.cartItemId === existing.cartItemId ? { ...it, units: it.units + 1 } : it
+          )
+        );
+        return { merged: true };
+      }
+
+      const cartItemId = `${item.productId}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      setItems([
+        ...items,
+        {
+          cartItemId,
+          units: 1,
+          decorativeMessage: "",
+          extraCustomization: "",
+          ...item,
+        },
+      ]);
+      return { merged: false };
+    },
+    [items]
+  );
 
   const removeItem = useCallback((cartItemId) => {
     setItems((prev) => prev.filter((it) => it.cartItemId !== cartItemId));

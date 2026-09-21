@@ -1,6 +1,6 @@
-// src/App.jsx
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { CartProvider } from "./features/cart/hooks/UseCart";
 
 // Importaciones de páginas y componentes principales:
 import LoginPage from './features/login/pages/LoginPage';
@@ -18,30 +18,32 @@ import StoreLayout from './shared/layouts/StoreLayout';
 
 export default function App() {
   return (
-    <Routes>
-      {/* Ruta de Login (fuera del layout general) */}
-      <Route path="/login" element={<LoginPage />} />
-      
-      {/* Ruta de Registro */}
-      {/* <Route path="/registro" element={<RegisterPage />} /> */}
-
-      {/* 🍓 2. Rutas del Panel de Administración (con asterisco para que reconozca todas sus subrutas como /admin/productos, /admin/pedidos, etc.) */}
-      <Route path="/admin/*" element={<AdminRoutes />} />
-
-      {/* Rutas principales envueltas en el StoreLayout (Navbar y diseño global de la tienda) */}
-      <Route element={<StoreLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/inicio" element={<Navigate to="/" replace />} />
-        <Route path="/conocenos" element={<AboutPage />} />
-        <Route path="/catalogo" element={<ProductCatalog />} />
-        <Route path="/resenas" element={<ReviewsPage />} />
+    <CartProvider>
+      <Routes>
+        {/* Ruta de Login (fuera del layout general) */}
+        <Route path="/login" element={<LoginPage />} />
         
-        {/* Rutas de la cuenta del usuario/cliente */}
-        <Route path="/users/*" element={<ProfileRoutes />} />
-      </Route>
+        {/* Ruta de Registro */}
+        {/* <Route path="/registro" element={<RegisterPage />} /> */}
 
-      {/* Redirección por defecto para cualquier otra ruta no encontrada */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        {/* 🍓 2. Rutas del Panel de Administración */}
+        <Route path="/admin/*" element={<AdminRoutes />} />
+
+        {/* Rutas principales envueltas en el StoreLayout */}
+        <Route element={<StoreLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/inicio" element={<Navigate to="/" replace />} />
+          <Route path="/conocenos" element={<AboutPage />} />
+          <Route path="/catalogo" element={<ProductCatalog />} />
+          <Route path="/resenas" element={<ReviewsPage />} />
+          
+          {/* Rutas de la cuenta del usuario/cliente */}
+          <Route path="/users/*" element={<ProfileRoutes />} />
+        </Route>
+
+        {/* Redirección por defecto para cualquier otra ruta no encontrada */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </CartProvider>
   );
 }

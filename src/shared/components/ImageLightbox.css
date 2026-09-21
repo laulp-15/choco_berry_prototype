@@ -1,0 +1,47 @@
+/* src/shared/components/ImageLightbox.css */
+
+.image-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(42, 35, 29, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  animation: lightboxIn 0.15s ease;
+}
+
+@keyframes lightboxIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.image-lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.image-lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--blanco);
+  color: var(--texto);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.image-lightbox-close:hover {
+  background: var(--secundario-1);
+  color: var(--primario);
+}
