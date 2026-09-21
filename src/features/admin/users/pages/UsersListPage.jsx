@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import DataTable from "../../../../shared/components/DataTable";
 import StatusToggle from "../../../../shared/components/StatusToggle";
 import FormSelect from "../../../../shared/components/FormSelect";
-import KpiCard from "../../../../shared/components/KpiCard";
 import ConfirmModal from "../../../../shared/components/ConfirmModal";
 import { useToast } from "../../../../shared/components/Toast";
-import { useAuth } from "../../../login/hooks/useAuth";
+import { useAuth } from "../../../login/context/AuthContext";
 import useUsersAdmin, { hasAssociatedOrders } from "../hooks/useUsersAdmin";
 import UserFormModal from "../components/UserFormModal";
 import RoleBadge from "../components/RoleBadge";
@@ -34,9 +33,6 @@ export default function UsersListPage() {
   const { role: currentRole } = useAuth();
   const navigate = useNavigate();
 
-  // Regla de negocio: "Solo los administradores podrán crear o
-  // modificar empleados". Mientras no haya sesión de administrador,
-  // el módulo queda en modo consulta (sin crear/editar/eliminar).
   const canManage = currentRole === "administrador";
 
   const [roleFilter, setRoleFilter] = useState("");
@@ -45,7 +41,6 @@ export default function UsersListPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const [submitting, setSubmitting] = useState(false);
-
   const [confirmTarget, setConfirmTarget] = useState(null);
 
   const filtered = useMemo(() => {
@@ -56,13 +51,6 @@ export default function UsersListPage() {
       return true;
     });
   }, [users, roleFilter, statusFilter]);
-
-  const kpis = useMemo(() => {
-    const total = users.length;
-    const activos = users.filter((u) => u.active !== false).length;
-    const admins = users.filter((u) => u.role === "administrador").length;
-    return { total, activos, inactivos: total - activos, admins };
-  }, [users]);
 
   function openCreate() {
     setEditingUser(null);
@@ -96,8 +84,6 @@ export default function UsersListPage() {
     } finally {
       setSubmitting(false);
     }
-    // Los errores (ej. EMAIL_TAKEN) los captura el propio modal y no
-    // deben cerrarlo, por eso no hay catch aquí — se relanzan solas.
   }
 
   async function handleToggleActive(user, value) {
@@ -202,15 +188,6 @@ export default function UsersListPage() {
   return (
     <>
       <div className="users-page">
-        <div className="row users-kpis">
-          <div className="col-12 col-sm-6 col-lg-3 users-col">
-           
-          </div>
-          <div className="col-12 col-sm-6 col-lg-3 users-col">
-           
-          </div>
-        </div>
-
         <DataTable
           title="Usuarios"
           description="Administra el personal autorizado y sus roles de acceso al sistema."
@@ -221,7 +198,8 @@ export default function UsersListPage() {
           searchPlaceholder="Buscar usuario por nombre o correo..."
           emptyMessage="No se encontraron usuarios con esos criterios."
           extraFilter={
-            <div className="users-extra-filters">
+            <div className="users-extra-filters d-flex gap-2 align-items-center">
+              {/* Se removió el texto duplicado "Filtros" ya que el DataTable lo incluye nativamente */}
               <FormSelect
                 value={roleFilter}
                 onChange={setRoleFilter}
@@ -239,7 +217,7 @@ export default function UsersListPage() {
         />
 
         {!canManage && (
-          <p className="users-readonly-hint">
+          <p className="users-readonly-hint mt-3 text-muted">
             <i className="fa-solid fa-circle-info" /> Inicia sesión como administrador para
             crear, editar o eliminar usuarios. Con la sesión actual solo puedes consultar el
             listado.

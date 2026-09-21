@@ -1,5 +1,10 @@
 /* src/features/admin/dashboard/pages/DashboardPage.css */
 
+.dashboard-page {
+  font-family: "Poppins", sans-serif;
+  color: #2b2120;
+}
+
 .dashboard-header {
   display: flex;
   align-items: flex-start;
@@ -11,14 +16,15 @@
 
 .dashboard-title {
   font-weight: 700;
-  font-size: 24px; /* H2 */
+  font-size: 24px;
   line-height: 32px;
   margin-bottom: 4px;
+  color: #2b2120;
 }
 
 .dashboard-subtitle {
   font-size: 14px;
-  color: var(--texto-muted);
+  color: #7a6b68;
 }
 
 .btn-export {
@@ -26,19 +32,20 @@
   align-items: center;
   gap: 8px;
   border: none;
-  background: var(--primario);
-  color: var(--blanco);
+  background-color: #d94f6e; /* Color principal de ChocoBerry */
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-weight: 700;
   border-radius: 999px;
   padding: 11px 20px;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background-color 0.15s ease;
   white-space: nowrap;
 }
+
 .btn-export:hover {
-  background: var(--primario-oscuro);
+  background-color: #c13d5d;
 }
 
 .dashboard-kpis {
@@ -51,4 +58,16 @@
 
 .dashboard-col {
   margin-bottom: 20px;
+}
+
+/* Estilos de soporte para asegurar que las tarjetas internas y gráficas tengan fondo blanco */
+.dashboard-page .kpi-card,
+.dashboard-page .bar-chart-container,
+.dashboard-page .top-products-container,
+.dashboard-page .card {
+  background-color: #ffffff !important;
+  border: 1px solid #f0e6e4 !important;
+  border-radius: 16px !important;
+  padding: 20px !important;
+  box-shadow: 0 4px 12px rgba(43, 33, 32, 0.03) !important;
 }

@@ -2,24 +2,6 @@ import React from 'react';
 import { useCategories } from '../hooks/useCategories';
 import CategoryFormModal from '../components/CategoryFormModal';
 
-const renderIcon = (name) => {
-  const baseStyle = { fontSize: '1.1rem' };
-  switch (name) {
-    case 'Heart': 
-      return <i className="fa-solid fa-heart" style={{ ...baseStyle, color: '#C2435A' }} aria-hidden="true" />;
-    case 'User': 
-      return <i className="fa-solid fa-user" style={{ ...baseStyle, color: '#471C26' }} aria-hidden="true" />;
-    case 'Sparkles': 
-      return <i className="fa-solid fa-wand-magic-sparkles" style={{ ...baseStyle, color: '#F49B05' }} aria-hidden="true" />;
-    case 'Cake': 
-      return <i className="fa-solid fa-cake-candles" style={{ ...baseStyle, color: '#C2435A' }} aria-hidden="true" />;
-    case 'Calendar': 
-      return <i className="fa-regular fa-calendar-days" style={{ ...baseStyle, color: '#C2435A' }} aria-hidden="true" />;
-    default: 
-      return <i className="fa-solid fa-gift" style={{ ...baseStyle, color: '#F49B05' }} aria-hidden="true" />;
-  }
-};
-
 export default function CategoriesListPage() {
   const {
     searchTerm,
@@ -54,6 +36,8 @@ export default function CategoriesListPage() {
 
       {/* FILTROS Y BÚSQUEDA */}
       <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+        
+        {/* 1. Botón Crear a la izquierda */}
         <button
           onClick={handleOpenCreate}
           style={{
@@ -69,13 +53,15 @@ export default function CategoriesListPage() {
             gap: '0.5rem',
             cursor: 'pointer',
             boxShadow: '0 2px 5px rgba(230, 57, 80, 0.2)',
+            whiteSpace: 'nowrap'
           }}
         >
           <i className="fa-solid fa-plus" aria-hidden="true" />
           Crear categoría
         </button>
 
-        <div style={{ position: 'relative', flex: 1, minWidth: '250px' }}>
+        {/* 2. Buscador en el centro con tamaño flexible */}
+        <div style={{ position: 'relative', flex: 1, minWidth: '280px' }}>
           <input
             type="text"
             placeholder="Buscar por categoría..."
@@ -84,6 +70,7 @@ export default function CategoriesListPage() {
             style={{
               width: '100%',
               padding: '0.65rem 1rem',
+              paddingRight: '2.5rem',
               borderRadius: '25px',
               border: '1px solid #EADBDA',
               backgroundColor: '#ffffff',
@@ -99,54 +86,58 @@ export default function CategoriesListPage() {
           />
         </div>
 
-        <button
-          style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #EADBDA',
-            padding: '0.65rem 1.2rem',
-            borderRadius: '25px',
-            fontSize: '0.9rem',
-            fontWeight: '600',
-            color: '#471C26',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            cursor: 'pointer',
-          }}
-        >
-          <i className="fa-solid fa-filter" style={{ color: '#E63950' }} aria-hidden="true" />
-          Filtros
-        </button>
+        {/* 3. Filtros y Selector a la derecha */}
+        <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
+          <button
+            style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid #EADBDA',
+              padding: '0.65rem 1.2rem',
+              borderRadius: '25px',
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              color: '#471C26',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              cursor: 'pointer',
+            }}
+          >
+            <i className="fa-solid fa-filter" style={{ color: '#E63950' }} aria-hidden="true" />
+            Filtros
+          </button>
 
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #EADBDA',
-            padding: '0.65rem 1.2rem',
-            borderRadius: '12px',
-            fontSize: '0.9rem',
-            color: '#6B5A54',
-            cursor: 'pointer',
-            outline: 'none',
-          }}
-        >
-          <option value="todos">Todos los estados</option>
-          <option value="activo">Activo</option>
-          <option value="inactivo">Inactivo</option>
-        </select>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid #EADBDA',
+              padding: '0.65rem 1.2rem',
+              borderRadius: '12px',
+              fontSize: '0.9rem',
+              color: '#6B5A54',
+              cursor: 'pointer',
+              outline: 'none',
+            }}
+          >
+            <option value="todos">Todos los estados</option>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+        </div>
       </div>
 
-      {/* TABLA DE CATEGORÍAS */}
-      <div style={{ backgroundColor: '#ffffff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
+      {/* CONTENEDOR TIPO TARJETA */}
+      <div style={{ backgroundColor: '#ffffff', borderRadius: '16px', boxShadow: '0 2px 12px rgba(0,0,0,0.03)', overflow: 'hidden', border: '1px solid #F5EFEA' }}>
+        
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
-            <tr style={{ backgroundColor: '#FCE8EC', color: '#471C26', fontSize: '0.8rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-              <th style={{ padding: '1rem 1.5rem' }}>Categoría</th>
-              <th style={{ padding: '1rem 1.5rem' }}>Descripción</th>
-              <th style={{ padding: '1rem 1.5rem', textAlign: 'center' }}>Estado</th>
-              <th style={{ padding: '1rem 1.5rem', textAlign: 'right' }}>Acciones</th>
+            <tr style={{ borderBottom: '1px solid #F5EFEA', color: '#471C26', fontSize: '0.8rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', backgroundColor: '#ffffff' }}>
+              <th style={{ padding: '1.2rem 1.5rem' }}>Categoría</th>
+              <th style={{ padding: '1.2rem 1.5rem' }}>Descripción</th>
+              <th style={{ padding: '1.2rem 1.5rem', textAlign: 'center' }}>Estado</th>
+              <th style={{ padding: '1.2rem 1.5rem', textAlign: 'right' }}>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -154,18 +145,13 @@ export default function CategoriesListPage() {
               <tr
                 key={cat.id}
                 style={{
-                  borderBottom: index !== filteredCategorias.length - 1 ? '1px solid #F5EFEA' : 'none',
+                  borderBottom: index !== filteredCategorias.length - 1 ? '1px solid #F9F5F2' : 'none',
                   fontSize: '0.9rem',
                   color: '#471C26',
                 }}
               >
                 <td style={{ padding: '1rem 1.5rem', fontWeight: '600' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                    <div style={{ backgroundColor: '#FDF2F4', padding: '0.4rem', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      {renderIcon(cat.iconName)}
-                    </div>
-                    <span>{cat.nombre}</span>
-                  </div>
+                  <span>{cat.nombre}</span>
                 </td>
 
                 <td style={{ padding: '1rem 1.5rem', color: '#6B5A54', maxWidth: '350px' }}>
@@ -236,6 +222,19 @@ export default function CategoriesListPage() {
             ))}
           </tbody>
         </table>
+
+        {/* PIE DE TABLA / PAGINACIÓN */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderTop: '1px solid #F5EFEA', color: '#6B5A54', fontSize: '0.9rem' }}>
+          <div>
+            Página 1 de 1
+          </div>
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <span style={{ color: '#A0958F', cursor: 'not-allowed' }}>← Anterior</span>
+            <span style={{ fontWeight: 'bold', color: '#471C26' }}>1</span>
+            <span style={{ color: '#A0958F', cursor: 'not-allowed' }}>Siguiente →</span>
+          </div>
+        </div>
+
       </div>
 
       {/* MODAL CREAR / EDITAR */}

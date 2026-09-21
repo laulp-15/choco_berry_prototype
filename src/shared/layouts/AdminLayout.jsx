@@ -4,8 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import "./AdminLayout.css";
 
-// Un solo lugar para el menú del admin. Si se agrega un módulo nuevo,
-// solo hay que agregar una línea aquí — no hay que tocar cada página.
+// Menú de navegación principal del panel de administración
 const NAV_ITEMS = [
   { to: "/admin", label: "Dashboard", icon: "fa-chart-line", end: true },
   { to: "/admin/roles", label: "Roles", icon: "fa-shield-halved" },
@@ -24,9 +23,14 @@ export default function AdminLayout() {
 
   return (
     <div className="admin-layout">
+      {/* Barra lateral de navegación */}
       <aside className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="admin-brand">
-          <img src="/img/Logo/CHOCOBERRY.png" alt="ChocoBerry" className="admin-brand-logo" />
+          <img 
+            src="/img/Logo/CHOCOBERRY.png" 
+            alt="ChocoBerry" 
+            className="admin-brand-logo" 
+          />
         </div>
 
         <nav className="admin-nav">
@@ -35,11 +39,13 @@ export default function AdminLayout() {
               key={item.to}
               to={item.to}
               end={item.end}
-              className={({ isActive }) => `admin-nav-item ${isActive ? "active" : ""}`}
+              className={({ isActive }) => 
+                `admin-nav-item ${isActive ? "active" : ""}`
+              }
               onClick={() => setSidebarOpen(false)}
             >
               <i className={`fa-solid ${item.icon}`} />
-              {item.label}
+              <span>{item.label}</span>
             </NavLink>
           ))}
         </nav>
@@ -53,6 +59,7 @@ export default function AdminLayout() {
               <span className="admin-profile-role">Administradora</span>
             </div>
           </div>
+          
           <button type="button" className="admin-logout">
             <i className="fa-solid fa-right-to-bracket" />
             Cerrar sesión
@@ -60,23 +67,29 @@ export default function AdminLayout() {
         </div>
       </aside>
 
+      {/* Backdrop para móviles cuando el sidebar esté abierto */}
       {sidebarOpen && (
-        <div className="admin-sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
+        <div 
+          className="admin-sidebar-backdrop" 
+          onClick={() => setSidebarOpen(false)} 
+        />
       )}
 
+      {/* Contenido principal de la administración */}
       <div className="admin-content">
         <header className="admin-topbar">
           <IconButton
             className="admin-menu-toggle"
             disableRipple
             onClick={() => setSidebarOpen(true)}
+            aria-label="Abrir menú"
           >
             <i className="fa-solid fa-bars" />
           </IconButton>
         </header>
 
         <main className="admin-main">
-          {/* Aquí se monta la página de cada módulo (Roles, Usuarios, etc.) */}
+          {/* Aquí se montan dinámicamente las páginas del admin (Dashboard, Roles, Productos, etc.) */}
           <Outlet />
         </main>
       </div>
