@@ -38,7 +38,7 @@ export default function ReviewFormModal({ isOpen, onClose, onSubmit }) {
 
         {/* Encabezado limpio en bloque */}
         <div className="modal-header">
-          <h2>Tu opinión nos inspira ✨</h2>
+          <h2>Tu opinión nos inspira </h2>
           <p>Cuéntanos qué tal fue tu experiencia con ChocoBerry</p>
         </div>
 

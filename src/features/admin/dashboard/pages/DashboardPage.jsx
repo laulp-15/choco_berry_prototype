@@ -17,12 +17,12 @@ const KPIS = [
   },
   {
     icon: "fa-sack-dollar",
-    iconColor: "var(--primario)",
+    iconColor: "#d94f6e",
     value: formatPrice(7850000),
     label: "Ingresos del mes",
     delta: { text: "10% más respecto al mes anterior", positive: true },
   },
-  { icon: "fa-star", iconColor: "var(--primario)", value: "Caja Amor de Fresa", label: "Producto más vendido" },
+  { icon: "fa-star", iconColor: "#d94f6e", value: "Caja Amor de Fresa", label: "Producto más vendido" },
 ];
 
 const SALES_BY_WEEKDAY = [
