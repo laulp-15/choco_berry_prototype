@@ -1,0 +1,58 @@
+/* src/features/about/pages/AboutPage.css
+   Shell de la vista Conócenos v3.
+
+   A diferencia de la versión anterior, aquí NO hay un único container que
+   envuelve todo: cada sección es full-bleed (ocupa el 100% del ancho) con
+   su propio color de fondo, y adentro tiene un ".about-inner" centrado que
+   limita el contenido a 1200px. Así se logran fondos alternados de pared
+   a pared en vez de una sola "caja" blanca con todo dentro.
+
+   Los colores (--primario, --texto, etc.) vienen de shared/css/tokens.css.
+   --font-display / --font-body se cargan por Google Fonts en index.html. */
+
+.about-page {
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-body: "Poppins", sans-serif;
+
+  font-family: var(--font-body);
+  color: var(--texto);
+  overflow-x: hidden;
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Sistema de animación al hacer scroll, compartido por las secciones --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-left {
+  transform: translateX(-30px);
+}
+.reveal-right {
+  transform: translateX(30px);
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@media (max-width: 991.98px) {
+  .reveal-left,
+  .reveal-right {
+    transform: translateY(20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}

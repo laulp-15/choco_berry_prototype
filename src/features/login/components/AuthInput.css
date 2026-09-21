@@ -1,0 +1,279 @@
+
+/* src/features/login/components/AuthInput.css */
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  text-align: left;
+}
+
+/* ================================
+   LABEL
+   ================================ */
+
+.auth-field-label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  color: var(--auth-text);
+  cursor: pointer;
+}
+
+.auth-field-required {
+  color: var(--carmesi-100, #e63946);
+}
+
+/* ================================
+   INPUT
+   ================================ */
+
+.auth-field-input.MuiOutlinedInput-root {
+  width: 100%;
+  min-height: 48px;
+
+  background: var(--auth-input-bg);
+
+  border-radius: 12px;
+
+  font-family: var(--font-body);
+  font-size: 14.5px;
+
+  color: var(--auth-text);
+
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* Borde normal */
+
+.auth-field-input.MuiOutlinedInput-root
+  .MuiOutlinedInput-notchedOutline {
+  border: 1px solid var(--auth-border);
+  transition:
+    border-color 0.15s ease,
+    border-width 0.15s ease;
+}
+
+/* Hover */
+
+.auth-field-input.MuiOutlinedInput-root:hover
+  .MuiOutlinedInput-notchedOutline {
+  border-color: var(--carmesi-60, #ef818a);
+}
+
+/* Focus */
+
+.auth-field-input.MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: var(--carmesi-100, #e63946);
+  border-width: 1.5px;
+}
+
+/* ================================
+   INPUT TEXT
+   ================================ */
+
+.auth-field-input.MuiOutlinedInput-root input {
+  padding: 12.5px 14px;
+
+  font-family: var(--font-body);
+  font-size: 14.5px;
+
+  color: var(--auth-text);
+
+  caret-color: var(--carmesi-100, #e63946);
+}
+
+.auth-field-input.MuiOutlinedInput-root input::placeholder {
+  color: var(--auth-text-muted);
+  opacity: 0.8;
+}
+
+/* ================================
+   ICONO INICIAL
+   ================================ */
+
+.auth-field-input .MuiInputAdornment-positionStart {
+  margin-right: 4px;
+}
+
+.auth-field-input .MuiInputAdornment-positionStart i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+
+  color: var(--auth-text-muted);
+
+  font-size: 14px;
+
+  transition: color 0.15s ease;
+}
+
+.auth-field-input.Mui-focused
+  .MuiInputAdornment-positionStart i {
+  color: var(--carmesi-100, #e63946);
+}
+
+/* ================================
+   PASSWORD TOGGLE
+   ================================ */
+
+.auth-password-toggle.MuiIconButton-root {
+  width: 38px;
+  height: 38px;
+
+  margin-right: 2px;
+
+  color: var(--auth-text-muted);
+
+  border-radius: 8px;
+
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.auth-password-toggle.MuiIconButton-root:hover {
+  color: var(--carmesi-100, #e63946);
+
+  background-color: rgba(230, 57, 70, 0.06);
+}
+
+.auth-password-toggle.MuiIconButton-root:focus-visible {
+  outline: 2px solid var(--carmesi-60, #ef818a);
+  outline-offset: 2px;
+}
+
+.auth-password-toggle i {
+  font-size: 14px;
+}
+
+/* ================================
+   ERROR
+   ================================ */
+
+.auth-field-input--error.MuiOutlinedInput-root
+  .MuiOutlinedInput-notchedOutline {
+  border-color: var(--error-100, #dd322d) !important;
+}
+
+.auth-field-input--error.MuiOutlinedInput-root:hover
+  .MuiOutlinedInput-notchedOutline {
+  border-color: var(--error-100, #dd322d) !important;
+}
+
+.auth-field-input--error.MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: var(--error-100, #dd322d) !important;
+  border-width: 1.5px;
+}
+
+/* ================================
+   ERROR MESSAGE
+   ================================ */
+
+.auth-field-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+
+  margin-top: 1px;
+
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  color: var(--error-100, #dd322d);
+}
+
+.auth-field-error i {
+  flex-shrink: 0;
+  margin-top: 2px;
+
+  font-size: 11px;
+}
+
+/* ================================
+   HINT
+   ================================ */
+
+.auth-field-hint {
+  display: block;
+
+  margin-top: 1px;
+
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.4;
+
+  color: var(--auth-text-muted);
+}
+
+/* ================================
+   DISABLED
+   ================================ */
+
+.auth-field-input.MuiOutlinedInput-root.Mui-disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+
+  background: var(--auth-input-bg);
+}
+
+.auth-field-input.MuiOutlinedInput-root.Mui-disabled
+  .MuiOutlinedInput-notchedOutline {
+  border-color: var(--auth-border);
+}
+
+.auth-field-input.MuiOutlinedInput-root.Mui-disabled input {
+  cursor: not-allowed;
+}
+
+/* ================================
+   DARK MODE
+   ================================ */
+
+.auth-layout[data-theme="dark"]
+  .auth-field-input
+  .MuiIconButton-root {
+  color: var(--auth-text-muted);
+}
+
+.auth-layout[data-theme="dark"]
+  .auth-password-toggle.MuiIconButton-root:hover {
+  color: var(--carmesi-100, #e63946);
+
+  background-color: rgba(230, 57, 70, 0.1);
+}
+
+/* ================================
+   REDUCED MOTION
+   ================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-field-input.MuiOutlinedInput-root,
+  .auth-field-input.MuiOutlinedInput-root
+    .MuiOutlinedInput-notchedOutline,
+  .auth-field-input
+    .MuiInputAdornment-positionStart
+    i,
+  .auth-password-toggle.MuiIconButton-root {
+    transition: none;
+  }
+}
+

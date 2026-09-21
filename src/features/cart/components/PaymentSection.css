@@ -1,0 +1,28 @@
+/* src/features/cart/components/PaymentSection.css
+   Los estilos del dropzone ahora viven en shared/components/FileDropzone.css */
+
+.payment-intro {
+  font-size: 13px;
+  color: var(--texto-muted);
+  margin-bottom: 12px;
+}
+
+.payment-nequi {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--secundario-3);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--texto);
+  margin-bottom: 20px;
+}
+.payment-nequi i {
+  color: var(--primario);
+  font-size: 13px;
+}
+.payment-nequi strong {
+  color: var(--primario);
+}

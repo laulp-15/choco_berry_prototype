@@ -9,10 +9,9 @@ import "./RelatedProducts.css";
  * @param {object} props
  * @param {object[]} props.products
  * @param {() => void} [props.onViewAll]
- * @param {(product: object) => void} [props.onAddToCart]
  * @param {(product: object) => void} [props.onViewDetail]
  */
-export default function RelatedProducts({ products, onViewAll, onAddToCart, onViewDetail }) {
+export default function RelatedProducts({ products, onViewAll, onViewDetail }) {
   return (
     <div className="related-products">
       <div className="related-header">
@@ -23,12 +22,8 @@ export default function RelatedProducts({ products, onViewAll, onAddToCart, onVi
       </div>
       <div className="row">
         {products.map((product) => (
-          <div key={product.name} className="col-12 col-sm-6 col-lg-3 product-col">
-            <ProductCard
-              product={product}
-              onAddToCart={onAddToCart}
-              onViewDetail={onViewDetail}
-            />
+          <div key={product.id} className="col-12 col-sm-6 col-lg-3 product-col">
+            <ProductCard product={product} onViewDetail={onViewDetail} />
           </div>
         ))}
       </div>

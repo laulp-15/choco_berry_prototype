@@ -1,0 +1,108 @@
+/* src/features/admin/dashboard/components/TopProductsList.css */
+
+.top-products-card {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 16px;
+  height: 100%;
+}
+
+.top-products-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.top-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.top-products-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Número del ranking */
+
+.top-products-rank {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+
+  border-radius: 6px;
+
+  background: var(--primario);
+  color: var(--blanco);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor del nombre + barra */
+
+.top-products-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Nombre y cantidad */
+
+.top-products-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.top-products-name {
+  min-width: 0;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texto);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.top-products-sold {
+  flex-shrink: 0;
+
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+/* Fondo de la barra */
+
+.top-products-bar {
+  width: 100%;
+  height: 5px;
+
+  background: var(--secundario-2);
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+/* Parte que representa las ventas */
+
+.top-products-bar-fill {
+  height: 100%;
+
+  background: var(--primario);
+  border-radius: 10px;
+
+  transition: width 0.5s ease;
+}

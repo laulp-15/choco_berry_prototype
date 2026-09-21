@@ -21,23 +21,35 @@ export default function ProductCatalog() {
     });
   }, [activeCategory, query]);
 
-  // TODO: conectar con el store/servicio real del carrito
-  const handleAddToCart = (product) => {
-    console.log("Añadir al carrito:", product);
-  };
-
   const handleViewDetail = (product) => {
     navigate(`/productos/${product.id}`);
   };
 
   return (
     <div className="catalog-page">
-      <div className="container catalog-wrap">
-        <h1 className="catalog-title">Catálogo de productos</h1>
-        <p className="catalog-subtitle">
-          Explora nuestras fresas cubiertas de chocolate para cada ocasión.
-        </p>
 
+      <div className="catalog-hero">
+        <div className="catalog-hero-overlay"></div>
+
+        <div className="container catalog-hero-inner">
+          <span className="catalog-hero-tag">
+            <i className="fa-solid fa-heart" aria-hidden="true"></i>
+            Hecho para compartir
+          </span>
+
+          <h1 className="catalog-hero-title">
+            Nuestros productos
+          </h1>
+
+          <p className="catalog-hero-subtitle">
+            Descubre nuestras fresas cubiertas de chocolate,
+            hechas a mano para convertir cada ocasión en un
+            momento especial.
+          </p>
+        </div>
+      </div>
+
+      <div className="container catalog-wrap">
         <SearchBar
           value={query}
           onChange={setQuery}
@@ -53,14 +65,14 @@ export default function ProductCatalog() {
 
         {filteredProducts.length > 0 ? (
           <div className="row">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product, index) => (
               <div
                 key={product.id}
                 className="col-12 col-sm-6 col-lg-3 product-col"
+                style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
               >
                 <ProductCard
                   product={product}
-                  onAddToCart={handleAddToCart}
                   onViewDetail={handleViewDetail}
                 />
               </div>

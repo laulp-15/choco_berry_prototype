@@ -1,0 +1,49 @@
+/* src/features/about/components/NuestraPromesa.css */
+
+.nuestra-promesa {
+  background: var(--secundario-3);
+  padding: 120px 0;
+}
+
+.promesa-inner {
+  max-width: 680px;
+  text-align: center;
+}
+
+.promesa-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--texto);
+  margin-bottom: 28px;
+}
+
+.promesa-text {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.85;
+  color: var(--texto-muted);
+  margin-bottom: 16px;
+}
+
+.promesa-emphasis {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--primario-oscuro);
+  margin: 28px 0 0;
+}
+.promesa-emphasis-strong {
+  font-weight: 600;
+  font-size: 22px;
+  margin-top: 6px;
+}
+
+@media (max-width: 767.98px) {
+  .nuestra-promesa {
+    padding: 84px 0;
+  }
+  .promesa-title {
+    font-size: 25px;
+  }
+}

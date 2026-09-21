@@ -1,0 +1,493 @@
+/* src/features/about/components/HechoConDedicacion.css */
+
+.hecho-dedicacion {
+  position: relative;
+  padding: 110px 0;
+  background: var(--secundario-3);
+  overflow: hidden;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.hd-content {
+  max-width: 520px;
+}
+
+/* =========================
+   EYEBROW
+========================= */
+
+.hd-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 18px;
+
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--primario);
+}
+
+.hd-eyebrow-icon {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: var(--secundario-1);
+
+  transition: transform 0.35s ease;
+}
+
+.hd-eyebrow-icon i {
+  font-size: 13px;
+}
+
+.hd-eyebrow:hover .hd-eyebrow-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* =========================
+   TÍTULO
+========================= */
+
+.hd-title {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+
+  color: var(--texto);
+}
+
+.hd-title span {
+  color: var(--primario);
+}
+
+/* =========================
+   DECORACIÓN
+========================= */
+
+.hd-title-decoration {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  width: 105px;
+
+  margin: 22px 0 28px;
+}
+
+.hd-title-decoration span {
+  flex: 1;
+  height: 1px;
+
+  background: var(--primario-claro);
+  opacity: 0.7;
+}
+
+.hd-title-decoration i {
+  font-size: 8px;
+  color: var(--primario);
+}
+
+/* =========================
+   TEXTO
+========================= */
+
+.hd-text {
+  max-width: 500px;
+
+  margin: 0 0 17px;
+
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.85;
+
+  color: var(--texto-muted);
+}
+
+.hd-text strong {
+  font-weight: 700;
+  color: var(--texto);
+}
+
+/* =========================
+   SEGUNDA IMAGEN
+========================= */
+
+.hd-secondary-image {
+  position: relative;
+
+  width: 100%;
+  max-width: 500px;
+
+  height: 145px;
+
+  margin-top: 30px;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  border-left: 4px solid var(--primario);
+
+  background: var(--secundario-2);
+
+  box-shadow:
+    0 16px 35px -25px rgba(42, 35, 29, 0.35);
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.hd-secondary-image:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 40px -22px rgba(42, 35, 29, 0.4);
+}
+
+.hd-secondary-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.6s ease;
+}
+
+.hd-secondary-image:hover img {
+  transform: scale(1.04);
+}
+
+.hd-secondary-fallback {
+  display: none;
+
+  position: absolute;
+  inset: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 36px;
+
+  color: var(--primario-claro);
+  background: var(--secundario-2);
+}
+
+/* =========================
+   IMAGEN PRINCIPAL
+========================= */
+
+.hd-visual {
+  position: relative;
+
+  width: min(100%, 540px);
+
+  margin: 0 auto;
+
+  padding: 12px 12px 28px 18px;
+}
+
+.hd-image-frame {
+  position: relative;
+
+  padding: 12px;
+
+  background: var(--blanco);
+
+  border: 2px dashed var(--primario-claro);
+  border-radius: 32px;
+
+  transform: rotate(1deg);
+
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.hd-visual:hover .hd-image-frame {
+  transform: rotate(0deg) translateY(-4px);
+
+  box-shadow:
+    0 28px 55px -30px rgba(42, 35, 29, 0.3);
+}
+
+.hd-image-wrap {
+  position: relative;
+
+  min-height: 430px;
+
+  overflow: hidden;
+
+  border-radius: 23px;
+
+  background: var(--secundario-2);
+}
+
+.hd-image {
+  width: 100%;
+  height: 100%;
+  min-height: 430px;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.8s ease;
+}
+
+.hd-image-wrap:hover .hd-image {
+  transform: scale(1.045);
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+.hd-image-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 55%,
+      rgba(42, 35, 29, 0.08) 100%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================
+   FALLBACK
+========================= */
+
+.hd-image-fallback {
+  display: none;
+
+  position: absolute;
+  inset: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 42px;
+
+  color: var(--primario-claro);
+  background: var(--secundario-2);
+}
+
+/* =========================
+   BADGE
+========================= */
+
+.hd-badge {
+  position: absolute;
+
+  left: -4px;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 12px 18px 12px 12px;
+
+  background: var(--blanco);
+
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+
+  box-shadow:
+    0 18px 38px -22px rgba(42, 35, 29, 0.4);
+
+  transform: rotate(-2deg);
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.hd-visual:hover .hd-badge {
+  transform: rotate(0deg) translateY(-4px);
+}
+
+.hd-badge-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--secundario-1);
+
+  color: var(--primario);
+}
+
+.hd-badge-icon i {
+  font-size: 14px;
+}
+
+.hd-badge-text {
+  display: flex;
+  flex-direction: column;
+
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: var(--texto-muted);
+}
+
+.hd-badge-text strong {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+
+  letter-spacing: 0;
+  text-transform: none;
+
+  color: var(--texto);
+}
+
+/* =========================
+   DETALLES DECORATIVOS
+========================= */
+
+.hd-decor {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hd-decor-one {
+  width: 75px;
+  height: 75px;
+
+  top: -15px;
+  right: -5px;
+
+  border: 1px solid var(--primario-claro);
+
+  opacity: 0.7;
+}
+
+.hd-decor-two {
+  width: 14px;
+  height: 14px;
+
+  left: -8px;
+  top: 48%;
+
+  background: var(--primario);
+
+  opacity: 0.65;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 991.98px) {
+  .hecho-dedicacion {
+    padding: 80px 0;
+  }
+
+  .hd-content {
+    max-width: 650px;
+  }
+
+  .hd-title {
+    font-size: 40px;
+  }
+
+  .hd-secondary-image {
+    max-width: 600px;
+  }
+
+  .hd-visual {
+    max-width: 620px;
+    margin-top: 20px;
+  }
+
+  .hd-image-wrap,
+  .hd-image {
+    min-height: 380px;
+  }
+}
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media (max-width: 575.98px) {
+  .hecho-dedicacion {
+    padding: 70px 0;
+  }
+
+  .hd-title {
+    font-size: 34px;
+  }
+
+  .hd-title-decoration {
+    margin-top: 18px;
+    margin-bottom: 23px;
+  }
+
+  .hd-text {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .hd-secondary-image {
+    height: 125px;
+    margin-top: 24px;
+  }
+
+  .hd-visual {
+    padding: 8px 8px 25px 10px;
+  }
+
+  .hd-image-frame {
+    padding: 9px;
+    border-radius: 25px;
+  }
+
+  .hd-image-wrap,
+  .hd-image {
+    min-height: 300px;
+  }
+
+  .hd-badge {
+    left: 0;
+  }
+
+  .hd-decor-one {
+    width: 55px;
+    height: 55px;
+    right: -2px;
+  }
+}

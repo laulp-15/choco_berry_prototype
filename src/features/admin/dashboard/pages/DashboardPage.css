@@ -1,0 +1,80 @@
+/* src/features/admin/dashboard/pages/DashboardPage.css */
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dashboard-title {
+  font-weight: 700;
+  font-size: 24px; /* H2 */
+  line-height: 32px;
+  margin-bottom: 4px;
+}
+
+.dashboard-subtitle {
+  font-size: 14px;
+  color: var(--texto-muted);
+}
+
+.dashboard-header-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-generate-report {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--primario);
+  background: var(--blanco);
+  color: var(--primario);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+.btn-generate-report:hover {
+  background: var(--secundario-1);
+}
+
+.btn-export {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: var(--primario);
+  color: var(--blanco);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+.btn-export:hover {
+  background: var(--primario-oscuro);
+}
+
+.dashboard-kpis {
+  margin-bottom: 20px;
+}
+
+.dashboard-row {
+  margin-bottom: 20px;
+}
+
+.dashboard-col {
+  margin-bottom: 20px;
+}

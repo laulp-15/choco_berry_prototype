@@ -1,0 +1,103 @@
+/* src/features/about/components/CierreMarca.css */
+
+.cierre-marca {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--texto);
+}
+
+.cierre-marca-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.cierre-marca-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 35, 29, 0.78);
+}
+
+.cierre-marca-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 600px;
+}
+
+.cierre-marca-brand {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--blanco);
+  letter-spacing: 0.03em;
+}
+
+.cierre-marca-sub {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--secundario-1);
+  margin-bottom: 26px;
+}
+
+.cierre-marca-slogan {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--blanco);
+  margin-bottom: 14px;
+}
+
+.cierre-marca-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--secundario-3);
+  opacity: 0.9;
+  margin-bottom: 32px;
+}
+
+.cierre-marca-cta {
+  background: var(--primario) !important;
+  color: var(--blanco) !important;
+  border-radius: 999px !important;
+  padding: 13px 34px !important;
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  text-transform: none !important;
+  box-shadow: 0 12px 28px rgba(230, 57, 70, 0.35) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background 0.3s ease !important;
+}
+.cierre-marca-cta:hover {
+  background: var(--primario-oscuro) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(201, 47, 60, 0.4) !important;
+}
+
+@media (max-width: 767.98px) {
+  .cierre-marca {
+    min-height: 60vh;
+  }
+  .cierre-marca-brand {
+    font-size: 25px;
+  }
+  .cierre-marca-slogan {
+    font-size: 21px;
+  }
+}

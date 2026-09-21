@@ -1,0 +1,40 @@
+/* src/features/cart/components/OrderCardMessage.css */
+
+.order-card-message {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.order-card-message-label {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.order-card-message-hint {
+  font-size: 12px;
+  color: var(--texto-muted);
+  margin-bottom: 12px;
+}
+
+.order-card-message-input.MuiOutlinedInput-root {
+  width: 100%;
+  border-radius: 10px;
+  background: var(--secundario-3);
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+}
+.order-card-message-input .MuiOutlinedInput-notchedOutline {
+  border-color: var(--borde);
+}
+.order-card-message-input.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primario-claro) !important;
+  border-width: 1px !important;
+}
+.order-card-message-input textarea::placeholder {
+  color: var(--texto-suave);
+  opacity: 1;
+}

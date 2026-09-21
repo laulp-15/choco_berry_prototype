@@ -1,0 +1,74 @@
+/* src/features/admin/orders/components/OrderProductLineItem.css */
+
+.order-line-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--borde);
+}
+.order-line-item:last-child {
+  border-bottom: none;
+}
+
+.order-line-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.order-line-item-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texto);
+}
+.order-line-item-units {
+  font-weight: 400;
+  color: var(--texto-muted);
+}
+
+.order-line-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--texto-muted);
+  margin-top: 4px;
+}
+
+.order-line-item-color {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--borde);
+  display: inline-block;
+}
+
+.order-line-item-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: var(--texto-suave);
+  margin-top: 4px;
+}
+
+.order-line-item-price {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primario);
+  padding-top: 2px;
+}
+
+.order-line-item-remove.MuiIconButton-root {
+  color: var(--texto-muted);
+  font-size: 13px;
+}
+.order-line-item-remove.MuiIconButton-root:hover {
+  color: var(--primario);
+}

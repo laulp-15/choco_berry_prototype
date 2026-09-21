@@ -1,0 +1,15 @@
+/* src/shared/components/Toast.css */
+
+.app-toast-alert.MuiAlert-root {
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 12px;
+  align-items: center;
+}
+.app-toast-alert.MuiAlert-filledSuccess {
+  background-color: #24943c;
+}
+.app-toast-alert.MuiAlert-filledError {
+  background-color: var(--primario);
+}

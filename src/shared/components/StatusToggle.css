@@ -1,0 +1,28 @@
+/* src/shared/components/StatusToggle.css */
+
+.status-toggle.MuiSwitch-root {
+  width: 46px;
+  height: 26px;
+  padding: 0;
+}
+.status-toggle .MuiSwitch-switchBase {
+  padding: 3px;
+}
+.status-toggle .MuiSwitch-thumb {
+  width: 20px;
+  height: 20px;
+  box-shadow: none;
+  background-color: var(--blanco) !important;
+}
+.status-toggle .MuiSwitch-track {
+  border-radius: 999px;
+  background-color: var(--borde) !important;
+  opacity: 1 !important;
+}
+.status-toggle .MuiSwitch-switchBase.Mui-checked {
+  transform: translateX(20px);
+}
+.status-toggle .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background-color: #24943c !important; /* verde de estado 'éxito' de la guía de estilo */
+  opacity: 1 !important;
+}

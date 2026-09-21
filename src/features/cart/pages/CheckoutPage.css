@@ -1,0 +1,42 @@
+/* src/features/cart/pages/CheckoutPage.css */
+
+.checkout-page {
+  background: var(--secundario-3);
+  color: var(--texto);
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.checkout-wrap {
+  max-width: 1200px;
+  padding: 32px 20px 40px;
+}
+
+.checkout-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.checkout-back.MuiIconButton-root {
+  color: var(--primario);
+  font-size: 16px;
+}
+
+.checkout-title {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.checkout-empty-link {
+  border: none;
+  background: none;
+  color: var(--primario);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 8px;
+}

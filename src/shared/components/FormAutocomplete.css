@@ -1,0 +1,14 @@
+/* src/shared/components/FormAutocomplete.css */
+
+.form-autocomplete .MuiOutlinedInput-root {
+  min-height: 42px;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+.form-autocomplete .MuiAutocomplete-input {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+}
+.form-autocomplete.has-error .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primario) !important;
+}

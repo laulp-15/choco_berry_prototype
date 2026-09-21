@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { X, Star, Send } from 'lucide-react';
 import './ReviewFormModal.css';
 
 export default function ReviewFormModal({ isOpen, onClose, onSubmit }) {
@@ -34,7 +33,7 @@ export default function ReviewFormModal({ isOpen, onClose, onSubmit }) {
         
         {/* Botón de cierre */}
         <button className="modal-close-btn" onClick={onClose} aria-label="Cerrar">
-          <X size={18} />
+          <i className="fa-solid fa-xmark" style={{ fontSize: '1.1rem' }} aria-hidden="true" />
         </button>
 
         {/* Encabezado limpio en bloque */}
@@ -57,10 +56,13 @@ export default function ReviewFormModal({ isOpen, onClose, onSubmit }) {
                   onMouseEnter={() => setHoverRating(star)}
                   onMouseLeave={() => setHoverRating(0)}
                 >
-                  <Star
-                    size={26}
-                    fill={(hoverRating || rating) >= star ? "#F49B05" : "none"}
-                    color={(hoverRating || rating) >= star ? "#F49B05" : "#D0C4C0"}
+                  <i
+                    className={(hoverRating || rating) >= star ? "fa-solid fa-star" : "fa-regular fa-star"}
+                    style={{
+                      fontSize: '1.6rem',
+                      color: (hoverRating || rating) >= star ? "#F49B05" : "#D0C4C0"
+                    }}
+                    aria-hidden="true"
                   />
                 </button>
               ))}
@@ -100,7 +102,7 @@ export default function ReviewFormModal({ isOpen, onClose, onSubmit }) {
             </button>
             <button type="submit" className="btn-submit">
               <span>Publicar Reseña</span>
-              <Send size={15} />
+              <i className="fa-solid fa-paper-plane" style={{ fontSize: '0.9rem' }} aria-hidden="true" />
             </button>
           </div>
         </form>

@@ -1,0 +1,87 @@
+/* src/shared/components/UserMenuIcon.css */
+
+.user-menu {
+  position: relative;
+  display: inline-flex;
+}
+
+.user-menu-trigger {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--primario, #e63946);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  line-height: 1;
+}
+
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 230px;
+  background: var(--blanco, #fff);
+  border: 1px solid var(--borde, #e9d9de);
+  border-radius: 12px;
+  box-shadow: 0 18px 40px -20px rgba(42, 35, 29, 0.4);
+  padding: 10px;
+  z-index: 50;
+  font-family: var(--font-body);
+}
+
+.user-menu-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px 12px;
+  border-bottom: 1px solid var(--borde, #e9d9de);
+  margin-bottom: 8px;
+}
+
+.user-menu-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--texto, #2a231d);
+}
+
+.user-menu-role {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--secundario-1, #fad2e1);
+  color: var(--primario-oscuro, #c92f3c);
+}
+
+.user-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: var(--texto, #2a231d);
+  cursor: pointer;
+}
+.user-menu-item:hover {
+  background: var(--secundario-2, #fce8ef);
+}
+.user-menu-item i {
+  width: 16px;
+  color: var(--texto-muted, #675a51);
+}
+
+.user-menu-item--danger {
+  color: var(--primario-oscuro, #c92f3c);
+}
+.user-menu-item--danger i {
+  color: var(--primario-oscuro, #c92f3c);
+}

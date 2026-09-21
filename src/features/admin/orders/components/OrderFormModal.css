@@ -1,0 +1,118 @@
+/* src/features/admin/orders/components/OrderFormModal.css */
+
+.order-form-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.order-form-tab {
+  border: none;
+  background: none;
+  padding: 10px 4px;
+  margin-right: 20px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.order-form-tab:hover {
+  color: var(--texto);
+}
+.order-form-tab.active {
+  color: var(--primario);
+  border-bottom-color: var(--primario);
+}
+
+.order-form-section {
+  min-height: 320px;
+}
+
+.order-form-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.order-form-shipping-hint {
+  font-size: 12px;
+  color: var(--texto-muted);
+  white-space: nowrap;
+  padding-bottom: 12px;
+}
+.order-form-shipping-hint strong {
+  color: var(--primario);
+}
+
+.order-lines-list {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 4px 16px;
+  margin-bottom: 20px;
+}
+
+/* --- Pie del modal: totales + acciones --- */
+.order-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+}
+
+.order-form-totals {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--texto-muted);
+}
+
+.order-form-total {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primario);
+}
+
+.order-form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-cancel {
+  border: 1px solid var(--borde);
+  background: var(--blanco);
+  color: var(--texto-muted);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.btn-cancel:hover {
+  background: var(--secundario-3);
+}
+
+.btn-save {
+  border: none;
+  background: var(--primario);
+  color: var(--blanco);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-save:hover {
+  background: var(--primario-oscuro);
+}

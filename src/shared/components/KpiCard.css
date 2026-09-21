@@ -1,0 +1,54 @@
+/* src/shared/components/KpiCard.css */
+
+.kpi-card {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.kpi-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--secundario-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.kpi-value {
+  font-size: 24px; /* H2 */
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 6px;
+}
+
+.kpi-delta {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+}
+.kpi-delta.positive {
+  background: rgba(36, 148, 60, 0.12);
+  color: #24943c; /* verde de estado 'éxito' de la guía de estilo */
+}
+.kpi-delta.negative {
+  background: rgba(221, 50, 45, 0.12);
+  color: #dd322d; /* rojo de estado 'error' de la guía de estilo */
+}
+
+.kpi-label {
+  font-size: 13px;
+  color: var(--texto-muted);
+}
